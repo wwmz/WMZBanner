@@ -252,7 +252,7 @@
 - (NSIndexPath*)getCurrentIndexPath{
     NSArray *sortedIndexPaths = [[self.myCollectionV indexPathsForVisibleItems] sortedArrayUsingSelector:@selector(compare:)];
     NSIndexPath* currrentIndexPath = nil;
-    NSLog(@"%@",sortedIndexPaths);
+//    NSLog(@"%@",sortedIndexPaths);
     if (sortedIndexPaths.count>2) {
         currrentIndexPath = sortedIndexPaths[1];
     }else if(sortedIndexPaths.count == 2){
@@ -270,7 +270,7 @@
     }else{
         currrentIndexPath = sortedIndexPaths.lastObject;
     }
-    NSLog(@"%@",currrentIndexPath);
+//    NSLog(@"%@",currrentIndexPath);
     return currrentIndexPath;
 }
 
