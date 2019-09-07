@@ -39,6 +39,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                     
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wHideBannerControl)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlImageRadius)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, UIEdgeInsets,                  wSectionInset)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
@@ -60,6 +61,7 @@ WMZBannerParam * BannerParam(void){
         _wBannerControlSelectImageSize = CGSizeMake(10, 5);
         _wAutoScrollSecond = 3;
         _wCanFingerSliding = YES;
+        _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);
     }
     return self;
 }

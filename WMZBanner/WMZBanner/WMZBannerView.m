@@ -86,7 +86,9 @@
         [self.myCollectionV reloadData];
     } completion:^(BOOL finished) {
         NSIndexPath *path = [NSIndexPath indexPathForRow:(self.param.wRepeat?COUNT*self.data.count/2:0)+self.param.wSelectIndex inSection:0];
-        [self scrolToPath:path animated:NO];
+        if (self.param.wRepeat||self.param.wSelectIndex>0){
+            [self scrolToPath:path animated:NO];
+        }
          self.bannerControl.currentPage = self.param.wSelectIndex;
         if (self.param.wAutoScroll) {
             [self createTimer];

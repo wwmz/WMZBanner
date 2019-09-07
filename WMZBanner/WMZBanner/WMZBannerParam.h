@@ -23,6 +23,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*, 
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wScale)
 //背景毛玻璃效果 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wEffect)
+//整体间距 默认UIEdgeInsetsMake(0,0, 0, 0)
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
 //缩放系数 数值越大缩放越大 default 0.5
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wScaleFactor)
 //垂直缩放 数值越大缩放越小 default 400

@@ -127,9 +127,10 @@
     //固定移动的距离
     .wContentOffsetXSet(0.4)
     //循环
-    .wRepeatSet(YES)
-    //item的间距
-    .wLineSpacingSet(10)
+    .wRepeatSet(NO)
+    //整体左右间距
+    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10))
+    
     ;
     self.viewThree = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
 }

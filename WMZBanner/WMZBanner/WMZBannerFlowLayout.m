@@ -17,7 +17,7 @@
         self.itemSize = self.param.wItemSize;
         self.minimumInteritemSpacing = 0;
         self.minimumLineSpacing = self.param.wLineSpacing;
-        self.sectionInset = UIEdgeInsetsMake(0,0, 0, 0);
+        self.sectionInset = self.param.wSectionInset;
         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     }
     return self;
