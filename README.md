@@ -104,6 +104,8 @@
     .wRepeatSet(YES)
     //item的间距
     .wLineSpacingSet(10)
+     //整体左右间距
+    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10))
     
 ##### 自定义cell 
 ##### 传入一个继承UICollectionViewCell的类
@@ -162,13 +164,15 @@
     wPlaceholderImage
     开启无线滚动 default NO
     wRepeat
+    整体间距 default UIEdgeInsetsMake(0,0, 0, 0)
+    wSectionInset
     开启自动滚动 default NO
     wAutoScroll
     自动滚动间隔时间 default 3.0f
     wAutoScrollSecond
     默认移动到第几个 default 0
     wSelectIndex
-    自定义cell内容 默认是Collectioncell类
+    自定义cell内容 default @“Collectioncell"
     wMyCell
     自定义cell的类名 自定义视图必传 不然会crash
     wMyCellClassName
@@ -190,7 +194,7 @@
     wBannerControlImageRadius
     自定义安全的圆点图标的size  default (5,5)
     wBannerControlImageSize
-    自定义安全的选中圆点图标的size (10,5)
+    自定义安全的选中圆点图标的size default (10,5)
     wBannerControlSelectImageSize
 
 ### 依赖
