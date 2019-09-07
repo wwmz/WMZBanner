@@ -133,6 +133,9 @@
     ;
     self.viewThree = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
 }
+
+
+//
 - (void)demoFour{
     WMZBannerParam *param =
     BannerParam()
