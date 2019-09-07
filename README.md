@@ -107,6 +107,7 @@
     
 ##### 自定义cell 
 ##### 传入一个继承UICollectionViewCell的类
+
      BannerParam()
     //自定义视图必传
     .wMyCellClassNameSet(@"MyCell")
@@ -129,74 +130,69 @@
     })
     
 ##### 更新UI
-/**
- *  更新UI
- *
- */
-- (void)updateUI;
-改变.wDataSet(@[]),然后调用updateUI()方法即可
+-(void)updateUI;
+改变.wDataSet(@[]),然后调用updateUI()实例方法即可
 
 ##### 其他可配置的全部参数说明
-、、、
-布局方式 autoLayout 必传 和frame 二选一
-wMasonry
-//布局方式 frame  必传 和autoLayout 二选一
-wFrame
-//数据源 必传
-wData
-//开启缩放 default NO
-wScale
-//背景毛玻璃效果 default NO
-wEffect
-//缩放系数 数值越大缩放越大 default 0.5
-wScaleFactor
-//垂直缩放 数值越大缩放越小 default 400
-wActiveDistance
-//item的size default 视图的宽高 item的width最小为父视图的一半 (为了保证同屏最多显示3个 减少不必要的bug)
-wItemSize
-//item的之间的间距 default 0
-wLineSpacing
-//滑动的时候偏移的距离 以倍数计算 default 0.5 正中间
-wContentOffsetX
-//左右相邻item的中心点 default BannerCellPositionCenter
-wPosition
-//图片不变形铺满 默认 YES
-wImageFill
-//占位图片 默认 -
-wPlaceholderImage
-//开启无线滚动 default NO
-wRepeat
-//开启自动滚动 default NO
-wAutoScroll
-//自动滚动间隔时间 default 3.0f
-wAutoScrollSecond
-//默认移动到第几个 default 0
-wSelectIndex
-//自定义cell内容 默认是Collectioncell类
-wMyCell
-//自定义cell的类名 自定义视图必传 不然会crash
-wMyCellClassName
-//点击方法
-wEventClick
-//隐藏pageControl default NO
-wHideBannerControl
-//是否允许手势滑动 default YES
-wCanFingerSliding
-//系统的圆点颜色  default  ffffff
-wBannerControlColor
-//系统的圆点选中颜色  default  orange
-wBannerControlSelectColor
-//自定义安全的圆点图标  default -
-wBannerControlImage
-//自定义安全的选中圆点图标  default -
-wBannerControlSelectImage
-//自定义安全的圆点图片圆角 default ImageSize/2
-wBannerControlImageRadius
-//自定义安全的圆点图标的size  default (5,5)
-wBannerControlImageSize
-//自定义安全的选中圆点图标的size (10,5)
-wBannerControlSelectImageSize
-、、、
+    布局方式 autoLayout 必传 和frame 二选一
+    wMasonry
+    //布局方式 frame  必传 和autoLayout 二选一
+    wFrame
+    数据源 必传
+    wData
+    开启缩放 default NO
+    wScale
+    背景毛玻璃效果 default NO
+    wEffect
+    缩放系数 数值越大缩放越大 default 0.5
+    wScaleFactor
+    垂直缩放 数值越大缩放越小 default 400
+    wActiveDistance
+    item的size default 视图的宽高 item的width最小为父视图的一半 (为了保证同屏最多显示3个 减少不必要的bug)
+    wItemSize
+    item的之间的间距 default 0
+    wLineSpacing
+    滑动的时候偏移的距离 以倍数计算 default 0.5 正中间
+    wContentOffsetX
+    左右相邻item的中心点 default BannerCellPositionCenter
+    wPosition
+    图片不变形铺满 默认 YES
+    wImageFill
+    占位图片 默认 -
+    wPlaceholderImage
+    开启无线滚动 default NO
+    wRepeat
+    开启自动滚动 default NO
+    wAutoScroll
+    自动滚动间隔时间 default 3.0f
+    wAutoScrollSecond
+    默认移动到第几个 default 0
+    wSelectIndex
+    自定义cell内容 默认是Collectioncell类
+    wMyCell
+    自定义cell的类名 自定义视图必传 不然会crash
+    wMyCellClassName
+    点击方法
+    wEventClick
+    隐藏pageControl default NO
+    wHideBannerControl
+    是否允许手势滑动 default YES
+    wCanFingerSliding
+    系统的圆点颜色  default  ffffff
+    wBannerControlColor
+    系统的圆点选中颜色  default  orange
+    wBannerControlSelectColor
+    自定义安全的圆点图标  default -
+    wBannerControlImage
+    自定义安全的选中圆点图标  default -
+    wBannerControlSelectImage
+    自定义安全的圆点图片圆角 default ImageSize/2
+    wBannerControlImageRadius
+    自定义安全的圆点图标的size  default (5,5)
+    wBannerControlImageSize
+    自定义安全的选中圆点图标的size (10,5)
+    wBannerControlSelectImageSize
+
 ### 依赖
 Masonry和SDWebImage
 
