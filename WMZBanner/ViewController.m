@@ -130,6 +130,8 @@
     .wRepeatSet(NO)
     //整体左右间距
     .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10))
+    //间距
+    .wLineSpacingSet(10)
     
     ;
     self.viewThree = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
