@@ -78,6 +78,7 @@
     
 ##### 天猫精灵样式
 ##### 大概效果图
+
 ![C820397D-CF3D-49A5-90E8-6F179F0D4EBF.png](https://upload-images.jianshu.io/upload_images/9163368-86301db3b9ecce99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
      BannerParam()
@@ -136,7 +137,8 @@
 改变.wDataSet(@[]),然后调用updateUI()方法即可
 
 ##### 其他可配置的全部参数说明
-//布局方式 autoLayout 必传 和frame 二选一
+、、、
+布局方式 autoLayout 必传 和frame 二选一
 wMasonry
 //布局方式 frame  必传 和autoLayout 二选一
 wFrame
@@ -194,7 +196,7 @@ wBannerControlImageRadius
 wBannerControlImageSize
 //自定义安全的选中圆点图标的size (10,5)
 wBannerControlSelectImageSize
-
+、、、
 ### 依赖
 Masonry和SDWebImage
 
