@@ -14,13 +14,19 @@
 - (instancetype)initConfigureWithModel:(WMZBannerParam *)param{
     if (self = [super init]) {
         self.param = param;
-        self.itemSize = self.param.wItemSize;
-        self.minimumInteritemSpacing = 0;
-        self.minimumLineSpacing = self.param.wLineSpacing;
-        self.sectionInset = self.param.wSectionInset;
-        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     }
     return self;
+}
+
+
+- (void)prepareLayout
+{
+    [super prepareLayout];
+    self.itemSize = self.param.wItemSize;
+    self.minimumInteritemSpacing = 0;
+    self.minimumLineSpacing = self.param.wLineSpacing;
+    self.sectionInset = self.param.wSectionInset;
+    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -74,7 +80,7 @@
     rect.size = self.collectionView.frame.size;
     NSArray *array = [super layoutAttributesForElementsInRect:rect];
     CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * self.param.wContentOffsetX;
-    CGFloat minDelta = MAXFLOAT;
+    CGFloat minDelta = self.param.wItemSize.width;
     for (UICollectionViewLayoutAttributes *attrs in array) {
         if (ABS(minDelta) > ABS(attrs.center.x - centerX)) {
             minDelta = attrs.center.x - centerX;
@@ -84,7 +90,5 @@
     proposedContentOffset.x += minDelta;
     return proposedContentOffset;
 }
-
-
 
 @end

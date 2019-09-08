@@ -33,13 +33,15 @@
     BannerParam()
     //自定义视图必传
     .wMyCellClassNameSet(@"MyCell")
-    .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView) {
+    .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView,NSArray*dataArr) {
         //自定义视图
         MyCell *cell = (MyCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyCell class]) forIndexPath:indexPath];
         [cell.icon sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
         cell.leftText.text = model[@"name"];
-        //毛玻璃效果必须实现
-        [bgImageView sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
+        //毛玻璃效果必须实现 看实际情况 取最后一个还是中间那个
+//        [bgImageView sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
+        [bgImageView sd_setImageWithURL:[NSURL URLWithString:dataArr[(indexPath.row == 0?:(indexPath.row-1))][@"icon"]] placeholderImage:nil];
+
         return cell;
     })
     .wEventClickSet(^(id anyID, NSIndexPath *path) {
@@ -91,7 +93,7 @@
 - (void)demoTwo{
     WMZBannerParam *param =  BannerParam()
     .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(10);
+        make.left.mas_equalTo(10);
         make.right.mas_equalTo(-10);
         make.top.mas_equalTo(BannerHeight/4+10);
         make.height.mas_equalTo(BannerHeight/5);
@@ -112,7 +114,7 @@
     .wMasonrySet(^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(BannerHeight/2+10);
-        make.height.mas_equalTo(BannerHeight/5);
+        make.height.mas_equalTo(200);
     }).wDataSet([self getData])
     //关闭pageControl
     .wHideBannerControlSet(YES)
@@ -123,11 +125,13 @@
     //缩放系数
     .wScaleFactorSet(0.5)
     //自定义item的大小
-    .wItemSizeSet(CGSizeMake(BannerWitdh*0.7, BannerHeight/5))
+    .wItemSizeSet(CGSizeMake(BannerWitdh*0.55, 200))
     //固定移动的距离
-    .wContentOffsetXSet(0.4)
+    .wContentOffsetXSet(0.32)
     //循环
-    .wRepeatSet(NO)
+    .wRepeatSet(YES)
+    //自动滚动
+    .wAutoScrollSet(YES)
     //整体左右间距
     .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10))
     //间距
@@ -144,7 +148,7 @@
     BannerParam()
     //自定义视图必传
     .wMyCellClassNameSet(@"MyCell")
-    .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView) {
+    .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView ,NSArray*dataArr) {
         //自定义视图
         MyCell *cell = (MyCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyCell class]) forIndexPath:indexPath];
         [cell.icon sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];

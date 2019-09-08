@@ -20,13 +20,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WMZBanner/MyCell.m"
-            timestampString = "589550148.313746"
+            timestampString = "589607298.014119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
             endingLineNumber = "20"
             landmarkName = "-initWithFrame:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
+            timestampString = "589610863.362747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-getCurrentIndexPath"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WMZBannerView getCurrentIndexPath]"
+                  moduleName = "WMZBanner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZBanner/WMZBanner/WMZBanner/WMZBannerView.m"
+                  timestampString = "589605393.220976"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "272"
+                  endingLineNumber = "272"
+                  offsetFromSymbolStart = "1029">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WMZBannerView getCurrentIndexPath]"
+                  moduleName = "WMZBanner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZBanner/WMZBanner/WMZBanner/WMZBannerView.m"
+                  timestampString = "589605393.224"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "272"
+                  endingLineNumber = "272"
+                  offsetFromSymbolStart = "1037">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

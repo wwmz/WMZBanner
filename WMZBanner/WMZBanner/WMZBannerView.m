@@ -53,7 +53,6 @@
 }
 
 - (void)setUp{
-    
     if (self.param.wItemSize.height == 0 || self.param.wItemSize.width == 0 ) {
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     }else if(self.param.wItemSize.width<self.frame.size.width/2){
@@ -91,8 +90,10 @@
         }
          self.bannerControl.currentPage = self.param.wSelectIndex;
         if (self.param.wAutoScroll) {
+            beganDragging = YES;
             [self createTimer];
         }else{
+            beganDragging = NO;
             [self cancelTimer];
         }
     }];
@@ -114,7 +115,7 @@
     NSInteger index = self.param.wRepeat?(indexPath.row%self.data.count):indexPath.row;
     id dic = self.data[index];
     if (self.param.wMyCell) {
-        return self.param.wMyCell(indexPath, collectionView, dic,self.bgImgView);
+        return self.param.wMyCell([NSIndexPath indexPathForRow:index inSection:0], collectionView, dic,self.bgImgView,self.data);
     }else{
         //默认视图
         Collectioncell *cell = (Collectioncell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([Collectioncell class]) forIndexPath:indexPath];
@@ -159,6 +160,7 @@
 }
 
 
+
 //滚动处理
 - (void)scrolToPath:(NSIndexPath*)path animated:(BOOL)animated{
     if (path.row> (self.param.wRepeat?(self.data.count*COUNT-1):(self.data.count-1))) return;
@@ -176,14 +178,11 @@
 
 //定时器
 - (void)createTimer{
-    if(!self.param.wAutoScroll){
-        if(timer){
-            [self cancelTimer];
-        }
-        return;
+    if (timer) {
+        dispatch_source_cancel(timer);
     }
-    if (!timer) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.param.wAutoScrollSecond  * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1  * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             dispatch_queue_t global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
             timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, global);
             dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, self.param.wAutoScrollSecond * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
@@ -191,17 +190,17 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self autoScrollAction];
+                        
                     });
                 });
             });
             dispatch_resume(timer);
-        });
-    }
+    });
 }
 
 //定时器方法
 - (void)autoScrollAction{
-    if (beganDragging) return;
+    if (!beganDragging) return;
     NSIndexPath* currrentIndexPath = [self getCurrentIndexPath];
     NSIndexPath *currentIndexPathReset = [NSIndexPath indexPathForItem:currrentIndexPath.item inSection:0];
     NSInteger nextItem = currentIndexPathReset.item ;
@@ -225,22 +224,27 @@
 - (void)cancelTimer{
     if (timer) {
         dispatch_source_cancel(timer);
-        timer = nil;
     }
 }
 
 //开始拖动
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    beganDragging = YES;
+    beganDragging = NO;
     [self cancelTimer];
 }
 
+//加速度结束
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    beganDragging = YES;
+    [self createTimer];
+}
 
 
 //拖动结束
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    beganDragging = NO;
-    [self createTimer];
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (!decelerate) {
+        beganDragging = NO;;
+    }
 }
 
 
@@ -284,7 +288,10 @@
         _myCollectionV.showsVerticalScrollIndicator = NO;
         _myCollectionV.showsHorizontalScrollIndicator = NO;
         _myCollectionV.backgroundColor = [UIColor clearColor];
-        _myCollectionV.decelerationRate = 0.5;
+        _myCollectionV.bounces = NO;
+        _myCollectionV.alwaysBounceVertical = NO;
+        _myCollectionV.alwaysBounceHorizontal = NO;
+        _myCollectionV.decelerationRate = _param.wDecelerationRate;
     }
     return _myCollectionV;
 }

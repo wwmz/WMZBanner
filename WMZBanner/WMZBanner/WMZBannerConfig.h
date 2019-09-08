@@ -38,7 +38,7 @@ typedef void(^BannerConstraint) (MASConstraintMaker *make);
 /*
  * cell的block
  */
-typedef UICollectionViewCell* (^BannerCellCallBlock)(NSIndexPath *indexPath,UICollectionView* collectionView,id model,UIImageView* bgImageView);
+typedef UICollectionViewCell* (^BannerCellCallBlock)(NSIndexPath *indexPath,UICollectionView* collectionView,id model,UIImageView* bgImageView,NSArray*dataArr);
 
 /*
  * 点击

@@ -49,6 +49,7 @@ WMZBannerParam * BannerParam(void){
         _wScaleFactor = 0.5f;
         _wLineSpacing = 0.0f;
         _wContentOffsetX = 0.5f;
+        _wAutoScrollSecond = 3.0f;
         _wPosition = BannerCellPositionCenter;
         _wActiveDistance = 400.0f;
         _wScale = NO;
@@ -62,6 +63,7 @@ WMZBannerParam * BannerParam(void){
         _wAutoScrollSecond = 3;
         _wCanFingerSliding = YES;
         _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);
+        _wDecelerationRate = UIScrollViewDecelerationRateFast;
     }
     return self;
 }

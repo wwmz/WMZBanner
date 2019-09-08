@@ -45,6 +45,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, NSString*,
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wRepeat)
 //开启自动滚动 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wAutoScroll)
+//滚动减速时间 default UIScrollViewDecelerationRateFast
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIScrollViewDecelerationRate,wDecelerationRate)
 //自动滚动间隔时间 default 3.0f
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wAutoScrollSecond)
 //默认移动到第几个 default 0
