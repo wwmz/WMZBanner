@@ -28,7 +28,7 @@
  
 直观 清晰, 编码时可随初始化控件编写完成, 不影响编码思路.
  
-	  WMZBannerParam *param =  BannerParam()
+	WMZBannerParam *param =  BannerParam()
     .wMasonrySet(^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(10);
         make.right.mas_equalTo(-10);
@@ -113,13 +113,15 @@
      BannerParam()
     //自定义视图必传
     .wMyCellClassNameSet(@"MyCell")
-    .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView) {
+    .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView,NSArray*dataArr) {
         //自定义视图
         MyCell *cell = (MyCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MyCell class]) forIndexPath:indexPath];
         [cell.icon sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
         cell.leftText.text = model[@"name"];
-        //毛玻璃效果必须实现
-        [bgImageView sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
+        //毛玻璃效果必须实现 看实际情况 取最后一个还是中间那个
+//      [bgImageView sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
+        [bgImageView sd_setImageWithURL:[NSURL URLWithString:dataArr[(indexPath.row == 0?:(indexPath.row-1))][@"icon"]] placeholderImage:nil];
+
         return cell;
     })
     .wEventClickSet(^(id anyID, NSIndexPath *path) {
@@ -196,6 +198,8 @@
     wBannerControlImageSize
     自定义安全的选中圆点图标的size default (10,5)
     wBannerControlSelectImageSize
+    滚动减速时间 default UIScrollViewDecelerationRateFast
+    wDecelerationRate
 
 ### 依赖
 Masonry和SDWebImage
