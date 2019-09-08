@@ -73,6 +73,8 @@
     .wAutoScrollSet(NO)
     //item中心位置
     .wPositionSet(BannerCellPositionCenter)
+    //整体左右偏移 item.width的一半 让第一个和最后一个可以居中
+    .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.4, 0, BannerWitdh*0.4))
     .wDataSet([self getData]);
     
 ##### 天猫精灵样式
@@ -103,8 +105,8 @@
     .wRepeatSet(YES)
     //item的间距
     .wLineSpacingSet(10)
-     //整体左右间距
-    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10))
+     //整体左右间距 右边偏移item.width的一半 让最后一个可以居中
+    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10+BannerWitdh*0.35))
     
 ##### 自定义cell 
 ##### 传入一个继承UICollectionViewCell的类
@@ -165,7 +167,7 @@
     wPlaceholderImage
     开启无线滚动 default NO
     wRepeat
-    整体间距 default UIEdgeInsetsMake(0,0, 0, 0)
+    整体间距 default UIEdgeInsetsMake(0,0, 0, 0) 如果是一屏幕有2 3个的 要让第一个和最后一个居中最好设置偏移量
     wSectionInset
     开启自动滚动 default NO
     wAutoScroll
