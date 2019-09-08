@@ -40,6 +40,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlImageRadius)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIEdgeInsets,                  wSectionInset)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, UIScrollViewDecelerationRate,  wDecelerationRate)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
