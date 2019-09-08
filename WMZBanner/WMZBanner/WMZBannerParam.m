@@ -10,7 +10,6 @@
 
 @implementation WMZBannerParam
 
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerConstraint,              wMasonry)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGRect,                        wFrame)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSArray*,                      wData)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScaleFactor)

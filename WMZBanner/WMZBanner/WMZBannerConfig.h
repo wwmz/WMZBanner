@@ -11,7 +11,6 @@
 #ifndef WMZBannerConfig_h
 #define WMZBannerConfig_h
 
-#import "Masonry.h"
 #import "UIImageView+WebCache.h"
 #import <UIKit/UIKit.h>
 
@@ -30,10 +29,6 @@ return self;                                                                    
 };                                                                                                                      \
 }
 
-/*
- * 布局
- */
-typedef void(^BannerConstraint) (MASConstraintMaker *make);
 
 /*
  * cell的block

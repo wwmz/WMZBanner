@@ -29,10 +29,7 @@
         self.param = param;
         if (parentView) {
             [parentView addSubview:self];
-            self.param.wMasonry? [self mas_makeConstraints:self.param.wMasonry]:[self setFrame:self.param.wFrame];
-            if (self.param.wMasonry) {
-                [self.superview layoutIfNeeded];
-            }
+            [self setFrame:self.param.wFrame];
             self.data = [NSArray arrayWithArray:self.param.wData];
             [self setUp];
         }
@@ -66,9 +63,7 @@
     self.flowL = [[WMZBannerFlowLayout alloc] initConfigureWithModel:self.param];;
 
     [self addSubview:self.myCollectionV];
-    [self.myCollectionV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_offset(0);
-    }];
+    self.myCollectionV.frame = self.bounds;
     self.myCollectionV.scrollEnabled = self.param.wCanFingerSliding;
     [self.myCollectionV registerClass:[Collectioncell class] forCellWithReuseIdentifier:NSStringFromClass([Collectioncell class])];
     if (self.param.wMyCellClassName) {
@@ -98,13 +93,13 @@
         }
     }];
     
-    self.bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    self.bgImgView = [[UIImageView alloc] initWithFrame:self.bounds];
     self.myCollectionV.backgroundView = self.bgImgView;
     self.bgImgView.hidden = !self.param.wEffect;
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    effectView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    effectView.frame = self.bounds;
     [self.myCollectionV.backgroundView addSubview:effectView];
 
 
@@ -163,7 +158,12 @@
 
 //滚动处理
 - (void)scrolToPath:(NSIndexPath*)path animated:(BOOL)animated{
-    if (path.row> (self.param.wRepeat?(self.data.count*COUNT-1):(self.data.count-1))) return;
+    if (path.row> (self.param.wRepeat?(self.data.count*COUNT-1):(self.data.count-1))){
+        if (timer && self.param.wAutoScroll) {
+            [self cancelTimer];
+        }
+        return;
+    }
     if (self.data.count==0) return;
     [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
     if (self.param.wRepeat && path.row>= (self.data.count*COUNT-1)) return;
@@ -201,7 +201,13 @@
 //定时器方法
 - (void)autoScrollAction{
     if (!beganDragging) return;
+    if (!self.param.wAutoScroll) {
+        [self cancelTimer];
+        return;
+    }
+    
     NSIndexPath* currrentIndexPath = [self getCurrentIndexPath];
+    
     NSIndexPath *currentIndexPathReset = [NSIndexPath indexPathForItem:currrentIndexPath.item inSection:0];
     NSInteger nextItem = currentIndexPathReset.item ;
     //屏幕只显示一个 要获取下一个需要加1
@@ -258,7 +264,6 @@
 - (NSIndexPath*)getCurrentIndexPath{
     NSArray *sortedIndexPaths = [[self.myCollectionV indexPathsForVisibleItems] sortedArrayUsingSelector:@selector(compare:)];
     NSIndexPath* currrentIndexPath = nil;
-//    NSLog(@"%@",sortedIndexPaths);
     if (sortedIndexPaths.count>2) {
         currrentIndexPath = sortedIndexPaths[1];
     }else if(sortedIndexPaths.count == 2){
@@ -273,10 +278,13 @@
         if (last.row == (self.param.wRepeat?(self.data.count*COUNT-1):(self.data.count-1)) ) {
             currrentIndexPath = last;
         }
+        NSIndexPath* first = sortedIndexPaths.firstObject;
+        if (first.item == 0) {
+            currrentIndexPath = first;
+        }
     }else{
         currrentIndexPath = sortedIndexPaths.lastObject;
     }
-//    NSLog(@"%@",currrentIndexPath);
     return currrentIndexPath;
 }
 
@@ -288,9 +296,6 @@
         _myCollectionV.showsVerticalScrollIndicator = NO;
         _myCollectionV.showsHorizontalScrollIndicator = NO;
         _myCollectionV.backgroundColor = [UIColor clearColor];
-        _myCollectionV.bounces = NO;
-//        _myCollectionV.alwaysBounceVertical = YES;
-//        _myCollectionV.alwaysBounceHorizontal = YES;
         _myCollectionV.decelerationRate = _param.wDecelerationRate;
     }
     return _myCollectionV;
@@ -317,9 +322,7 @@
         self.icon = [UIImageView new];
         self.icon.layer.masksToBounds = YES;
         [self.contentView addSubview:self.icon];
-        [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(0);
-        }];
+        self.icon.frame = self.contentView.bounds;
         self.contentView.layer.masksToBounds = YES;
         self.contentView.layer.cornerRadius = 5;
     }

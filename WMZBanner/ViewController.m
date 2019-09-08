@@ -47,11 +47,7 @@
     .wEventClickSet(^(id anyID, NSIndexPath *path) {
         NSLog(@"点击 %@ %@",anyID,path);
     })
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(30);
-        make.height.mas_equalTo(BannerHeight/5);
-    })
+    .wFrameSet(CGRectMake(0, 20, BannerWitdh, BannerHeight/5))
     .wImageFillSet(YES)
     .wLineSpacingSet(10)
     .wScaleSet(YES)
@@ -74,6 +70,8 @@
     .wBannerControlImageRadiusSet(5)
     .wHideBannerControlSet(NO)
     .wCanFingerSlidingSet(YES)
+    //左右偏移 让第一个和最后一个可以居中
+    .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.25, 0, BannerWitdh*0.25))
     .wDataSet([self getData])
     ;
     
@@ -92,12 +90,8 @@
 //最常用全图banner 无任何效果
 - (void)demoTwo{
     WMZBannerParam *param =  BannerParam()
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
-        make.right.mas_equalTo(-10);
-        make.top.mas_equalTo(BannerHeight/4+10);
-        make.height.mas_equalTo(BannerHeight/5);
-    }).wDataSet([self getData])
+    .wFrameSet(CGRectMake(10, BannerHeight/4+10, BannerWitdh-20, BannerHeight/5))
+    .wDataSet([self getData])
     //开启循环滚动
     .wRepeatSet(YES)
     //开启自动滚动
@@ -111,11 +105,8 @@
 //天猫精灵样式
 - (void)demoThree{
     WMZBannerParam *param =  BannerParam()
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(BannerHeight/2+10);
-        make.height.mas_equalTo(200);
-    }).wDataSet([self getData])
+    .wFrameSet(CGRectMake(0, BannerHeight/2+10, BannerWitdh, 200))
+    .wDataSet([self getData])
     //关闭pageControl
     .wHideBannerControlSet(YES)
     //开启缩放
@@ -129,11 +120,11 @@
     //固定移动的距离
     .wContentOffsetXSet(0.32)
     //循环
-    .wRepeatSet(YES)
+    .wRepeatSet(NO)
     //自动滚动
     .wAutoScrollSet(YES)
-    //整体左右间距
-    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10))
+    //整体左右间距  设置为size.width的一半 让最后一个可以居中
+    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, BannerWitdh*0.55*0.5+10))
     //间距
     .wLineSpacingSet(10)
     
@@ -157,11 +148,7 @@
         [bgImageView sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
         return cell;
     })
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(BannerHeight/4*3+10);
-        make.height.mas_equalTo(BannerHeight/5);
-    })
+    .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     .wLineSpacingSet(15)
     .wScaleSet(YES)
     .wActiveDistanceSet(400)
@@ -176,6 +163,8 @@
     .wBannerControlSelectColorSet([UIColor whiteColor])
     .wBannerControlColorSet([UIColor cyanColor])
     .wDataSet([self getData])
+    //让第一个和最后一个居中 设置为size.width的一半
+    .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.4, 0, BannerWitdh*0.4))
     ;
     
     self.viewFour = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];

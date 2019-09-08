@@ -12,10 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WMZBannerParam : NSObject
 /* =========================================Attributes==========================================*/
 
-
-//布局方式 autoLayout 必传 和frame 二选一
-WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerConstraint,     wMasonry)
-//布局方式 frame  必传 和autoLayout 二选一
+//布局方式 frame  必传
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGRect,               wFrame)
 //数据源 必传
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*,             wData)

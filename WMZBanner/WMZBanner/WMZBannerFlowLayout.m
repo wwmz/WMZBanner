@@ -43,10 +43,6 @@
         CGFloat zoom = 1 - self.param.wScaleFactor  * normalizedDistance;
         attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
         attributes.frame = CGRectMake(attributes.frame.origin.x, attributes.frame.origin.y + zoom, attributes.size.width, attributes.size.height);
-        CGFloat scrollDirectionItemHeight = self.itemSize.height;
-        CGFloat sideItemFixedOffset = 0;
-        sideItemFixedOffset = (scrollDirectionItemHeight - scrollDirectionItemHeight * 0.7) / 2;
-        
         attributes.center = CGPointMake(attributes.center.x, (self.param.wPosition == BannerCellPositionBottom?attributes.center.y:self.collectionView.center.y) + zoom);
         
     }
@@ -73,23 +69,19 @@
  */
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
 {
-    if (!self.param.wRepeat&&self.collectionView.contentOffset.x>=(self.param.wItemSize.width*self.param.wData.count*self.param.wContentOffsetX)) {
-        return proposedContentOffset;
-    }
-    
+
     CGRect rect;
     rect.origin.y = 0;
     rect.origin.x = proposedContentOffset.x;
     rect.size = self.collectionView.frame.size;
     NSArray *array = [super layoutAttributesForElementsInRect:rect];
     CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * self.param.wContentOffsetX;
-    CGFloat minDelta = self.param.wItemSize.width;
+    CGFloat minDelta = MAXFLOAT;
     for (UICollectionViewLayoutAttributes *attrs in array) {
         if (ABS(minDelta) > ABS(attrs.center.x - centerX)) {
             minDelta = attrs.center.x - centerX;
         }
     }
-    // 修改原有的偏移量
     proposedContentOffset.x += minDelta;
     return proposedContentOffset;
 }

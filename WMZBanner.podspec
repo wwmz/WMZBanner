@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.source_files = "WMZBanner/WMZBanner/**/*.{h,m}"
   s.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
   s.frameworks   = 'UIKit','Foundation'
-  s.dependency  'Masonry'
   s.dependency  'SDWebImage'
 end
 
