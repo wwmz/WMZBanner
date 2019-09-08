@@ -2,8 +2,7 @@
 
 演示
 ==============
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/9163368-165e4765ee266cc2.gif?imageMogr2/auto-orient/strip)
-
+![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-ef576469dcb2beb4.gif?imageMogr2/auto-orient/strip)
 
 
 特性
