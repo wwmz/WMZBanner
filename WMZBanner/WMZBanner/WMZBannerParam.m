@@ -64,7 +64,7 @@ WMZBannerParam * BannerParam(void){
         _wAutoScrollSecond = 3;
         _wCanFingerSliding = YES;
         _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);
-        _wDecelerationRate = UIScrollViewDecelerationRateFast;
+        _wDecelerationRate = 0.1;
     }
     return self;
 }

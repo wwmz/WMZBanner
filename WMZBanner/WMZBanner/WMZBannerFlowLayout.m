@@ -73,7 +73,10 @@
  */
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
 {
-
+    if (!self.param.wRepeat&&self.collectionView.contentOffset.x>=(self.param.wItemSize.width*self.param.wData.count*self.param.wContentOffsetX)) {
+        return proposedContentOffset;
+    }
+    
     CGRect rect;
     rect.origin.y = 0;
     rect.origin.x = proposedContentOffset.x;

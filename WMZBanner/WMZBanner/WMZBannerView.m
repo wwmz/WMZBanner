@@ -178,10 +178,10 @@
 
 //定时器
 - (void)createTimer{
-    if (timer) {
-        dispatch_source_cancel(timer);
+    if (!self.param.wAutoScroll) {
+        [self cancelTimer]; return;
     }
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1  * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             dispatch_queue_t global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
             timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, global);
@@ -289,8 +289,8 @@
         _myCollectionV.showsHorizontalScrollIndicator = NO;
         _myCollectionV.backgroundColor = [UIColor clearColor];
         _myCollectionV.bounces = NO;
-        _myCollectionV.alwaysBounceVertical = NO;
-        _myCollectionV.alwaysBounceHorizontal = NO;
+//        _myCollectionV.alwaysBounceVertical = YES;
+//        _myCollectionV.alwaysBounceHorizontal = YES;
         _myCollectionV.decelerationRate = _param.wDecelerationRate;
     }
     return _myCollectionV;
