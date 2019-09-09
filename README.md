@@ -27,13 +27,8 @@
  
 直观 清晰, 编码时可随初始化控件编写完成, 不影响编码思路.
  
-	WMZBannerParam *param =  BannerParam()
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(10);
-        make.right.mas_equalTo(-10);
-        make.top.mas_equalTo(BannerHeight/4+10);
-        make.height.mas_equalTo(BannerHeight/5);
-    })
+    WMZBannerParam *param =  BannerParam()
+    .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     //传入数据
     .wDataSet([self getData])
     //开启循环滚动
@@ -49,11 +44,7 @@
 ### 卡片模式
 	
     BannerParam()
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(BannerHeight/4*3+10);
-        make.height.mas_equalTo(BannerHeight/5);
-    })
+    .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     //item之间的间距
     .wLineSpacingSet(15)
     //开启缩放效果 
@@ -83,11 +74,7 @@
 ![C820397D-CF3D-49A5-90E8-6F179F0D4EBF.png](https://upload-images.jianshu.io/upload_images/9163368-86301db3b9ecce99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
      BannerParam()
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(BannerHeight/2+10);
-        make.height.mas_equalTo(BannerHeight/5);
-    })
+    .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     .wDataSet([self getData])
     //关闭pageControl
     .wHideBannerControlSet(YES)
@@ -128,20 +115,14 @@
     .wEventClickSet(^(id anyID, NSIndexPath *path) {
         NSLog(@"点击 %@ %@",anyID,path);
     })
-    .wMasonrySet(^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(30);
-        make.height.mas_equalTo(BannerHeight/5);
-    })
+    .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     
 ##### 更新UI
 -(void)updateUI;
 改变.wDataSet(@[]),然后调用updateUI()实例方法即可
 
 ##### 其他可配置的全部参数说明
-    布局方式 autoLayout 必传 和frame 二选一
-    wMasonry
-    //布局方式 frame  必传 和autoLayout 二选一
+    布局方式 frame  必传 
     wFrame
     数据源 必传
     wData
