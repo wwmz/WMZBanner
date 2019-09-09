@@ -203,7 +203,7 @@
     wDecelerationRate
 
 ### 依赖
-Masonry和SDWebImage
+SDWebImage
 
 安装
 ==============
