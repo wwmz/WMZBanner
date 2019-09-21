@@ -15,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (instancetype)initConfigureWithModel:(WMZBannerParam *)param withView:(UIView*)parentView;
+
+/**
+ *  调用方法
+ *
+ */
+- (instancetype)initConfigureWithModel:(WMZBannerParam *)param;
 /**
  *  更新UI
  *

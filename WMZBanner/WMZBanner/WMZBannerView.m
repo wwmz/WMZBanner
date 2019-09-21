@@ -29,10 +29,24 @@
         self.param = param;
         if (parentView) {
             [parentView addSubview:self];
-            [self setFrame:self.param.wFrame];
-            self.data = [NSArray arrayWithArray:self.param.wData];
-            [self setUp];
         }
+        [self setFrame:self.param.wFrame];
+        self.data = [NSArray arrayWithArray:self.param.wData];
+        [self setUp];
+    }
+    return self;
+}
+
+/**
+ *  调用方法
+ *
+ */
+- (instancetype)initConfigureWithModel:(WMZBannerParam *)param{
+    if (self = [super init]) {
+        self.param = param;
+        [self setFrame:self.param.wFrame];
+        self.data = [NSArray arrayWithArray:self.param.wData];
+        [self setUp];
     }
     return self;
 }
