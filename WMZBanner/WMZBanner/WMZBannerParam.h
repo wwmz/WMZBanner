@@ -52,8 +52,6 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCellCallBlock,  wMyCell)
 //自定义cell的类名 自定义视图必传 不然会crash
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, NSString*,            wMyCellClassName)
-//点击方法
-WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerClickBlock,     wEventClick)
 //隐藏pageControl default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wHideBannerControl)
 //是否允许手势滑动 default YES
@@ -72,12 +70,19 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,  
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGSize,               wBannerControlImageSize)
 //自定义安全的选中圆点图标的size (10,5)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGSize,               wBannerControlSelectImageSize)
-
+//pageControl的位置 default BannerControlCenter
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BannerControlPosition,wBannerControlPosition)
 /* =========================================Attributes==========================================*/
 
 /* =========================================Events==============================================*/
 WMZBannerParam * BannerParam(void);
+//点击方法
+WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerClickBlock,     wEventClick)
 /* =========================================Events==============================================*/
+
+/* =========================================custom==============================================*/
+@property(nonatomic,assign)NSInteger myCurrentPath;
+/* =========================================custom==============================================*/
 
 @end
 

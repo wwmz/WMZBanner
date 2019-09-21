@@ -38,12 +38,25 @@ typedef UICollectionViewCell* (^BannerCellCallBlock)(NSIndexPath *indexPath,UICo
 /*
  * 点击
  */
-typedef void (^BannerClickBlock)(id anyID,NSIndexPath* path);
+typedef void (^BannerClickBlock)(id anyID,NSInteger index);
 
+/*
+ *cell动画的位置
+ */
 typedef enum :NSInteger{
     BannerCellPositionCenter      = 0,             //居中 默认
     BannerCellPositionBottom      = 1,             //置底
 }BannerCellPosition;
+
+/*
+ *pageControl的位置
+ */
+typedef enum :NSInteger{
+    BannerControlCenter      = 0,             //居中 默认
+    BannerControlLeft        = 1,             //左下
+    BannerControlRight       = 2,             //右下
+}BannerControlPosition;
+
 
 
 #endif /* WMZBannerConfig_h */

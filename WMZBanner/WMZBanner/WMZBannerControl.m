@@ -7,7 +7,6 @@
 //
 
 #import "WMZBannerControl.h"
-
 @implementation WMZBannerControl
 
 - (instancetype)initWithFrame:(CGRect)frame WithModel:(WMZBannerParam *)param{
@@ -28,6 +27,7 @@
             self.currentImageSize = param.wBannerControlSelectImageSize;
             self.currentPageIndicatorTintColor = [UIColor clearColor];
         }
+        
 
     }
     return self;
@@ -81,5 +81,25 @@
     return dot;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (!self.param.wBannerControlImage||!self.param.wBannerControlSelectImage) return;
+    CGFloat marginX = self.currentImageSize.width + 5;
+    CGFloat newW = (self.subviews.count) * marginX;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, newW, self.frame.size.height);
+    CGPoint center = self.center;
+    center.x = self.superview.center.x;
+    self.center = center;
+    for (int i=0; i<[self.subviews count]; i++) {
+        UIImageView* dot = [self.subviews objectAtIndex:i];
+        
+        if (i == self.currentPage) {
+            [dot setFrame:CGRectMake(i * marginX-2.5, dot.frame.origin.y, self.currentImageSize.width, self.currentImageSize.height)];
+        }else {
+            [dot setFrame:CGRectMake(i * marginX, dot.frame.origin.y, self.currentImageSize.width, self.currentImageSize.height)];
+        }
+    }
+}
 
 @end

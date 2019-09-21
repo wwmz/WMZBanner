@@ -40,6 +40,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlImageRadius)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIEdgeInsets,                  wSectionInset)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIScrollViewDecelerationRate,  wDecelerationRate)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerControlPosition,         wBannerControlPosition)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
@@ -58,8 +59,8 @@ WMZBannerParam * BannerParam(void){
         _wImageFill = YES;
         _wBannerControlColor = [UIColor whiteColor];
         _wBannerControlSelectColor = [UIColor orangeColor];
-        _wBannerControlImageSize = CGSizeMake(5, 5);
-        _wBannerControlSelectImageSize = CGSizeMake(10, 5);
+        _wBannerControlImageSize = CGSizeMake(10, 10);
+        _wBannerControlSelectImageSize = CGSizeMake(10, 10);
         _wAutoScrollSecond = 3;
         _wCanFingerSliding = YES;
         _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);

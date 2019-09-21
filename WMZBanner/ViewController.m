@@ -44,8 +44,8 @@
 
         return cell;
     })
-    .wEventClickSet(^(id anyID, NSIndexPath *path) {
-        NSLog(@"点击 %@ %@",anyID,path);
+    .wEventClickSet(^(id anyID, NSInteger index) {
+        NSLog(@"点击 %@ %ld",anyID,index);
     })
     .wFrameSet(CGRectMake(0, 20, BannerWitdh, BannerHeight/5))
     .wImageFillSet(YES)
@@ -59,17 +59,18 @@
     .wSelectIndexSet(2)
     .wRepeatSet(YES)
     .wAutoScrollSecondSet(3)
-    .wAutoScrollSet(NO)
+    .wAutoScrollSet(YES)
     .wPositionSet(BannerCellPositionCenter)
     .wBannerControlSelectColorSet([UIColor whiteColor])
     .wBannerControlColorSet([UIColor cyanColor])
-    .wBannerControlImageSet(@"AAA")
-    .wBannerControlSelectImageSet(@"BBB")
+    .wBannerControlImageSet(@"slideCirclePoint")
+    .wBannerControlSelectImageSet(@"slidePoint")
     .wBannerControlImageSizeSet(CGSizeMake(10, 10))
-    .wBannerControlSelectImageSizeSet(CGSizeMake(10, 10))
+    .wBannerControlSelectImageSizeSet(CGSizeMake(15, 10))
     .wBannerControlImageRadiusSet(5)
     .wHideBannerControlSet(NO)
     .wCanFingerSlidingSet(YES)
+    .wBannerControlPositionSet(BannerControlCenter)
     //左右偏移 让第一个和最后一个可以居中
     .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.25, 0, BannerWitdh*0.25))
     .wDataSet([self getData])
@@ -77,14 +78,14 @@
     
     self.viewOne = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
     
-    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //        //模拟网络请求
-    //        param.wDataSet(@[
-    //                         @{@"name":@"自定义文本11",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567762995596&di=fe55b2c249e91b18b5dc9e26cf2f048c&imgtype=0&src=http%3A%2F%2Fimage.diyiyou.com%2Fgame%2F2016%2F09%2F1473325030_8.jpg"},
-    //                         @{@"name":@"自定义文本22",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567762995596&di=583eed4742e4e074a22937ebdae24338&imgtype=0&src=http%3A%2F%2Fwww.gamemei.com%2Fbackground%2Fuploads%2F160608%2F24-16060P95125564.jpg"}
-    //                         ]);
-    //        [banner updateUI];
-    //    });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            //模拟网络请求
+//            param.wDataSet(@[
+//                             @{@"name":@"自定义文本11",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567762995596&di=fe55b2c249e91b18b5dc9e26cf2f048c&imgtype=0&src=http%3A%2F%2Fimage.diyiyou.com%2Fgame%2F2016%2F09%2F1473325030_8.jpg"},
+//                             @{@"name":@"自定义文本22",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567762995596&di=583eed4742e4e074a22937ebdae24338&imgtype=0&src=http%3A%2F%2Fwww.gamemei.com%2Fbackground%2Fuploads%2F160608%2F24-16060P95125564.jpg"}
+//                             ]);
+//            [self.viewOne updateUI];
+//        });
 }
 
 //最常用全图banner 无任何效果
@@ -158,7 +159,7 @@
     .wSelectIndexSet(2)
     .wRepeatSet(YES)
     .wAutoScrollSecondSet(3)
-    .wAutoScrollSet(NO)
+    .wAutoScrollSet(YES)
     .wPositionSet(BannerCellPositionCenter)
     .wBannerControlSelectColorSet([UIColor whiteColor])
     .wBannerControlColorSet([UIColor cyanColor])
