@@ -109,8 +109,9 @@
         center = self.center.x*1.7;
     }
     self.bannerControl.center = CGPointMake(center, self.bannerControl.center.y);
-    [self addSubview:self.bannerControl];
-    self.bannerControl.hidden = self.param.wHideBannerControl;
+    if (!self.param.wHideBannerControl) {
+        [self addSubview:self.bannerControl];
+    }
     
     [self resetCollection];
     
