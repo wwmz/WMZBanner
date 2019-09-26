@@ -99,7 +99,7 @@
         [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
     }
     
-    self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width);
+    self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width && self.param.wLineSpacing == 0);
     self.bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectMake(0, self.param.wItemSize.height-40, self.param.wItemSize.width, 30) WithModel:self.param];
     CGFloat center = self.center.x;
     if (self.param.wBannerControlPosition == BannerControlLeft) {
