@@ -35,6 +35,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                      
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wBannerControlSelectImageSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wAutoScroll)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wAutoScrollSecond)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wAlpha)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wHideBannerControl)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlImageRadius)
@@ -47,6 +48,7 @@ WMZBannerParam * BannerParam(void){
 
 - (instancetype)init{
     if (self = [super init]) {
+        _wAlpha = 1;
         _wScaleFactor = 0.5f;
         _wLineSpacing = 0.0f;
         _wContentOffsetX = 0.5f;

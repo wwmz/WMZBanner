@@ -70,6 +70,8 @@
     .wBannerControlImageRadiusSet(5)
     .wHideBannerControlSet(NO)
     .wCanFingerSlidingSet(YES)
+    //左右半透明 中间不透明
+    .wAlphaSet(0.5)
     .wBannerControlPositionSet(BannerControlCenter)
     //左右偏移 让第一个和最后一个可以居中
     .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.25, 0, BannerWitdh*0.25))

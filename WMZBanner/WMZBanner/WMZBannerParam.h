@@ -24,6 +24,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,     
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
 //缩放系数 数值越大缩放越大 default 0.5
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wScaleFactor)
+//左右的透明度 default 1
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wAlpha)
 //垂直缩放 数值越大缩放越小 default 400
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wActiveDistance)
 //item的size default 视图的宽高 item的width最小为父视图的一半 (为了保证同屏最多显示3个 减少不必要的bug)

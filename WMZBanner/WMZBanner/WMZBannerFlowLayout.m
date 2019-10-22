@@ -43,74 +43,22 @@
         CGFloat zoom = 1 - self.param.wScaleFactor  * normalizedDistance;
         attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
         attributes.frame = CGRectMake(attributes.frame.origin.x, attributes.frame.origin.y + zoom, attributes.size.width, attributes.size.height);
-        if (true) {
-           attributes.alpha = zoom;
+      
+        if (self.param.wAlpha<1) {
+            CGFloat collectionCenter =  self.collectionView.frame.size.width / 2 ;
+            CGFloat offset = self.collectionView.contentOffset.x ;
+            CGFloat normalizedCenter =  attributes.center.x - offset;
+            CGFloat maxDistance = (self.itemSize.width) + self.minimumLineSpacing;
+            CGFloat distance1 = MIN(fabs(collectionCenter - normalizedCenter), maxDistance);
+            CGFloat ratio = (maxDistance - distance1) / maxDistance;
+            CGFloat alpha = ratio * (1 - self.param.wAlpha) +self.param.wAlpha;
+            attributes.alpha = alpha;
         }
         attributes.center = CGPointMake(attributes.center.x, (self.param.wPosition == BannerCellPositionBottom?attributes.center.y:self.collectionView.center.y) + zoom);
 
     }
     return array;
 }
-
-
-//每个cell的布局设置
-//- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    //获取cell的布局
-//    UICollectionViewLayoutAttributes *layoutAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-//    
-//    
-//    //设置frame
-//    CGRect frame;
-//    frame.origin.x = self.collectionView.bounds.size.width / 2 - self.param.wItemSize.width / 2 + self.collectionView.contentOffset.x;
-//    frame.origin.y = (self.collectionViewContentSize.height - self.param.wItemSize.height) / 2;
-//    frame.size.width = self.param.wItemSize.width;
-//    frame.size.height = self.param.wItemSize.height;
-//    layoutAttributes.frame = frame;
-//    
-//    //设置ratio
-//    CGFloat page = (indexPath.item - indexPath.item % 2) * 0.5; //结果 0,0,1,1,2,2 ...
-//    CGFloat ratio = - 0.5 + page - (self.collectionView.contentOffset.x / self.collectionView.bounds.size.width); //通过偏移量,获取比重
-//    //限制比重
-//    if (ratio > 0.5) {
-//        ratio = 0.5 + 0.1 * (ratio - 0.5);
-//    } else if (ratio < -0.5) {
-//        ratio = - 0.5 + 0.1 * (ratio + 0.5);
-//    }
-//    
-//    
-//    //
-//    if ((ratio > 0 && indexPath.item % 2 == 1) || (ratio < 0 && indexPath.item % 2 == 0)) {
-//        if (indexPath.row != 1) {
-//            return nil;
-//        }
-//    }
-//    
-//    
-//    //计算旋转角度angle,设定3D旋转
-//    CGFloat newRatio = MIN(MAX(ratio, -1), 1);
-//    //计算m34
-//    CATransform3D transform = CATransform3DIdentity;
-//    transform.m34 = 1.0 / - 2000;
-//    
-//    CGFloat angle = 0.0f;
-//    if (indexPath.item % 2 == 0) {
-//        //中心线在左边
-//        angle = (1 - newRatio) * (-M_PI_2);
-//    } else if (indexPath.item % 2 == 1) {
-//        //中心线在右边
-//        angle = (1 + newRatio) * (M_PI_2);
-//    }
-//    angle += (indexPath.row % 2) / 1000;
-//    
-//    transform = CATransform3DRotate(transform, angle, 0, 1, 0);
-//    
-//    layoutAttributes.transform3D = transform;
-//    if (indexPath.row == 0) {
-//        layoutAttributes.zIndex = NSIntegerMax;
-//    }
-//    return layoutAttributes;
-//}
 
 
 //防止报错
