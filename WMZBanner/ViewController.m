@@ -70,6 +70,8 @@
     .wBannerControlImageRadiusSet(5)
     .wHideBannerControlSet(NO)
     .wCanFingerSlidingSet(YES)
+    //整体缩小
+//    .wScreenScaleSet(0.8)
     //左右半透明 中间不透明
     .wAlphaSet(0.5)
     .wBannerControlPositionSet(BannerControlCenter)

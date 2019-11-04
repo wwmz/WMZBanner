@@ -79,6 +79,31 @@
 }
 
 - (void)setUp{
+    
+    if (self.param.wScreenScale<1&&self.param.wScreenScale>0) {
+        CGRect rect = self.param.wFrame;
+        rect.origin.x = rect.origin.x * self.param.wScreenScale;
+        rect.origin.y = rect.origin.y * self.param.wScreenScale;
+        rect.size.width = rect.size.width * self.param.wScreenScale;
+        rect.size.height = rect.size.height * self.param.wScreenScale;
+        self.param.wFrame = rect;
+        self.frame = self.param.wFrame;
+        
+        CGSize size = self.param.wItemSize;
+        size.width *= self.param.wScreenScale;
+        size.height *= self.param.wScreenScale;
+        self.param.wItemSize = size;
+        
+        self.param.wLineSpacing*=self.param.wScreenScale;
+        
+        UIEdgeInsets sets = self.param.wSectionInset;
+        sets.top*=self.param.wScreenScale;
+        sets.right*=self.param.wScreenScale;
+        sets.bottom*=self.param.wScreenScale;
+        sets.left*=self.param.wScreenScale;
+        self.param.wSectionInset = sets;
+    }
+    
     if (self.param.wItemSize.height == 0 || self.param.wItemSize.width == 0 ) {
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     }else if(self.param.wItemSize.width<self.frame.size.width/2){
@@ -88,6 +113,22 @@
     }else if(self.param.wItemSize.width>self.frame.size.width){
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.param.wItemSize.height);
     }
+    
+//    if (self.param.wScreenScale<1&&self.param.wScreenScale>0) {
+//        CGSize size = self.param.wItemSize;
+//        size.width *= self.param.wScreenScale;
+//        size.height *= self.param.wScreenScale;
+//        self.param.wItemSize = size;
+//
+//        self.param.wLineSpacing*=self.param.wScreenScale;
+//
+//        UIEdgeInsets sets = self.param.wSectionInset;
+//        sets.top*=self.param.wScreenScale;
+//        sets.right*=self.param.wScreenScale;
+//        sets.bottom*=self.param.wScreenScale;
+//        sets.left*=self.param.wScreenScale;
+//        self.param.wSectionInset = sets;
+//    }
     
     self.flowL = [[WMZBannerFlowLayout alloc] initConfigureWithModel:self.param];;
 

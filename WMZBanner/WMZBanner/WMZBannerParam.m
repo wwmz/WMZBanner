@@ -18,6 +18,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                     
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wContentOffsetX)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScreenScale)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellPosition,            wPosition)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wPlaceholderImage)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wImageFill)
@@ -67,6 +68,7 @@ WMZBannerParam * BannerParam(void){
         _wCanFingerSliding = YES;
         _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);
         _wDecelerationRate = 0.1;
+        _wScreenScale = 1;
     }
     return self;
 }
