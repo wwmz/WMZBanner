@@ -219,3 +219,10 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 ==============
 使用过程中如果有什么bug欢迎给我提issue 我看到就会解决
 [我的简书](https://www.jianshu.com/u/17b9dd398782)
+
+
+更新记录
+==============
+- 20191025 增加wAlpha属性 左右视图的透明度 default 1 范围0~1之间
+- 20191104 增加wScreenScale属性 全局缩放 default 1 范围0~1之间
+
