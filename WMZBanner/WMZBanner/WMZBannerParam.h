@@ -20,6 +20,20 @@ WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*, 
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wScale)
 //背景毛玻璃效果 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wEffect)
+//隐藏pageControl default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wHideBannerControl)
+//是否允许手势滑动 default YES
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wCanFingerSliding)
+//图片不变形铺满 默认 YES
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wImageFill)
+//开启无线滚动 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wRepeat)
+//开启自动滚动 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wAutoScroll)
+//纵向(cell全屏的时候有效) default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wVertical)
+//跑马灯(文字效果) default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wMarquee)
 //整体间距 默认UIEdgeInsetsMake(0,0, 0, 0)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
 //整体视图缩放系数 default 1
@@ -38,14 +52,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,  
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wContentOffsetX)
 //左右相邻item的中心点 default BannerCellPositionCenter
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BannerCellPosition,   wPosition)
-//图片不变形铺满 默认 YES
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wImageFill)
 //占位图片 默认 -
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, NSString*,            wPlaceholderImage)
-//开启无线滚动 default NO
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wRepeat)
-//开启自动滚动 default NO
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wAutoScroll)
 //滚动减速时间 default UIScrollViewDecelerationRateFast
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIScrollViewDecelerationRate,wDecelerationRate)
 //自动滚动间隔时间 default 3.0f
@@ -56,10 +64,6 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCellCallBlock,  wMyCell)
 //自定义cell的类名 自定义视图必传 不然会crash
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, NSString*,            wMyCellClassName)
-//隐藏pageControl default NO
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wHideBannerControl)
-//是否允许手势滑动 default YES
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wCanFingerSliding)
 //系统的圆点颜色  default  ffffff
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, UIColor*,             wBannerControlColor)
 //系统的圆点选中颜色  default  orange
@@ -76,6 +80,9 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGSize,   
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGSize,               wBannerControlSelectImageSize)
 //pageControl的位置 default BannerControlCenter
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BannerControlPosition,wBannerControlPosition)
+//跑马灯文字颜色  default  red
+WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, UIColor*,             wMarqueeTextColor)
+
 /* =========================================Attributes==========================================*/
 
 /* =========================================Events==============================================*/

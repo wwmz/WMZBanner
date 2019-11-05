@@ -80,6 +80,11 @@
 
 - (void)setUp{
     
+    if (self.param.wMarquee) {
+        self.param.wVertical = YES;
+        self.param.wHideBannerControl = YES;
+    }
+    
     if (self.param.wScreenScale<1&&self.param.wScreenScale>0) {
         CGRect rect = self.param.wFrame;
         rect.origin.x = rect.origin.x * self.param.wScreenScale;
@@ -121,6 +126,7 @@
     self.myCollectionV.frame = self.bounds;
     self.myCollectionV.scrollEnabled = self.param.wCanFingerSliding;
     [self.myCollectionV registerClass:[Collectioncell class] forCellWithReuseIdentifier:NSStringFromClass([Collectioncell class])];
+    [self.myCollectionV registerClass:[CollectionTextCell class] forCellWithReuseIdentifier:NSStringFromClass([CollectionTextCell class])];
     if (self.param.wMyCellClassName) {
         [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
     }
@@ -161,19 +167,28 @@
     if (self.param.wMyCell) {
         return self.param.wMyCell([NSIndexPath indexPathForRow:index inSection:indexPath.section], collectionView, dic,self.bgImgView,self.data);
     }else{
-        //默认视图
-        Collectioncell *cell = (Collectioncell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([Collectioncell class]) forIndexPath:indexPath];
-        
-        cell.param = self.param;
-        if ([dic isKindOfClass:[NSDictionary class]]) {
-            [self setIconData:cell.icon withData:dic[@"icon"]];
-            [self setIconData:self.bgImgView withData:dic[@"icon"]];
+        //跑马灯cell
+        if (self.param.wMarquee) {
+            CollectionTextCell *cell = (CollectionTextCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CollectionTextCell class]) forIndexPath:indexPath];
+                       cell.param = self.param;
+            cell.param = self.param;
+            if ([dic isKindOfClass:[NSString class]]) {
+                cell.label.text = dic;
+            }
+            return cell;
         }else{
-            [self setIconData:cell.icon withData:dic];
-            [self setIconData:self.bgImgView withData:dic];
+            //默认视图
+            Collectioncell *cell = (Collectioncell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([Collectioncell class]) forIndexPath:indexPath];
+            cell.param = self.param;
+            if ([dic isKindOfClass:[NSDictionary class]]) {
+                [self setIconData:cell.icon withData:dic[@"icon"]];
+                [self setIconData:self.bgImgView withData:dic[@"icon"]];
+            }else{
+                [self setIconData:cell.icon withData:dic];
+                [self setIconData:self.bgImgView withData:dic];
+            }
+            return cell;
         }
-      return cell;
-        
     }
 }
 
@@ -212,7 +227,13 @@
         return;
     }
     if (self.data.count==0) return;
-    [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+    if ([self.myCollectionV isPagingEnabled]) {
+        [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:
+         self.param.wVertical?UICollectionViewScrollPositionCenteredVertically:
+                              UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+    }else{
+        [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+    }
     if ([self.myCollectionV isPagingEnabled]) return;
     if(self.param.wContentOffsetX>0.5){
         self.myCollectionV.contentOffset = CGPointMake(self.myCollectionV.contentOffset.x-(self.param.wContentOffsetX-0.5)*self.myCollectionV.frame.size.width, self.myCollectionV.contentOffset.y);
@@ -270,7 +291,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if ([self.myCollectionV isPagingEnabled]) {
-        NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
+        NSInteger index =  self.param.wVertical?
+                           scrollView.contentOffset.y/scrollView.frame.size.height:
+                           scrollView.contentOffset.x/scrollView.frame.size.width;
         self.param.myCurrentPath = index;
         self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
     }
@@ -341,5 +364,25 @@
 - (void)setParam:(WMZBannerParam *)param{
     _param = param;
     self.icon.contentMode = param.wImageFill?UIViewContentModeScaleAspectFill:UIViewContentModeScaleToFill;
+}
+@end
+
+@implementation CollectionTextCell
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self){
+        self.label = [UILabel new];
+        self.label.font = [UIFont systemFontOfSize:17.0];
+        self.label.textColor = [UIColor redColor];
+        [self.contentView addSubview:self.label];
+        self.label.frame = self.contentView.bounds;
+    }
+    return self;
+}
+
+- (void)setParam:(WMZBannerParam *)param{
+    _param = param;
+    self.label.textColor = self.param.wMarqueeTextColor;
 }
 @end

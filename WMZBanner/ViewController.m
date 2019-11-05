@@ -12,6 +12,7 @@
 @interface ViewController ()
 @property(nonatomic,strong)WMZBannerView *viewOne;
 @property(nonatomic,strong)WMZBannerView *viewTwo;
+@property(nonatomic,strong)WMZBannerView *viewMarque;
 @property(nonatomic,strong)WMZBannerView *viewThree;
 @property(nonatomic,strong)WMZBannerView *viewFour;
 @end
@@ -23,6 +24,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self demoOne];
     [self demoTwo];
+    [self demoMarque];
     [self demoThree];
     [self demoFour];
 }
@@ -74,6 +76,10 @@
 //    .wScreenScaleSet(0.8)
     //左右半透明 中间不透明
     .wAlphaSet(0.5)
+    //开启跑马灯效果
+    .wMarqueeSet(NO)
+    //开启纵向
+    .wVerticalSet(NO)
     .wBannerControlPositionSet(BannerControlCenter)
     //左右偏移 让第一个和最后一个可以居中
     .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.25, 0, BannerWitdh*0.25))
@@ -107,10 +113,29 @@
     self.viewTwo = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
 }
 
+//跑马灯
+- (void)demoMarque{
+    WMZBannerParam *param =  BannerParam()
+    .wFrameSet(CGRectMake(10, BannerHeight/2-20, BannerWitdh-20, 30))
+    .wDataSet(@[@"热门商品",@"Hot",@"热点资讯",@"其他热门"])
+    //关闭手指滑动
+    .wCanFingerSlidingSet(NO)
+    //开启循环滚动
+    .wRepeatSet(YES)
+    //开启自动滚动
+    .wAutoScrollSet(YES)
+    //自动滚动时间
+    .wAutoScrollSecondSet(3)
+    //跑马灯
+    .wMarqueeSet(YES)
+    ;
+    self.viewMarque = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
+}
+
 //天猫精灵样式
 - (void)demoThree{
     WMZBannerParam *param =  BannerParam()
-    .wFrameSet(CGRectMake(0, BannerHeight/2+10, BannerWitdh, 200))
+    .wFrameSet(CGRectMake(0, BannerHeight/2+10, BannerWitdh, BannerHeight/5))
     .wDataSet([self getData])
     //关闭pageControl
     .wHideBannerControlSet(YES)
@@ -121,7 +146,7 @@
     //缩放系数
     .wScaleFactorSet(0.5)
     //自定义item的大小
-    .wItemSizeSet(CGSizeMake(BannerWitdh*0.55, 200))
+    .wItemSizeSet(CGSizeMake(BannerWitdh*0.55, BannerHeight/5))
     //固定移动的距离
     .wContentOffsetXSet(0.32)
     //循环

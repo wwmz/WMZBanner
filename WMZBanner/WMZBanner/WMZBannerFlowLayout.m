@@ -26,7 +26,12 @@
     self.minimumInteritemSpacing = 0;
     self.minimumLineSpacing = self.param.wLineSpacing;
     self.sectionInset = self.param.wSectionInset;
-    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    if ([self.collectionView isPagingEnabled]) {
+         self.scrollDirection = self.param.wVertical? UICollectionViewScrollDirectionVertical
+                                                     :UICollectionViewScrollDirectionHorizontal;
+    }else{
+         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    }
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {

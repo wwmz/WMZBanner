@@ -14,6 +14,14 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, CGRect,                      
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSArray*,                      wData)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScaleFactor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wEffect)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wVertical)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wImageFill)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wScale)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wRepeat)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wAutoScroll)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wHideBannerControl)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wMarquee)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)
@@ -21,9 +29,6 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                     
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScreenScale)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellPosition,            wPosition)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wPlaceholderImage)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wImageFill)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wScale)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wRepeat)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSInteger,                     wSelectIndex)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wMyCellClassName)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellCallBlock,           wMyCell)
@@ -34,15 +39,13 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                   
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wBannerControlSelectImage)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wBannerControlImageSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wBannerControlSelectImageSize)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wAutoScroll)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wAutoScrollSecond)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wAlpha)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wHideBannerControl)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlImageRadius)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIEdgeInsets,                  wSectionInset)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIScrollViewDecelerationRate,  wDecelerationRate)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerControlPosition,         wBannerControlPosition)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wMarqueeTextColor)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
@@ -69,6 +72,7 @@ WMZBannerParam * BannerParam(void){
         _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);
         _wDecelerationRate = 0.1;
         _wScreenScale = 1;
+        _wMarqueeTextColor = [UIColor redColor];
     }
     return self;
 }
