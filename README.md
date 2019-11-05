@@ -2,7 +2,7 @@
 
 演示
 ==============
-![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-ef576469dcb2beb4.gif?imageMogr2/auto-orient/strip)
+![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-a5d9f3f86ce62985.gif?imageMogr2/auto-orient/strip)
 
 
 特性
@@ -68,6 +68,21 @@
     .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.4, 0, BannerWitdh*0.4))
     .wDataSet([self getData]);
     
+##### 跑马灯
+     WMZBannerParam *param =  BannerParam()
+    .wFrameSet(CGRectMake(10, BannerHeight/2-20, BannerWitdh-20, 30))
+    .wDataSet(@[@"热门商品",@"Hot",@"热点资讯",@"其他热门"])
+    //关闭手指滑动
+    .wCanFingerSlidingSet(NO)
+    //开启循环滚动
+    .wRepeatSet(YES)
+    //开启自动滚动
+    .wAutoScrollSet(YES)
+    //自动滚动时间
+    .wAutoScrollSecondSet(3)
+    //跑马灯
+    .wMarqueeSet(YES)
+    
 ##### 天猫精灵样式
 ##### 大概效果图
 
@@ -130,6 +145,10 @@
     wScale
     背景毛玻璃效果 default NO
     wEffect
+    纵向(cell全屏的时候有效)  default NO
+    wVertical
+    跑马灯(文字效果) default NO
+    wMarquee
     缩放系数 数值越大缩放越大 default 0.5
     wScaleFactor
     垂直缩放 数值越大缩放越小 default 400
@@ -225,4 +244,6 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 ==============
 - 20191025 增加wAlpha属性 左右视图的透明度 default 1 范围0~1之间
 - 20191104 增加wScreenScale属性 全局缩放 default 1 范围0~1之间
+- 20191105 增加wVertical属性 开启纵向滚动(全屏有效) default NO
+- 20191105 增加wMarquee属性  开启跑马灯效果(全屏有效) default NO
 
