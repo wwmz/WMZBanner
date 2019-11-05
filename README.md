@@ -245,5 +245,5 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191025 增加wAlpha属性 左右视图的透明度 default 1 范围0~1之间
 - 20191104 增加wScreenScale属性 全局缩放 default 1 范围0~1之间
 - 20191105 增加wVertical属性 开启纵向滚动(全屏有效) default NO
-           增加wMarquee属性  开启跑马灯效果(全屏有效) default NO
+- 20191105 增加wMarquee属性  开启跑马灯效果(全屏有效) default NO
 
