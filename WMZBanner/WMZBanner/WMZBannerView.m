@@ -111,9 +111,11 @@
     
     if (self.param.wItemSize.height == 0 || self.param.wItemSize.width == 0 ) {
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
-    }else if(self.param.wItemSize.width<self.frame.size.width/2){
-        self.param.wItemSize = CGSizeMake(self.frame.size.width/2, self.param.wItemSize.height);
-    }else if(self.param.wItemSize.height>self.frame.size.height){
+    }
+//    else if(self.param.wItemSize.width<self.frame.size.width/2){
+//        self.param.wItemSize = CGSizeMake(self.frame.size.width/2, self.param.wItemSize.height);
+//    }
+    else if(self.param.wItemSize.height>self.frame.size.height){
         self.param.wItemSize = CGSizeMake(self.param.wItemSize.width, self.frame.size.height);
     }else if(self.param.wItemSize.width>self.frame.size.width){
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.param.wItemSize.height);
