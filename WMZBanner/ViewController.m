@@ -108,6 +108,8 @@
     .wDataSet([self getData])
     //开启循环滚动
     .wRepeatSet(YES)
+    //开启纵向
+    .wVerticalSet(NO)
     //开启自动滚动
     .wAutoScrollSet(YES)
     //自动滚动时间
