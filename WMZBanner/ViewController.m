@@ -46,8 +46,8 @@
 
         return cell;
     })
-    .wEventClickSet(^(id anyID, NSInteger index) {
-        NSLog(@"点击 %@ %ld",anyID,index);
+    .wEventClickSet(^(id anyID, NSInteger index,BOOL isCenter) {
+        NSLog(@"点击 %@ %ld %d",anyID,index,isCenter);
     })
     .wFrameSet(CGRectMake(0, 20, BannerWitdh, BannerHeight/5))
     .wImageFillSet(YES)
@@ -165,6 +165,7 @@
 
 //
 - (void)demoFour{
+    
     WMZBannerParam *param =
     BannerParam()
     //自定义视图必传
@@ -188,14 +189,22 @@
     .wSelectIndexSet(2)
     .wRepeatSet(YES)
     .wAutoScrollSecondSet(3)
-    .wAutoScrollSet(YES)
+    .wAutoScrollSet(NO)
     .wPositionSet(BannerCellPositionCenter)
     .wBannerControlSelectColorSet([UIColor whiteColor])
     .wBannerControlColorSet([UIColor cyanColor])
     .wDataSet([self getData])
+    .wEventClickSet(^(id anyID, NSInteger index,BOOL isCenter) {
+        NSLog(@"点击 %@ %ld %d",anyID,index,isCenter);
+    })
+    .wEventScrollEndSet( ^(id anyID, NSInteger index, BOOL isCenter) {
+         NSLog(@"滚动 %@ %ld %d",anyID,index,isCenter);
+    })
     //让第一个和最后一个居中 设置为size.width的一半
     .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.4, 0, BannerWitdh*0.4))
     ;
+    
+
     
     self.viewFour = [[WMZBannerView alloc]initConfigureWithModel:param withView:self.view];
     
