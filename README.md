@@ -247,4 +247,6 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191105 增加wVertical属性 开启纵向滚动(全屏有效) default NO
 - 20191105 增加wMarquee属性  开启跑马灯效果(全屏有效) default NO
 - 20191106 解除itemsize最低为视图一半的限制 可支持小图
+- 20191120 新增点击获取居中cell的center判断
+- 20191120 新增wEventScrollEnd滚动结束事件(每次滚动结束都会调用 最好是关闭自动滚动的场景使用)
 
