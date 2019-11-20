@@ -38,8 +38,12 @@ typedef UICollectionViewCell* (^BannerCellCallBlock)(NSIndexPath *indexPath,UICo
 /*
  * 点击
  */
-typedef void (^BannerClickBlock)(id anyID,NSInteger index,BOOL isCenter);
+typedef void (^BannerClickBlock)(id anyID,NSInteger index);
 
+/*
+ * 点击 ,可获取居中cell
+ */
+typedef void (^BannerCenterClickBlock)(id anyID,NSInteger index,BOOL isCenter);
 
 /*
  * 滚动结束

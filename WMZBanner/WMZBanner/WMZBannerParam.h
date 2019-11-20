@@ -89,6 +89,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, UIColor*, 
 WMZBannerParam * BannerParam(void);
 //点击方法
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerClickBlock,     wEventClick)
+//点击方法 可获取居中cell
+WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCenterClickBlock,wEventCenterClick)
 //每次滚动结束都会调用 最好是关闭自动滚动的场景使用
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollEndBlock, wEventScrollEnd)
 /* =========================================Events==============================================*/

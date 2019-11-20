@@ -216,8 +216,13 @@
     if (self.param.wEventClick) {
         NSInteger index = self.param.wRepeat?indexPath.row%self.data.count:indexPath.row;
         id dic = self.data[index];
+        self.param.wEventClick(dic, index);
+    }
+    if (self.param.wEventCenterClick) {
+        NSInteger index = self.param.wRepeat?indexPath.row%self.data.count:indexPath.row;
+        id dic = self.data[index];
         BOOL center = [self checkCellInCenterCollectionView:collectionView AtIndexPath:indexPath];
-        self.param.wEventClick(dic, index,center);
+        self.param.wEventCenterClick(dic, index,center);
     }
 }
 
@@ -233,8 +238,6 @@
         [arr addObject:[NSString stringWithFormat:@"%.0f",cell.frame.size.height]];
         [indexArr addObject:cell];
     }
-    NSLog(@"%@",[collectionView visibleCells]);
-           
     float max = [[arr valueForKeyPath:@"@max.floatValue"] floatValue];
            
     NSInteger cellIndex = [arr indexOfObject:[NSString stringWithFormat:@"%.0f",max]];

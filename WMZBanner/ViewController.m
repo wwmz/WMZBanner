@@ -46,8 +46,11 @@
 
         return cell;
     })
-    .wEventClickSet(^(id anyID, NSInteger index,BOOL isCenter) {
-        NSLog(@"点击 %@ %ld %d",anyID,index,isCenter);
+    .wEventClickSet(^(id anyID, NSInteger index) {
+        NSLog(@"点击 %@ %ld",anyID,index);
+    })
+    .wEventCenterClickSet(^(id anyID, NSInteger index,BOOL isCenter) {
+        NSLog(@"判断居中点击 %@ %ld %d",anyID,index,isCenter);
     })
     .wFrameSet(CGRectMake(0, 20, BannerWitdh, BannerHeight/5))
     .wImageFillSet(YES)
@@ -194,8 +197,8 @@
     .wBannerControlSelectColorSet([UIColor whiteColor])
     .wBannerControlColorSet([UIColor cyanColor])
     .wDataSet([self getData])
-    .wEventClickSet(^(id anyID, NSInteger index,BOOL isCenter) {
-        NSLog(@"点击 %@ %ld %d",anyID,index,isCenter);
+    .wEventCenterClickSet(^(id anyID, NSInteger index,BOOL isCenter) {
+        NSLog(@"判断居中点击 %@ %ld %d",anyID,index,isCenter);
     })
     .wEventScrollEndSet( ^(id anyID, NSInteger index, BOOL isCenter) {
          NSLog(@"滚动 %@ %ld %d",anyID,index,isCenter);

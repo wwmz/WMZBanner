@@ -34,6 +34,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                   
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellCallBlock,           wMyCell)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerClickBlock,              wEventClick)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerScrollEndBlock,          wEventScrollEnd)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCenterClickBlock,        wEventCenterClick)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlSelectColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wBannerControlImage)
