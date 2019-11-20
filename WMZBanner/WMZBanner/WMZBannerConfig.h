@@ -43,12 +43,12 @@ typedef void (^BannerClickBlock)(id anyID,NSInteger index);
 /*
  * 点击 ,可获取居中cell
  */
-typedef void (^BannerCenterClickBlock)(id anyID,NSInteger index,BOOL isCenter);
+typedef void (^BannerCenterClickBlock)(id anyID,NSInteger index,BOOL isCenter,UICollectionViewCell* cell);
 
 /*
  * 滚动结束
  */
-typedef void (^BannerScrollEndBlock)(id anyID,NSInteger index,BOOL isCenter);
+typedef void (^BannerScrollEndBlock)(id anyID,NSInteger index,BOOL isCenter,UICollectionViewCell* cell);
 
 /*
  *cell动画的位置

@@ -222,7 +222,8 @@
         NSInteger index = self.param.wRepeat?indexPath.row%self.data.count:indexPath.row;
         id dic = self.data[index];
         BOOL center = [self checkCellInCenterCollectionView:collectionView AtIndexPath:indexPath];
-        self.param.wEventCenterClick(dic, index,center);
+        UICollectionViewCell *currentCell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        self.param.wEventCenterClick(dic, index,center,currentCell);
     }
 }
 
@@ -254,6 +255,7 @@
 
 //滚动处理
 - (void)scrolToPath:(NSIndexPath*)path animated:(BOOL)animated{
+    
     if (self.param.wRepeat?(path.row> self.data.count*COUNT-1):(path.row> self.data.count-1)){
         [self cancelTimer];
         return;
@@ -266,6 +268,20 @@
     }else{
         [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
     }
+    
+    //特殊要求
+    if (!animated&&![self.myCollectionV isPagingEnabled]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.param.wEventScrollEnd) {
+                NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
+                id dic = self.data[index];
+                BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:path];
+                UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:path];
+                self.param.wEventScrollEnd(dic, index, center,currentCell);
+            }
+        });
+    }
+        
     if ([self.myCollectionV isPagingEnabled]) return;
     if(self.param.wContentOffsetX>0.5){
         self.myCollectionV.contentOffset = CGPointMake(self.myCollectionV.contentOffset.x-(self.param.wContentOffsetX-0.5)*self.myCollectionV.frame.size.width, self.myCollectionV.contentOffset.y);
@@ -329,6 +345,7 @@
         self.param.myCurrentPath = index;
         self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
     }
+    
 }
 
 //拖动结束
@@ -340,15 +357,18 @@
     if (self.param.wAutoScroll) {
         [self createTimer];
     }
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
     if (self.param.wEventScrollEnd) {
         NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
         id dic = self.data[index];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0];
         BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:indexPath];
-        self.param.wEventScrollEnd(dic, index, center);
+        UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:indexPath];
+        self.param.wEventScrollEnd(dic, index, center,currentCell);
     }
 }
 
@@ -362,7 +382,8 @@
             id dic = self.data[index];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0];
             BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:indexPath];
-            self.param.wEventScrollEnd(dic, index, center);
+            UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:indexPath];
+            self.param.wEventScrollEnd(dic, index, center,currentCell);
         }
     }
 }
