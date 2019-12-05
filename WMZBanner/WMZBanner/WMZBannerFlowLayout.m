@@ -23,7 +23,7 @@
 {
     [super prepareLayout];
     self.itemSize = self.param.wItemSize;
-    self.minimumInteritemSpacing = 0;
+    self.minimumInteritemSpacing = (self.param.wFrame.size.height-self.param.wItemSize.height)/2;
     self.minimumLineSpacing = self.param.wLineSpacing;
     self.sectionInset = self.param.wSectionInset;
     if ([self.collectionView isPagingEnabled]) {
