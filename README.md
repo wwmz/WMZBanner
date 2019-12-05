@@ -249,4 +249,4 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191106 解除itemsize最低为视图一半的限制 可支持小图
 - 20191120 新增wEventCenterClick(可判断当前点击cell是否是中间那个)
 - 20191120 新增wEventScrollEnd滚动结束事件(每次滚动结束都会调用 最好是关闭自动滚动的场景使用)
-
+- 20191204 适配ipad   pod 更新到1.0.4
