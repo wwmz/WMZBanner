@@ -79,7 +79,6 @@
 }
 
 - (void)setUp{
-    
     if (self.param.wMarquee) {
         self.param.wVertical = YES;
         self.param.wHideBannerControl = YES;
@@ -245,10 +244,12 @@
     if (cellIndex == NSNotFound) {
         cellIndex = 0;
     }
-    UICollectionViewCell *cell = indexArr[cellIndex];
-    UICollectionViewCell *currentCell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    if (cell == currentCell) {
-        center = YES;
+    if (cellIndex<indexArr.count) {
+        UICollectionViewCell *cell = indexArr[cellIndex];
+        UICollectionViewCell *currentCell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        if (cell == currentCell) {
+            center = YES;
+        }
     }
     return center;
 }

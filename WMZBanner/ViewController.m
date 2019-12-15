@@ -42,7 +42,7 @@
         cell.leftText.text = model[@"name"];
         //毛玻璃效果必须实现 看实际情况 取最后一个还是中间那个
 //        [bgImageView sd_setImageWithURL:[NSURL URLWithString:model[@"icon"]] placeholderImage:nil];
-        [bgImageView sd_setImageWithURL:[NSURL URLWithString:dataArr[(indexPath.row == 0?:(indexPath.row-1))][@"icon"]] placeholderImage:nil];
+        [bgImageView sd_setImageWithURL:[NSURL URLWithString:dataArr[(indexPath.row == 0?0:(indexPath.row-1))][@"icon"]] placeholderImage:nil];
 
         return cell;
     })
