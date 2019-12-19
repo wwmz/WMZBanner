@@ -22,9 +22,11 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wHideBannerControl)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wMarquee)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverLap)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wEffectHeight)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wContentOffsetX)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScreenScale)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellPosition,            wPosition)
@@ -38,6 +40,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCenterClickBlock,      
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlSelectColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wBannerControlImage)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wDataParamIconName)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wBannerControlSelectImage)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wBannerControlImageSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wBannerControlSelectImageSize)
@@ -48,6 +51,9 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, UIEdgeInsets,                
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIScrollViewDecelerationRate,  wDecelerationRate)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerControlPosition,         wBannerControlPosition)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wMarqueeTextColor)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerPageControl,             wCustomControl)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlSelectMargin)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wMarqueeRate)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
@@ -69,12 +75,15 @@ WMZBannerParam * BannerParam(void){
         _wBannerControlSelectColor = [UIColor orangeColor];
         _wBannerControlImageSize = CGSizeMake(10, 10);
         _wBannerControlSelectImageSize = CGSizeMake(10, 10);
-        _wAutoScrollSecond = 3;
         _wCanFingerSliding = YES;
         _wSectionInset = UIEdgeInsetsMake(0,0, 0, 0);
         _wDecelerationRate = 0.1;
         _wScreenScale = 1;
         _wMarqueeTextColor = [UIColor redColor];
+        _wEffectHeight = 1;
+        _wDataParamIconName = @"icon";
+        _wBannerControlSelectMargin = 3;
+        _wMarqueeRate = 5.0f;
     }
     return self;
 }

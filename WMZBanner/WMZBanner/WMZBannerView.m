@@ -11,17 +11,17 @@
 #import "WMZBannerView.h"
 #import "WMZBannerFlowLayout.h"
 #import "WMZBannerControl.h"
+#import "WMZBannerOverLayout.h"
 #define COUNT 500
 @interface WMZBannerView()<UICollectionViewDelegate,UICollectionViewDataSource>{
     BOOL beganDragging;
 }
 @property(strong,nonatomic)UICollectionView *myCollectionV;
-@property(strong,nonatomic)WMZBannerFlowLayout *flowL ;
+@property(strong,nonatomic)UICollectionViewFlowLayout *flowL ;
 @property(strong,nonatomic)WMZBannerControl *bannerControl ;
-@property(strong,nonatomic)UIImageView *bgImgView;
 @property(strong,nonatomic)NSArray *data;
 @property(strong,nonatomic)WMZBannerParam *param;
-@property(nonatomic,  weak)NSTimer *timer;
+@property(strong,nonatomic)NSTimer *timer;
 @end
 @implementation WMZBannerView
 - (instancetype)initConfigureWithModel:(WMZBannerParam *)param withView:(UIView*)parentView{
@@ -61,7 +61,6 @@
     self.bannerControl.numberOfPages = self.data.count;
     [UIView animateWithDuration:0.0 animations:^{
         [self.myCollectionV reloadData];
-
         if (self.param.wSelectIndex|| self.param.wRepeat) {
             NSIndexPath *path = [NSIndexPath indexPathForRow: self.param.wRepeat?((COUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0];
             [self scrolToPath:path animated:NO];
@@ -73,6 +72,9 @@
                 [self cancelTimer];
             }
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self scrollEnd:[NSIndexPath indexPathForRow: self.param.wRepeat?((COUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0]];
+        });
     } completion:^(BOOL finished) {}];
     
     
@@ -80,8 +82,10 @@
 
 - (void)setUp{
     if (self.param.wMarquee) {
-        self.param.wVertical = YES;
+        self.param.wAutoScroll = YES;
         self.param.wHideBannerControl = YES;
+        self.param.wAutoScrollSecond = 0.05f;
+        self.param.wRepeat = YES;
     }
     
     if (self.param.wScreenScale<1&&self.param.wScreenScale>0) {
@@ -111,9 +115,7 @@
     if (self.param.wItemSize.height == 0 || self.param.wItemSize.width == 0 ) {
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     }
-//    else if(self.param.wItemSize.width<self.frame.size.width/2){
-//        self.param.wItemSize = CGSizeMake(self.frame.size.width/2, self.param.wItemSize.height);
-//    }
+
     else if(self.param.wItemSize.height>self.frame.size.height){
         self.param.wItemSize = CGSizeMake(self.param.wItemSize.width, self.frame.size.height);
     }else if(self.param.wItemSize.width>self.frame.size.width){
@@ -121,44 +123,49 @@
     }
     
     
-    self.flowL = [[WMZBannerFlowLayout alloc] initConfigureWithModel:self.param];;
+    if (!self.param.wCardOverLap) {
+        self.flowL = [[WMZBannerFlowLayout alloc] initConfigureWithModel:self.param];;
+    }else{
+        self.param.wRepeat = YES;
+        if (self.param.wScaleFactor == 0.5) {
+            self.param.wScaleFactor = 0.8f;
+        }
+        self.flowL = [[WMZBannerOverLayout alloc] initConfigureWithModel:self.param];;
+    }
 
     [self addSubview:self.myCollectionV];
-    self.myCollectionV.frame = self.bounds;
     self.myCollectionV.scrollEnabled = self.param.wCanFingerSliding;
     [self.myCollectionV registerClass:[Collectioncell class] forCellWithReuseIdentifier:NSStringFromClass([Collectioncell class])];
     [self.myCollectionV registerClass:[CollectionTextCell class] forCellWithReuseIdentifier:NSStringFromClass([CollectionTextCell class])];
     if (self.param.wMyCellClassName) {
         [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
     }
+    self.myCollectionV.frame = self.bounds;
+    self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width && self.param.wLineSpacing == 0)||self.param.wVertical;
+    if ([self.myCollectionV isPagingEnabled]) {
+        self.myCollectionV.decelerationRate = UIScrollViewDecelerationRateNormal;
+    }
     
-    self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width && self.param.wLineSpacing == 0);
-    self.bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectMake(0, self.param.wItemSize.height-40, self.param.wItemSize.width, 30) WithModel:self.param];
-    CGFloat center = self.center.x;
-    if (self.param.wBannerControlPosition == BannerControlLeft) {
-        center = self.center.x*0.2;
+    self.bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectMake((self.bounds.size.width - 80)/2 , self.bounds.size.height - 30,80, 30) WithModel:self.param];
+    if (self.param.wCustomControl) {
+        self.param.wCustomControl(self.bannerControl);
     }
-    else if (self.param.wBannerControlPosition == BannerControlRight) {
-        center = self.center.x*1.7;
-    }
-    self.bannerControl.center = CGPointMake(center, self.bannerControl.center.y);
     if (!self.param.wHideBannerControl) {
         [self addSubview:self.bannerControl];
     }
     
-    [self resetCollection];
     
-    self.bgImgView = [[UIImageView alloc] initWithFrame:self.bounds];
-    self.myCollectionV.backgroundView = self.bgImgView;
+    self.bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height*self.param.wEffectHeight)];
+    [self addSubview:self.bgImgView];
+    [self sendSubviewToBack:self.bgImgView];
     self.bgImgView.hidden = !self.param.wEffect;
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    effectView.frame = self.bounds;
-    [self.myCollectionV.backgroundView addSubview:effectView];
+    effectView.frame = self.bgImgView.bounds;
+    [self.bgImgView addSubview:effectView];
     
-    
-
+    [self resetCollection];
 }
 
 
@@ -168,32 +175,21 @@
     if (self.param.wMyCell) {
         return self.param.wMyCell([NSIndexPath indexPathForRow:index inSection:indexPath.section], collectionView, dic,self.bgImgView,self.data);
     }else{
-        //跑马灯cell
-        if (self.param.wMarquee) {
-            CollectionTextCell *cell = (CollectionTextCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CollectionTextCell class]) forIndexPath:indexPath];
-                       cell.param = self.param;
-            cell.param = self.param;
-            if ([dic isKindOfClass:[NSString class]]) {
-                cell.label.text = dic;
-            }
-            return cell;
+        //默认视图
+        Collectioncell *cell = (Collectioncell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([Collectioncell class]) forIndexPath:indexPath];
+        cell.param = self.param;
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            [self setIconData:cell.icon withData:dic[self.param.wDataParamIconName]];
+
         }else{
-            //默认视图
-            Collectioncell *cell = (Collectioncell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([Collectioncell class]) forIndexPath:indexPath];
-            cell.param = self.param;
-            if ([dic isKindOfClass:[NSDictionary class]]) {
-                [self setIconData:cell.icon withData:dic[@"icon"]];
-                [self setIconData:self.bgImgView withData:dic[@"icon"]];
-            }else{
-                [self setIconData:cell.icon withData:dic];
-                [self setIconData:self.bgImgView withData:dic];
-            }
-            return cell;
+            [self setIconData:cell.icon withData:dic];
         }
+        return cell;
     }
 }
 
 - (void)setIconData:(UIImageView*)icon withData:(id)data{
+    if (!data) return;
     if ([data isKindOfClass:[NSString class]]) {
         if ([(NSString*)data hasPrefix:@"http"]) {
             [icon sd_setImageWithURL:[NSURL URLWithString:(NSString*)data] placeholderImage:self.param.wPlaceholderImage?[UIImage imageNamed:self.param.wPlaceholderImage]:nil];
@@ -242,7 +238,11 @@
            
     NSInteger cellIndex = [arr indexOfObject:[NSString stringWithFormat:@"%.0f",max]];
     if (cellIndex == NSNotFound) {
-        cellIndex = 0;
+        if (arr.count%2 == 0) {
+            cellIndex = arr.count/2 ;
+        }else{
+            cellIndex = arr.count/2+1 ;
+        }
     }
     if (cellIndex<indexArr.count) {
         UICollectionViewCell *cell = indexArr[cellIndex];
@@ -262,28 +262,23 @@
         return;
     }
     if (self.data.count==0) return;
-    if ([self.myCollectionV isPagingEnabled]) {
-        [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:
-         self.param.wVertical?UICollectionViewScrollPositionCenteredVertically:
-                              UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+    if (self.param.wCardOverLap) {
+         [self.myCollectionV setContentOffset: self.param.wVertical?
+          CGPointMake(0, path.row *self.myCollectionV.bounds.size.height):
+          CGPointMake(path.row *self.myCollectionV.bounds.size.width, 0)
+                                     animated:animated];
+
     }else{
-        [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+        if ([self.myCollectionV isPagingEnabled]) {
+            [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:
+             self.param.wVertical?UICollectionViewScrollPositionCenteredVertically:
+                                  UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+        }else{
+            [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+        }
     }
     
-    //特殊要求
-    if (!animated&&![self.myCollectionV isPagingEnabled]) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (self.param.wEventScrollEnd) {
-                NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
-                id dic = self.data[index];
-                BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:path];
-                UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:path];
-                self.param.wEventScrollEnd(dic, index, center,currentCell);
-            }
-        });
-    }
-        
-    if ([self.myCollectionV isPagingEnabled]) return;
+    if ([self.myCollectionV isPagingEnabled]||self.param.wCardOverLap) return;
     if(self.param.wContentOffsetX>0.5){
         self.myCollectionV.contentOffset = CGPointMake(self.myCollectionV.contentOffset.x-(self.param.wContentOffsetX-0.5)*self.myCollectionV.frame.size.width, self.myCollectionV.contentOffset.y);
     }else if(self.param.wContentOffsetX<0.5){
@@ -294,22 +289,21 @@
 
 //定时器
 - (void)createTimer{
-    
-    [self cancelTimer];
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.param.wAutoScrollSecond  target:self selector:@selector(autoScrollAction) userInfo:nil repeats:YES];
-    self.timer = timer;
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    if (!self.timer) {
+        SEL sel = NSSelectorFromString(self.param.wMarquee?@"autoMarqueenScrollAction":@"autoScrollAction");
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.param.wAutoScrollSecond  target:self selector:sel userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    }
 }
 
-//定时器方法
+//定时器方法 自动滚动
 - (void)autoScrollAction{
     if (beganDragging) return;
+    if (!self.superview) return;
     if (!self.param.wAutoScroll) {
         [self cancelTimer];
         return;
     }
-
     self.param.myCurrentPath+=1;
     if (self.param.wRepeat&&  self.param.myCurrentPath == (self.data.count*COUNT)) {
        self.param.myCurrentPath = 0;
@@ -320,6 +314,28 @@
     }
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem: self.param.myCurrentPath inSection:0];
     [self scrolToPath:nextIndexPath animated:YES];
+}
+
+//定时器方法 跑马灯
+- (void)autoMarqueenScrollAction{
+    if (!self.superview) return;
+    if (!self.param.wAutoScroll) {
+        [self cancelTimer];
+        return;
+    }
+    if (self.param.wVertical) {
+        CGFloat OffsetY = self.myCollectionV.contentOffset.y + self.param.wMarqueeRate;
+        if (OffsetY >self.myCollectionV.contentSize.height) {
+            OffsetY = self.myCollectionV.contentSize.height/2;
+        }
+        [self.myCollectionV setContentOffset:CGPointMake(self.myCollectionV.contentOffset.x, OffsetY) animated:NO];
+    }else{
+        CGFloat OffsetX = self.myCollectionV.contentOffset.x + self.param.wMarqueeRate;
+        if (OffsetX >self.myCollectionV.contentSize.width) {
+            OffsetX = self.myCollectionV.contentSize.width/2;
+        }
+        [self.myCollectionV setContentOffset:CGPointMake(OffsetX, self.myCollectionV.contentOffset.y) animated:NO];
+    }
 }
 
 //定时器销毁
@@ -333,58 +349,72 @@
 //开始拖动
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     beganDragging = YES;
-    if (self.param.wAutoScroll) {
-        [self cancelTimer];
+    if (!self.param.wMarquee) {
+        if (self.param.wAutoScroll) {
+            [self cancelTimer];
+        }
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if ([self.myCollectionV isPagingEnabled]) {
-        NSInteger index =  self.param.wVertical?
-                           scrollView.contentOffset.y/scrollView.frame.size.height:
-                           scrollView.contentOffset.x/scrollView.frame.size.width;
-        self.param.myCurrentPath = index;
-        self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
+    if (self.param.wCardOverLap) {
+        if ([self.myCollectionV isPagingEnabled]&&!self.param.wMarquee) {
+            NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
+            self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
+        }
+    }else{
+        if ([self.myCollectionV isPagingEnabled]&&!self.param.wMarquee) {
+            NSInteger index =  self.param.wVertical?
+                               scrollView.contentOffset.y/scrollView.frame.size.height:
+                               scrollView.contentOffset.x/scrollView.frame.size.width;
+            self.param.myCurrentPath = index;
+            self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
+        }
     }
-    
 }
 
 //拖动结束
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     beganDragging = NO;
-    if (![self.myCollectionV isPagingEnabled]) {
-        self.bannerControl.currentPage = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
+    if (!self.param.wMarquee) {
+        if (![self.myCollectionV isPagingEnabled]) {
+            self.bannerControl.currentPage = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
+        }
+        if (self.param.wAutoScroll) {
+            [self createTimer];
+        }
     }
-    if (self.param.wAutoScroll) {
-        [self createTimer];
-    }
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
-    if (self.param.wEventScrollEnd) {
-        NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
-        id dic = self.data[index];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0];
-        BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:indexPath];
-        UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:indexPath];
-        self.param.wEventScrollEnd(dic, index, center,currentCell);
-    }
+    [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
 }
 
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    if (![self.myCollectionV isPagingEnabled]) {
-        self.bannerControl.currentPage = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
-        
-        if (self.param.wEventScrollEnd) {
-            NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
-            id dic = self.data[index];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0];
-            BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:indexPath];
-            UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:indexPath];
-            self.param.wEventScrollEnd(dic, index, center,currentCell);
+   [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
+}
+
+- (void)scrollEnd:(NSIndexPath*)indexPath{
+    if (!self.data.count) return;
+    if (self.param.wMarquee) return;
+    NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
+    if (index>self.data.count-1) {
+        index = 0;
+    }
+    id dic = self.data[index];
+    if (self.param.wEventScrollEnd) {
+        NSLog(@"%ld",self.param.myCurrentPath);
+        NSLog(@"%ld",indexPath.item);
+        BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:indexPath];
+        UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:indexPath];
+        self.param.wEventScrollEnd(dic, index, center,currentCell);
+    }
+    if (self.param.wEffect) {
+        if ([dic isKindOfClass:[NSDictionary class]]) {
+            [self setIconData:self.bgImgView  withData:dic[self.param.wDataParamIconName]];
+        }else{
+            [self setIconData:self.bgImgView  withData:dic];
         }
     }
 }
@@ -411,7 +441,18 @@
 }
 
 - (void)dealloc{
+    //单纯调用这里无法消除定时器
     [self cancelTimer];
+}
+
+//要配合这里调用
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (!newSuperview &&self.timer) {
+        // 销毁定时器
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
 @end
@@ -442,11 +483,12 @@
 {
     self = [super initWithFrame:frame];
     if (self){
+        self.contentView.backgroundColor = [UIColor whiteColor];
         self.label = [UILabel new];
         self.label.font = [UIFont systemFontOfSize:17.0];
         self.label.textColor = [UIColor redColor];
         [self.contentView addSubview:self.label];
-        self.label.frame = self.contentView.bounds;
+        self.label.frame = CGRectMake(10, 0, frame.size.width-20, frame.size.height);
     }
     return self;
 }

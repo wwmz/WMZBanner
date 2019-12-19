@@ -14,9 +14,8 @@
         self.param = param;
         self.userInteractionEnabled = NO;
         self.hidesForSinglePage = YES;
-        self.currentPageIndicatorTintColor = param.wBannerControlColor;
-        self.pageIndicatorTintColor = param.wBannerControlSelectColor;
-        
+        self.currentPageIndicatorTintColor = param.wBannerControlSelectColor;
+        self.pageIndicatorTintColor = param.wBannerControlColor;
         if (param.wBannerControlImage) {
             self.inactiveImage = [UIImage imageNamed:param.wBannerControlImage];
             self.inactiveImageSize = param.wBannerControlImageSize;
@@ -28,6 +27,7 @@
             self.currentPageIndicatorTintColor = [UIColor clearColor];
         }
         
+        [self resetFrame];
 
     }
     return self;
@@ -84,22 +84,54 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (!self.param.wBannerControlImage||!self.param.wBannerControlSelectImage) return;
-    CGFloat marginX = self.currentImageSize.width + 5;
-    CGFloat newW = (self.subviews.count) * marginX;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, newW, self.frame.size.height);
-    CGPoint center = self.center;
-    center.x = self.superview.center.x;
-    self.center = center;
+    if (self.param.wBannerControlImage&&self.param.wBannerControlSelectImage){
+        UIImageView *tmp = nil;
+        for (int i=0; i<[self.subviews count]; i++) {
+            UIImageView* dot = [self.subviews objectAtIndex:i];
+            CGFloat x = (tmp?CGRectGetMaxX(tmp.frame):0)+self.param.wBannerControlSelectMargin;
+            CGFloat y = 0;
+            if (i == self.currentPage) {
+                y = (self.bounds.size.height - self.currentImageSize.height)/2;
+                [dot setFrame:CGRectMake(x, y, self.currentImageSize.width, self.currentImageSize.height)];
+            }else {
+                y = (self.bounds.size.height - self.inactiveImageSize.height)/2;
+                [dot setFrame:CGRectMake(x, y, self.inactiveImageSize.width, self.inactiveImageSize.height)];
+            }
+            tmp = dot;
+            if (i == [self.subviews count]-1) {
+                CGRect rect = self.frame;
+                rect.size.width = CGRectGetMaxX(dot.frame);
+                rect.origin.x = (self.param.wFrame.size.width - rect.size.width)/2;
+                self.frame = rect;
+            }
+        }
+        [self resetFrame];
+    }
+}
+
+- (void)resetFrame{
     for (int i=0; i<[self.subviews count]; i++) {
         UIImageView* dot = [self.subviews objectAtIndex:i];
-        
-        if (i == self.currentPage) {
-            [dot setFrame:CGRectMake(i * marginX-2.5, dot.frame.origin.y, self.currentImageSize.width, self.currentImageSize.height)];
-        }else {
-            [dot setFrame:CGRectMake(i * marginX, dot.frame.origin.y, self.currentImageSize.width, self.currentImageSize.height)];
+        if (i == [self.subviews count]-1) {
+            CGRect rect = self.frame;
+            rect.size.width = CGRectGetMaxX(dot.frame);
+            rect.origin.x = (self.param.wFrame.size.width - rect.size.width)/2;
+            self.frame = rect;
         }
     }
+    if (self.param.wBannerControlPosition == BannerControlLeft) {
+          CGRect rect = self.frame;
+          rect.origin.x = 30;
+          self.frame = rect;
+      }
+      if (self.param.wBannerControlPosition == BannerControlRight) {
+          CGRect rect = self.frame;
+          rect.origin.x = self.superview.frame.size.width - rect.size.width  - 30;
+          self.frame = rect;
+      }
+      if (self.param.wCustomControl) {
+          self.param.wCustomControl(self);
+      }
 }
 
 @end

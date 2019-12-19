@@ -17,6 +17,11 @@
 #define BannerWitdh  [UIScreen mainScreen].bounds.size.width
 #define BannerHeight [UIScreen mainScreen].bounds.size.height
 
+#define BannerWeakSelf(obj) __weak typeof(obj) weakObject = obj;
+#define BannerStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
+
+#define BannerColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 #define WMZBannerPropStatementAndPropSetFuncStatement(propertyModifier,className, propertyPointerType, propertyName)           \
 @property(nonatomic,propertyModifier)propertyPointerType  propertyName;                                                 \
 - (className * (^) (propertyPointerType propertyName)) propertyName##Set;
@@ -39,6 +44,11 @@ typedef UICollectionViewCell* (^BannerCellCallBlock)(NSIndexPath *indexPath,UICo
  * 点击
  */
 typedef void (^BannerClickBlock)(id anyID,NSInteger index);
+
+/*
+ * 自定义pageControl
+ */
+typedef void (^BannerPageControl)(UIPageControl* pageControl);
 
 /*
  * 点击 ,可获取居中cell
