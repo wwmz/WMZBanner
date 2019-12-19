@@ -2,14 +2,15 @@
 
 演示
 ==============
-![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-a5d9f3f86ce62985.gif?imageMogr2/auto-orient/strip)
-
+![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-4b355bc0ecbdca0f.gif?imageMogr2/auto-orient/strip)
 
 特性
 ==============
 - 链式语法 结构优雅
 - 支持常规轮播图样式
 - 支持卡片式样式
+- 支持跑马灯
+- 支持卡片叠加模式
 - 支持自定义轮播图cell
 - 支持自定义图片的偏移距离
 - 支持自定义pagecontrol
@@ -72,22 +73,10 @@
      WMZBannerParam *param =  BannerParam()
     .wFrameSet(CGRectMake(10, BannerHeight/2-20, BannerWitdh-20, 30))
     .wDataSet(@[@"热门商品",@"Hot",@"热点资讯",@"其他热门"])
-    //关闭手指滑动
-    .wCanFingerSlidingSet(NO)
-    //开启循环滚动
-    .wRepeatSet(YES)
-    //开启自动滚动
-    .wAutoScrollSet(YES)
-    //自动滚动时间
-    .wAutoScrollSecondSet(3)
     //跑马灯
     .wMarqueeSet(YES)
     
 ##### 天猫精灵样式
-##### 大概效果图
-
-![C820397D-CF3D-49A5-90E8-6F179F0D4EBF.png](https://upload-images.jianshu.io/upload_images/9163368-86301db3b9ecce99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
      BannerParam()
     .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     .wDataSet([self getData])
@@ -109,6 +98,21 @@
     .wLineSpacingSet(10)
      //整体左右间距 右边偏移item.width的一半 让最后一个可以居中
     .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10+BannerWitdh*0.35))
+    
+    
+##### 卡片叠加样式
+     WMZBannerParam *param =  BannerParam()
+    .wFrameSet(CGRectMake(10,100, BannerWitdh-20, BannerHeight*0.35))
+    .wItemSizeSet(CGSizeMake(BannerWitdh-60, BannerHeight*0.25))
+    .wDataSet([self getData])
+    //设置item的间距
+    .wLineSpacingSet(15)
+    //开启卡片叠加模式
+    .wCardOverLapSet(YES)
+    //毛玻璃背景
+    .wEffectSet(YES)
+    //开启自动滚动
+    .wAutoScrollSet(YES);
     
 ##### 自定义cell 
 ##### 传入一个继承UICollectionViewCell的类
