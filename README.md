@@ -2,14 +2,15 @@
 
 演示
 ==============
-![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-a5d9f3f86ce62985.gif?imageMogr2/auto-orient/strip)
-
+![banner.gif](https://upload-images.jianshu.io/upload_images/9163368-4b355bc0ecbdca0f.gif?imageMogr2/auto-orient/strip)
 
 特性
 ==============
 - 链式语法 结构优雅
 - 支持常规轮播图样式
 - 支持卡片式样式
+- 支持跑马灯
+- 支持卡片叠加模式
 - 支持自定义轮播图cell
 - 支持自定义图片的偏移距离
 - 支持自定义pagecontrol
@@ -22,6 +23,8 @@
 ==============
 
 ### 默认模式
+
+![banner1.gif](https://upload-images.jianshu.io/upload_images/9163368-e67656a2a5b0bb7f.gif?imageMogr2/auto-orient/strip)
 
 主要适用于普通样式的情况下使用
  
@@ -42,7 +45,8 @@
 
 
 ### 卡片模式
-	
+![banner4.gif](https://upload-images.jianshu.io/upload_images/9163368-4a16369427d1da6f.gif?imageMogr2/auto-orient/strip)
+
     BannerParam()
     .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     //item之间的间距
@@ -69,24 +73,18 @@
     .wDataSet([self getData]);
     
 ##### 跑马灯
+
+![banner6.gif](https://upload-images.jianshu.io/upload_images/9163368-45ffbf5f23372828.gif?imageMogr2/auto-orient/strip)
+
      WMZBannerParam *param =  BannerParam()
     .wFrameSet(CGRectMake(10, BannerHeight/2-20, BannerWitdh-20, 30))
     .wDataSet(@[@"热门商品",@"Hot",@"热点资讯",@"其他热门"])
-    //关闭手指滑动
-    .wCanFingerSlidingSet(NO)
-    //开启循环滚动
-    .wRepeatSet(YES)
-    //开启自动滚动
-    .wAutoScrollSet(YES)
-    //自动滚动时间
-    .wAutoScrollSecondSet(3)
     //跑马灯
     .wMarqueeSet(YES)
     
 ##### 天猫精灵样式
-##### 大概效果图
 
-![C820397D-CF3D-49A5-90E8-6F179F0D4EBF.png](https://upload-images.jianshu.io/upload_images/9163368-86301db3b9ecce99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![banner3.gif](https://upload-images.jianshu.io/upload_images/9163368-52a16007f7a2834c.gif?imageMogr2/auto-orient/strip)
 
      BannerParam()
     .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
@@ -110,6 +108,45 @@
      //整体左右间距 右边偏移item.width的一半 让最后一个可以居中
     .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, 10+BannerWitdh*0.35))
     
+    
+##### 卡片叠加样式
+
+
+![banner5.gif](https://upload-images.jianshu.io/upload_images/9163368-2e9934f2b819cf6f.gif?imageMogr2/auto-orient/strip)
+
+     WMZBannerParam *param =  BannerParam()
+    .wFrameSet(CGRectMake(10,100, BannerWitdh-20, BannerHeight*0.35))
+    .wItemSizeSet(CGSizeMake(BannerWitdh-60, BannerHeight*0.25))
+    .wDataSet([self getData])
+    //设置item的间距
+    .wLineSpacingSet(15)
+    //开启卡片叠加模式
+    .wCardOverLapSet(YES)
+    //毛玻璃背景
+    .wEffectSet(YES)
+    //开启自动滚动
+    .wAutoScrollSet(YES);
+    
+##### 自定义pageControl
+
+ ![banner2.gif](https://upload-images.jianshu.io/upload_images/9163368-ba69944fb01c4805.gif?imageMogr2/auto-orient/strip)
+ 
+       WMZBannerParam *param =  BannerParam()
+      .wFrameSet(CGRectMake(10, BannerHeight*0.7+20, BannerWitdh-20, BannerHeight/6))
+      .wBannerControlImageSet(@"bannerP3")
+      .wBannerControlSelectImageSet(@"bannerP2")
+      .wBannerControlImageSizeSet(CGSizeMake(10, 10))
+      .wBannerControlSelectImageSizeSet(CGSizeMake(30, 30))
+      //自定义pageControl的位置
+      .wCustomControlSet(^(UIPageControl *pageControl) {
+          //随意改变xy值
+          CGRect rect = pageControl.frame;
+          rect.origin.y =  10;
+          pageControl.frame = rect;
+      })
+      .wDataSet([self getData]);
+      
+      
 ##### 自定义cell 
 ##### 传入一个继承UICollectionViewCell的类
 
@@ -132,6 +169,7 @@
     })
     .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     
+      
 ##### 更新UI
 -(void)updateUI;
 改变.wDataSet(@[]),然后调用updateUI()实例方法即可
@@ -250,3 +288,4 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191120 新增wEventCenterClick(可判断当前点击cell是否是中间那个)
 - 20191120 新增wEventScrollEnd滚动结束事件(每次滚动结束都会调用 最好是关闭自动滚动的场景使用)
 - 20191204 适配ipad   pod 更新到1.0.4
+- 20191219 新增卡片叠加样式 优化定时器 
