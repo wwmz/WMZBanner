@@ -66,6 +66,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIScrollVi
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wAutoScrollSecond)
 //默认移动到第几个 default 0
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,            wSelectIndex)
+//中间视图放最上面 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wZindex)
 //自定义cell内容 默认是Collectioncell类
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCellCallBlock,  wMyCell)
 //自定义cell的类名 自定义视图必传 不然会crash

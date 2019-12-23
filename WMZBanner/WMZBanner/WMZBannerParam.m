@@ -23,6 +23,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCanFingerSliding)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wMarquee)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverLap)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wZindex)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)

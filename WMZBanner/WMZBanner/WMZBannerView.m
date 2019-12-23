@@ -404,8 +404,6 @@
     }
     id dic = self.data[index];
     if (self.param.wEventScrollEnd) {
-        NSLog(@"%ld",self.param.myCurrentPath);
-        NSLog(@"%ld",indexPath.item);
         BOOL center = [self checkCellInCenterCollectionView:self.myCollectionV AtIndexPath:indexPath];
         UICollectionViewCell *currentCell = (UICollectionViewCell*)[self.myCollectionV cellForItemAtIndexPath:indexPath];
         self.param.wEventScrollEnd(dic, index, center,currentCell);

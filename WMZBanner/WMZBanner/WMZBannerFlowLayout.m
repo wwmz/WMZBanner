@@ -66,6 +66,9 @@
             CGFloat alpha = ratio * (1 - self.param.wAlpha) +self.param.wAlpha;
             attributes.alpha = alpha;
         }
+        if (self.param.wZindex) {
+           attributes.zIndex = zoom*100;
+        }
         attributes.center = CGPointMake(attributes.center.x, (self.param.wPosition == BannerCellPositionBottom?attributes.center.y:self.collectionView.center.y) + zoom);
 
     }
