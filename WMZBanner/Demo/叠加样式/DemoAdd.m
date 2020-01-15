@@ -40,12 +40,12 @@
     //毛玻璃背景
     .wEffectSet(YES)
     //开启自动滚动
-    .wAutoScrollSet(YES);
+//    .wAutoScrollSet(YES)
+    ;
     WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
     [self.view addSubview:viewOne];
 
 
-    
 
     /*
     *纵向
@@ -53,23 +53,26 @@
      WMZBannerParam *param1 =
     BannerParam()
     .wEventScrollEndSet(^(id anyID, NSInteger index, BOOL isCenter, UICollectionViewCell *cell) {
-        NSLog(@"%ld",index);
+        NSLog(@"滚动到第%ld个",index);
     })
     .wFrameSet(CGRectMake(10,  CGRectGetMaxY(viewOne.frame)+30 , BannerWitdh-20, BannerHeight*0.35))
     .wItemSizeSet(CGSizeMake(BannerWitdh/2, BannerHeight*0.3))
     .wDataSet([self getData])
     .wHideBannerControlSet(YES)
     //设置item的间距
-    .wLineSpacingSet(15)
+    .wLineSpacingSet(20)
     //开启卡片叠加模式
     .wCardOverLapSet(YES)
-//    //开启自动滚动
-//    .wAutoScrollSet(YES)
     //缩放系数
-    .wScaleFactorSet(0.7)
+    .wScaleFactorSet(0.6)
+    //毛玻璃背景
+    .wEffectSet(YES)
+    //开启自动滚动
+    .wAutoScrollSet(YES)
     //开启纵向
     .wVerticalSet(YES);
     WMZBannerView *viewTwo = [[WMZBannerView alloc]initConfigureWithModel:param1];
+
     [self.view addSubview:viewTwo];
     
 }

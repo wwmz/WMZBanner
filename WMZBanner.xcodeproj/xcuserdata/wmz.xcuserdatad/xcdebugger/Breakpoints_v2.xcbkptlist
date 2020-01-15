@@ -58,8 +58,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerOverLayout.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-cardOverLapTypeInRect:"
             landmarkType = "7">
          </BreakpointContent>

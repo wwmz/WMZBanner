@@ -140,7 +140,7 @@
     if (self.param.wMyCellClassName) {
         [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
     }
-    self.myCollectionV.frame = self.bounds;
+    self.myCollectionV.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, (int)self.bounds.size.width, (int)self.bounds.size.height);
     self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width && self.param.wLineSpacing == 0)||self.param.wVertical;
     if ([self.myCollectionV isPagingEnabled]) {
         self.myCollectionV.decelerationRate = UIScrollViewDecelerationRateNormal;
@@ -392,6 +392,11 @@
 
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    if (self.param.wCardOverLap) {
+        self.param.myCurrentPath = self.param.wVertical?
+              MAX(floor(scrollView.contentOffset.y / scrollView.bounds.size.height ), 0):
+              MAX(floor(scrollView.contentOffset.x / scrollView.bounds.size.width ), 0);
+    }
    [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
 }
 

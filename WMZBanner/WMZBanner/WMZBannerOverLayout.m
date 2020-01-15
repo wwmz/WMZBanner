@@ -23,15 +23,16 @@ static const int visibleItemsCount = 4;
 
 - (void)prepareLayout
 {
+//    NSLog(@"%f %f",BannerHeight*0.3,BannerHeight*0.35);
     [super prepareLayout];
     self.collectionView.pagingEnabled = YES;
     self.itemSize = self.param.wVertical?
-    CGSizeMake(self.param.wItemSize.width , self.param.wItemSize.height - (visibleItemsCount - 1)*self.param.wLineSpacing):
+    CGSizeMake(self.param.wItemSize.width , (self.param.wItemSize.height - (visibleItemsCount - 1)*self.param.wLineSpacing)):
     CGSizeMake(self.param.wItemSize.width - (visibleItemsCount - 1)*self.param.wLineSpacing, self.param.wItemSize.height);
     self.minimumInteritemSpacing = (self.param.wFrame.size.height-self.param.wItemSize.height)/2;
-    self.minimumLineSpacing = self.param.wVertical?
-    MAX(self.collectionView.bounds.size.height - self.itemSize.height , 0):
-    MAX(self.collectionView.bounds.size.width - self.itemSize.width , 0);
+//    self.minimumLineSpacing = self.param.wVertical?
+//    MAX(self.collectionContenSize.height - self.itemSize.height , 0):
+//    MAX(self.collectionContenSize.width - self.itemSize.width , 0);
     self.sectionInset = self.param.wSectionInset;
     self.scrollDirection = self.param.wVertical? UICollectionViewScrollDirectionVertical
                                                         :UICollectionViewScrollDirectionHorizontal;
@@ -50,8 +51,8 @@ static const int visibleItemsCount = 4;
        }
 
        self.param.myCurrentPath = self.param.wVertical?
-       MAX(floor(self.collectionContenOffset.y / self.collectionContenSize.height), 0):
-       MAX(floor(self.collectionContenOffset.x / self.collectionContenSize.width), 0);
+       MAX(floor(self.collectionContenOffset.y / (int)self.collectionContenSize.height ), 0):
+       MAX(floor(self.collectionContenOffset.x / (float)self.collectionContenSize.width ), 0);
        NSInteger minVisibleIndex = MAX(self.param.myCurrentPath, 0);
        NSInteger contentOffset =  self.param.wVertical?
        self.collectionContenOffset.y:self.collectionContenOffset.x;
@@ -61,14 +62,16 @@ static const int visibleItemsCount = 4;
        CGFloat offsetProgress = offset / (self.param.wVertical?self.collectionContenSize.height:self.collectionContenSize.width)*1.0f;
        NSInteger maxVisibleIndex = MAX(MIN(itemsCount - 1, self.param.myCurrentPath + visibleItemsCount), minVisibleIndex);
        NSMutableArray *mArr = [[NSMutableArray alloc] init];
+    
        for (NSInteger i = minVisibleIndex; i<=maxVisibleIndex; i++) {
            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
            UICollectionViewLayoutAttributes *attributes = [[self layoutAttributesForItemAtIndexPath:indexPath] copy];
+           
            NSInteger visibleIndex = MAX(indexPath.item - self.param.myCurrentPath + 1, 0);
            attributes.size =  self.itemSize;
            CGFloat topCardMidX = self.param.wVertical?
-           self.collectionContenOffset.y +  self.collectionContenSize.height / 2:
-           self.collectionContenOffset.x +  self.collectionContenSize.width / 2;
+           (self.collectionContenOffset.y +  self.collectionContenSize.height / 2):
+           (self.collectionContenOffset.x +  self.collectionContenSize.width / 2);
            attributes.center = self.param.wVertical?
            CGPointMake(self.collectionContenSize.width/2, topCardMidX + self.param.wLineSpacing * (visibleIndex - 1)):
            CGPointMake(topCardMidX + self.param.wLineSpacing * (visibleIndex - 1), self.collectionContenSize.height/2);
