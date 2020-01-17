@@ -1,5 +1,4 @@
 
-
 //
 //  WMZBannerOverLayout.m
 //  WMZBanner
@@ -7,7 +6,6 @@
 //  Created by wmz on 2019/12/18.
 //  Copyright © 2019 wmz. All rights reserved.
 //
-static const int visibleItemsCount = 4;
 #import "WMZBannerOverLayout.h"
 @interface WMZBannerOverLayout()
 @property(nonatomic,assign)CGPoint collectionContenOffset;
@@ -23,12 +21,14 @@ static const int visibleItemsCount = 4;
 
 - (void)prepareLayout
 {
-//    NSLog(@"%f %f",BannerHeight*0.3,BannerHeight*0.35);
     [super prepareLayout];
+    if (self.param.wCardOverLapCount<=0) {
+        self.param.wCardOverLapCount = 4;
+    }
     self.collectionView.pagingEnabled = YES;
     self.itemSize = self.param.wVertical?
-    CGSizeMake(self.param.wItemSize.width , (self.param.wItemSize.height - (visibleItemsCount - 1)*self.param.wLineSpacing)):
-    CGSizeMake(self.param.wItemSize.width - (visibleItemsCount - 1)*self.param.wLineSpacing, self.param.wItemSize.height);
+    CGSizeMake(self.param.wItemSize.width , (self.param.wItemSize.height - (self.param.wCardOverLapCount - 1)*self.param.wLineSpacing)):
+    CGSizeMake(self.param.wItemSize.width - (self.param.wCardOverLapCount - 1)*self.param.wLineSpacing, self.param.wItemSize.height);
     self.minimumInteritemSpacing = (self.param.wFrame.size.height-self.param.wItemSize.height)/2;
 //    self.minimumLineSpacing = self.param.wVertical?
 //    MAX(self.collectionContenSize.height - self.itemSize.height , 0):
@@ -60,7 +60,7 @@ static const int visibleItemsCount = 4;
        self.collectionContenSize.height:self.collectionContenSize.width;
        CGFloat offset = contentOffset % collectionBounds;
        CGFloat offsetProgress = offset / (self.param.wVertical?self.collectionContenSize.height:self.collectionContenSize.width)*1.0f;
-       NSInteger maxVisibleIndex = MAX(MIN(itemsCount - 1, self.param.myCurrentPath + visibleItemsCount), minVisibleIndex);
+       NSInteger maxVisibleIndex = MAX(MIN(itemsCount - 1, self.param.myCurrentPath + self.param.wCardOverLapCount), minVisibleIndex);
        NSMutableArray *mArr = [[NSMutableArray alloc] init];
     
        for (NSInteger i = minVisibleIndex; i<=maxVisibleIndex; i++) {
@@ -78,39 +78,29 @@ static const int visibleItemsCount = 4;
            attributes.zIndex = 925457662 - visibleIndex;
            CGFloat scale = [self parallaxProgressForVisibleIndex:visibleIndex offsetProgress:offsetProgress minScale:self.param.wScaleFactor];
            attributes.transform = CGAffineTransformMakeScale(scale, scale);
-            switch (visibleIndex) {
-              case 1:
-              {
-                
-                  if (self.param.wVertical) {
-                      if (self.collectionContenOffset.y >= 0) {
-                          attributes.center = CGPointMake(attributes.center.x, attributes.center.y - offset);
-                      }else{
-                          attributes.center = CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress);
-                      }
-                  }else{
-                      if (self.collectionContenOffset.x >= 0) {
-                        attributes.center =  CGPointMake(attributes.center.x - offset, attributes.center.y);
-                    }else{
-                        attributes.center = CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
-                    }
-                  }
-                break;
-              }
-              case visibleItemsCount+1:{
-                  attributes.center = self.param.wVertical?
-                  CGPointMake(attributes.center.x, attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing):
-                  CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing, attributes.center.y);
-              }
-              break;
-              default:
-              {
-                   attributes.center = self.param.wVertical?
-                  CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress):
-                   CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
-                  break;
+           if (visibleIndex == 1) {
+               if (self.param.wVertical) {
+                   if (self.collectionContenOffset.y >= 0) {
+                       attributes.center = CGPointMake(attributes.center.x, attributes.center.y - offset);
+                   }else{
+                       attributes.center = CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress);
+                   }
+               }else{
+                   if (self.collectionContenOffset.x >= 0) {
+                     attributes.center =  CGPointMake(attributes.center.x - offset, attributes.center.y);
+                 }else{
+                     attributes.center = CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
+                 }
                }
-            }
+           }else if (visibleIndex == self.param.wCardOverLapCount + 1){
+               attributes.center = self.param.wVertical?
+                    CGPointMake(attributes.center.x, attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing):
+                    CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing, attributes.center.y);
+           }else{
+               attributes.center = self.param.wVertical?
+                        CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress):
+                        CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
+           }
            [mArr addObject:attributes];
         }
     return mArr;
@@ -124,7 +114,7 @@ static const int visibleItemsCount = 4;
                          offsetProgress:(CGFloat)offsetProgress
                                minScale:(CGFloat)minScale
 {
-    CGFloat step = (1.0 - minScale) / (visibleItemsCount-1)*1.0;
+    CGFloat step = (1.0 - minScale) / (self.param.wCardOverLapCount-1)*1.0;
     return (1.0 - (visibleIndex - 1) * step + step * offsetProgress);
 }
 

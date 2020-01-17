@@ -20,6 +20,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*, 
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wScale)
 //开启卡片重叠模式 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wCardOverLap)
+//卡片重叠显示个数 default 4
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,            wCardOverLapCount)
 //背景毛玻璃效果 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wEffect)
 //隐藏pageControl default NO

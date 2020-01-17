@@ -69,6 +69,8 @@
     .wEffectSet(YES)
     //开启自动滚动
     .wAutoScrollSet(YES)
+    //显示个数
+    .wCardOverLapCountSet(3)
     //开启纵向
     .wVerticalSet(YES);
     WMZBannerView *viewTwo = [[WMZBannerView alloc]initConfigureWithModel:param1];

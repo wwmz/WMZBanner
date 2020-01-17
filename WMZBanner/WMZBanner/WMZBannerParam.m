@@ -24,6 +24,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wMarquee)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverLap)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wZindex)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, NSInteger,                     wCardOverLapCount)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)
@@ -85,6 +86,7 @@ WMZBannerParam * BannerParam(void){
         _wDataParamIconName = @"icon";
         _wBannerControlSelectMargin = 3;
         _wMarqueeRate = 5.0f;
+        _wCardOverLapCount = 4;
     }
     return self;
 }
