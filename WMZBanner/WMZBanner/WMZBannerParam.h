@@ -38,6 +38,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,     
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wVertical)
 //跑马灯(文字效果) default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wMarquee)
+//点击左右居中
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wClickCenter)
 //整体间距 默认UIEdgeInsetsMake(0,0, 0, 0)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
 //整体视图缩放系数 default 1

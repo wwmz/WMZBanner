@@ -30,6 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)updateUI;
 
+
+/**
+*  手动调用滚动
+*
+*/
+- (void)scrolToPath:(NSIndexPath*)path animated:(BOOL)animated;
+
 @end
 
 @interface Collectioncell : UICollectionViewCell

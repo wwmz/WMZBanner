@@ -220,6 +220,34 @@
         UICollectionViewCell *currentCell = (UICollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
         self.param.wEventCenterClick(dic, index,center,currentCell);
     }
+    if (self.param.wClickCenter) {
+        NSArray *visibleCellIndex = [collectionView visibleCells];
+        NSArray *sortedIndexPaths = [visibleCellIndex sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSIndexPath *path1 = (NSIndexPath *)[collectionView indexPathForCell:obj1];
+            NSIndexPath *path2 = (NSIndexPath *)[collectionView indexPathForCell:obj2];
+            return [path1 compare:path2];
+        }];
+        if (sortedIndexPaths.count>0) {
+            NSInteger center = sortedIndexPaths.count/2;
+            UICollectionViewCell *tmpCell = [collectionView cellForItemAtIndexPath:indexPath];
+            for (int i = 0; i < sortedIndexPaths.count; i++) {
+                UICollectionViewCell *cell = sortedIndexPaths[i];
+                if (cell == tmpCell) {
+                    NSIndexPath *nextIndexPath = nil;
+                    if (i>center || i<center) {
+                        nextIndexPath = [NSIndexPath indexPathForItem: indexPath.row inSection:0];
+                        self.param.myCurrentPath = indexPath.row;
+                        [self scrolToPath:nextIndexPath animated:YES];
+                        [collectionView setUserInteractionEnabled:NO];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                             [collectionView setUserInteractionEnabled:YES];
+                        });
+                    }
+                    break;
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -267,7 +295,6 @@
           CGPointMake(0, path.row *self.myCollectionV.bounds.size.height):
           CGPointMake(path.row *self.myCollectionV.bounds.size.width, 0)
                                      animated:animated];
-
     }else{
         if ([self.myCollectionV isPagingEnabled]) {
             [self.myCollectionV scrollToItemAtIndexPath:path atScrollPosition:
@@ -397,7 +424,7 @@
               MAX(floor(scrollView.contentOffset.y / scrollView.bounds.size.height ), 0):
               MAX(floor(scrollView.contentOffset.x / scrollView.bounds.size.width ), 0);
     }
-   [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
+    [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
 }
 
 - (void)scrollEnd:(NSIndexPath*)indexPath{
