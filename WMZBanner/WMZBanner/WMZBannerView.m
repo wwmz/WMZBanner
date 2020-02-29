@@ -396,6 +396,8 @@
                                scrollView.contentOffset.x/scrollView.frame.size.width;
             self.param.myCurrentPath = index;
             self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
+        }else{
+            self.bannerControl.currentPage = self.param.wRepeat?self.param.myCurrentPath %self.data.count:self.param.myCurrentPath;
         }
     }
 }
