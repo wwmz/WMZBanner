@@ -452,6 +452,18 @@
 }
 
 
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    if (!self.data.count) return;
+    if (self.param.wMarquee||self.param.wCardOverLap) return;
+    if (!self.param.wAddFastScrollAnina) return;
+    CGPoint newOffset = CGPointMake(targetContentOffset->x, targetContentOffset->y);
+    NSLog(@"速率 %f",velocity.x);
+    if(velocity.x < 1.5) {
+        [scrollView setContentOffset:newOffset animated:YES];
+    }
+}
+
 - (UICollectionView *)myCollectionV{
     if (!_myCollectionV) {
         _myCollectionV = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:_flowL];
@@ -461,6 +473,7 @@
         _myCollectionV.showsHorizontalScrollIndicator = NO;
         _myCollectionV.backgroundColor = [UIColor clearColor];
         _myCollectionV.decelerationRate = _param.wDecelerationRate;
+//        _myCollectionV.decelerationRate = 0.999;
     }
     return _myCollectionV;
 }

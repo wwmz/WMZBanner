@@ -40,6 +40,10 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,     
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wMarquee)
 //点击左右居中
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wClickCenter)
+//中间视图放最上面 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wZindex)
+//增加快速滑动的回弹动画 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wAddFastScrollAnina)
 //整体间距 默认UIEdgeInsetsMake(0,0, 0, 0)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
 //整体视图缩放系数 default 1
@@ -70,8 +74,6 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIScrollVi
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wAutoScrollSecond)
 //默认移动到第几个 default 0
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,            wSelectIndex)
-//中间视图放最上面 default NO
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wZindex)
 //自定义cell内容 默认是Collectioncell类
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCellCallBlock,  wMyCell)
 //自定义cell的类名 自定义视图必传 不然会crash

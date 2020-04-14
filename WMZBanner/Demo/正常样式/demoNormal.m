@@ -33,6 +33,8 @@
     .wLineSpacingSet(10)
     //开启自动滚动
     .wAutoScrollSet(YES)
+    //增加快速滑动的回弹动画
+    .wAddFastScrollAninaSet(YES)
     //自动滚动时间
     .wAutoScrollSecondSet(3)
     ;
