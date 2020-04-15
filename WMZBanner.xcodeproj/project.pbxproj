@@ -20,6 +20,7 @@
 		F31F403523220A1700C7B660 /* WMZBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F31F403423220A1700C7B660 /* WMZBannerView.m */; };
 		F31F41BA232221E600C7B660 /* WMZBannerFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F31F41B9232221E600C7B660 /* WMZBannerFlowLayout.m */; };
 		F31F426D2322594500C7B660 /* WMZBannerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F31F426C2322594500C7B660 /* WMZBannerControl.m */; };
+		F352C05C24473F27000EDA94 /* SpecilDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F352C05B24473F27000EDA94 /* SpecilDemo.m */; };
 		F38AFE3723A7B68100C56BC2 /* demoNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = F38AFE3623A7B68100C56BC2 /* demoNormal.m */; };
 		F38AFE3A23A7B6F500C56BC2 /* DemoTianMao.m in Sources */ = {isa = PBXBuildFile; fileRef = F38AFE3923A7B6F500C56BC2 /* DemoTianMao.m */; };
 		F38AFE4023A7BB3E00C56BC2 /* TianMaoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F38AFE3F23A7BB3E00C56BC2 /* TianMaoCell.m */; };
@@ -135,6 +136,8 @@
 		F31F41BB232223AF00C7B660 /* WMZBannerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZBannerConfig.h; sourceTree = "<group>"; };
 		F31F426B2322594500C7B660 /* WMZBannerControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZBannerControl.h; sourceTree = "<group>"; };
 		F31F426C2322594500C7B660 /* WMZBannerControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZBannerControl.m; sourceTree = "<group>"; };
+		F352C05A24473F27000EDA94 /* SpecilDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpecilDemo.h; sourceTree = "<group>"; };
+		F352C05B24473F27000EDA94 /* SpecilDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpecilDemo.m; sourceTree = "<group>"; };
 		F38AFE3523A7B68100C56BC2 /* demoNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = demoNormal.h; sourceTree = "<group>"; };
 		F38AFE3623A7B68100C56BC2 /* demoNormal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = demoNormal.m; sourceTree = "<group>"; };
 		F38AFE3823A7B6F500C56BC2 /* DemoTianMao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoTianMao.h; sourceTree = "<group>"; };
@@ -306,6 +309,7 @@
 		F31163A623A78E4F008171B5 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F352C05924473F1A000EDA94 /* 特殊样式 */,
 				F31163A723A78E4F008171B5 /* 显示全部属性 */,
 				F3C31F2F23AB14AD003952D3 /* 自定义pageControl */,
 				F31163A823A78E4F008171B5 /* 正常样式 */,
@@ -453,6 +457,15 @@
 				F31F41BB232223AF00C7B660 /* WMZBannerConfig.h */,
 			);
 			path = WMZBanner;
+			sourceTree = "<group>";
+		};
+		F352C05924473F1A000EDA94 /* 特殊样式 */ = {
+			isa = PBXGroup;
+			children = (
+				F352C05A24473F27000EDA94 /* SpecilDemo.h */,
+				F352C05B24473F27000EDA94 /* SpecilDemo.m */,
+			);
+			path = "特殊样式";
 			sourceTree = "<group>";
 		};
 		F3AD70652324241E00728B93 /* SDWebImage */ = {
@@ -791,6 +804,7 @@
 				F3AD70E52324241E00728B93 /* SDAnimatedImageView.m in Sources */,
 				F3AD70F82324241E00728B93 /* SDAnimatedImageRep.m in Sources */,
 				F3AD70EC2324241E00728B93 /* UIImage+GIF.m in Sources */,
+				F352C05C24473F27000EDA94 /* SpecilDemo.m in Sources */,
 				F3AD71122324241E00728B93 /* SDWeakProxy.m in Sources */,
 				F3AD70F02324241E00728B93 /* SDWebImageCompat.m in Sources */,
 				F3AD71142324241E00728B93 /* SDAsyncBlockOperation.m in Sources */,

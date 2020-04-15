@@ -58,8 +58,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-scrolToPath:animated:"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,8 +74,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "-scrolToPath:animated:"
             landmarkType = "7">
          </BreakpointContent>

@@ -74,14 +74,14 @@
 
 - (NSArray *)taData{
     if (!_taData) {
-        _taData = @[@"显示全部属性(+更新数据)",@"自定义pageControl",@"正常样式(横向+纵向)",@"天猫精灵样式",@"电商播报",@"自定义卡片样式",@"叠加样式",@"跑马灯"];
+        _taData = @[@"显示全部属性(+更新数据)",@"自定义pageControl",@"正常样式(横向+纵向)",@"天猫精灵样式",@"电商播报",@"自定义卡片样式",@"叠加样式",@"跑马灯",@"特殊样式"];
     }
     return _taData;
 }
 
 - (NSArray *)vcData{
     if (!_vcData) {
-        _vcData = @[@"demoOne",@"DemoPageControl",@"demoNormal",@"DemoTianMao",@"DemoDianshang",@"DemoCard",@"DemoAdd",@"DemoMarqueen"];
+        _vcData = @[@"demoOne",@"DemoPageControl",@"demoNormal",@"DemoTianMao",@"DemoDianshang",@"DemoCard",@"DemoAdd",@"DemoMarqueen",@"SpecilDemo"];
     }
     return _vcData;
 }

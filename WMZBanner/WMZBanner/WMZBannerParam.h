@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGRect,               wFrame)
 //数据源 必传
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*,             wData)
+//特殊样式 default 无
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, SpecialStyle,                 wSpecialStyle)
 //开启缩放 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wScale)
 //开启卡片重叠模式 default NO
@@ -76,6 +78,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,  
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,            wSelectIndex)
 //自定义cell内容 默认是Collectioncell类
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCellCallBlock,  wMyCell)
+//特殊样式SpecialLine 自定义下划线
+WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerSpecialLine,                  wSpecialCustumLine)
 //自定义cell的类名 自定义视图必传 不然会crash
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, NSString*,            wMyCellClassName)
 //系统的圆点颜色  default  ffffff

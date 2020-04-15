@@ -22,6 +22,7 @@
 @property(strong,nonatomic)NSArray *data;
 @property(strong,nonatomic)WMZBannerParam *param;
 @property(strong,nonatomic)NSTimer *timer;
+@property(strong,nonatomic)UIView *line;
 @end
 @implementation WMZBannerView
 - (instancetype)initConfigureWithModel:(WMZBannerParam *)param withView:(UIView*)parentView{
@@ -153,6 +154,22 @@
     if (!self.param.wHideBannerControl) {
         [self addSubview:self.bannerControl];
     }
+    
+    if (self.param.wSpecialStyle == SpecialStyleLine) {
+        [self addSubview:self.line];
+        self.line.hidden = NO;
+        self.line.backgroundColor = [UIColor redColor];
+        if (self.param.wSpecialCustumLine) {
+            self.param.wSpecialCustumLine(self.line);
+        }
+        
+        CGFloat lineHeight = self.line.frame.size.height?:2;
+        CGFloat lineWidth = self.param.wFrame.size.width/self.param.wData.count;
+        self.line.frame = CGRectMake(0, self.param.wFrame.size.height -lineHeight,  lineWidth, lineHeight);
+    }else{
+        self.line.hidden = YES;
+    }
+    
     
     
     self.bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height*self.param.wEffectHeight)];
@@ -400,6 +417,7 @@
             self.bannerControl.currentPage = self.param.wRepeat?self.param.myCurrentPath %self.data.count:self.param.myCurrentPath;
         }
     }
+    [self setUpSpecialFrame];
 }
 
 //拖动结束
@@ -413,6 +431,7 @@
             [self createTimer];
         }
     }
+    [self setUpSpecialFrame];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -458,9 +477,19 @@
     if (self.param.wMarquee||self.param.wCardOverLap) return;
     if (!self.param.wAddFastScrollAnina) return;
     CGPoint newOffset = CGPointMake(targetContentOffset->x, targetContentOffset->y);
-    NSLog(@"速率 %f",velocity.x);
     if(velocity.x < 1.5) {
         [scrollView setContentOffset:newOffset animated:YES];
+    }
+}
+
+- (void)setUpSpecialFrame{
+    if (!self.param.wSpecialStyle) return;
+    if (self.param.wSpecialStyle == SpecialStyleLine) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect rect = self.line.frame;
+            rect.origin.x = self.bannerControl.currentPage*rect.size.width;
+            self.line.frame = rect;
+        }];
     }
 }
 
@@ -473,7 +502,6 @@
         _myCollectionV.showsHorizontalScrollIndicator = NO;
         _myCollectionV.backgroundColor = [UIColor clearColor];
         _myCollectionV.decelerationRate = _param.wDecelerationRate;
-//        _myCollectionV.decelerationRate = 0.999;
     }
     return _myCollectionV;
 }
@@ -483,6 +511,13 @@
         _bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectZero WithModel:_param];
     }
     return _bannerControl;
+}
+
+- (UIView *)line{
+    if (!_line) {
+        _line = [UIView new];
+    }
+    return _line;
 }
 
 - (void)dealloc{

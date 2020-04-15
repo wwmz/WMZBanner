@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WMZBannerParam.h"
 NS_ASSUME_NONNULL_BEGIN
-
 @interface WMZBannerControl : UIPageControl
 @property (nonatomic, strong) UIImage *currentImage;
 @property (nonatomic, strong) UIImage *inactiveImage;

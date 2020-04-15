@@ -60,6 +60,12 @@ typedef void (^BannerCenterClickBlock)(id anyID,NSInteger index,BOOL isCenter,UI
  */
 typedef void (^BannerScrollEndBlock)(id anyID,NSInteger index,BOOL isCenter,UICollectionViewCell* cell);
 
+
+/*
+ * 自定义下划线
+ */
+typedef void (^BannerSpecialLine)(UIView *line);
+
 /*
  *cell动画的位置
  */
@@ -67,6 +73,14 @@ typedef enum :NSInteger{
     BannerCellPositionCenter      = 0,             //居中 默认
     BannerCellPositionBottom      = 1,             //置底
 }BannerCellPosition;
+
+
+/*
+ *特殊样式
+ */
+typedef enum :NSInteger{
+    SpecialStyleLine      = 1,             //下划线
+}SpecialStyle;
 
 /*
  *pageControl的位置
