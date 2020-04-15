@@ -79,6 +79,22 @@
     } completion:^(BOOL finished) {}];
     
     
+    if (self.param.wSpecialStyle == SpecialStyleLine) {
+        [self addSubview:self.line];
+        self.line.hidden = NO;
+        self.line.backgroundColor = [UIColor redColor];
+        if (self.param.wSpecialCustumLine) {
+            self.param.wSpecialCustumLine(self.line);
+        }
+        
+        CGFloat lineHeight = self.line.frame.size.height?:2;
+        CGFloat lineWidth = self.param.wFrame.size.width/self.param.wData.count;
+        self.line.frame = CGRectMake(0, self.param.wFrame.size.height -lineHeight,  lineWidth, lineHeight);
+    }else{
+        self.line.hidden = YES;
+    }
+    
+    
 }
 
 - (void)setUp{
@@ -154,23 +170,6 @@
     if (!self.param.wHideBannerControl) {
         [self addSubview:self.bannerControl];
     }
-    
-    if (self.param.wSpecialStyle == SpecialStyleLine) {
-        [self addSubview:self.line];
-        self.line.hidden = NO;
-        self.line.backgroundColor = [UIColor redColor];
-        if (self.param.wSpecialCustumLine) {
-            self.param.wSpecialCustumLine(self.line);
-        }
-        
-        CGFloat lineHeight = self.line.frame.size.height?:2;
-        CGFloat lineWidth = self.param.wFrame.size.width/self.param.wData.count;
-        self.line.frame = CGRectMake(0, self.param.wFrame.size.height -lineHeight,  lineWidth, lineHeight);
-    }else{
-        self.line.hidden = YES;
-    }
-    
-    
     
     self.bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height*self.param.wEffectHeight)];
     [self addSubview:self.bgImgView];
