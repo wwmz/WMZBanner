@@ -44,8 +44,6 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,     
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wClickCenter)
 //中间视图放最上面 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wZindex)
-//增加快速滑动的回弹动画 default NO
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wAddFastScrollAnina)
 //整体间距 默认UIEdgeInsetsMake(0,0, 0, 0)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
 //整体视图缩放系数 default 1

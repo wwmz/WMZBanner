@@ -25,7 +25,6 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverLap)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wZindex)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wClickCenter)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wAddFastScrollAnina)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSInteger,                     wCardOverLapCount)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)

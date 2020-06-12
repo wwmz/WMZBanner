@@ -8,7 +8,6 @@
 
 #import "SpecilDemo.h"
 #import "WMZBannerView.h"
-
 @interface SpecilDemo ()
 
 @end
@@ -19,8 +18,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self styleOne];
-
 }
+
 
 - (void)styleOne{
     WMZBannerParam *param =

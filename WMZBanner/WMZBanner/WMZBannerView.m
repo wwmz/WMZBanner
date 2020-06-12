@@ -79,7 +79,7 @@
     } completion:^(BOOL finished) {}];
     
     
-    if (self.param.wSpecialStyle == SpecialStyleLine) {
+    if (self.param.wSpecialStyle == SpecialStyleLine&&self.param.wData.count) {
         [self addSubview:self.line];
         self.line.hidden = NO;
         self.line.backgroundColor = [UIColor redColor];
@@ -98,6 +98,12 @@
 }
 
 - (void)setUp{
+    
+    if (self.data&&self.data.count==1) {
+        self.param.wRepeat = NO;
+        self.param.wAutoScroll = NO;
+    }
+    
     if (self.param.wMarquee) {
         self.param.wAutoScroll = YES;
         self.param.wHideBannerControl = YES;
@@ -468,21 +474,9 @@
         }
     }
 }
-
-
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if (!self.data.count) return;
-    if (self.param.wMarquee||self.param.wCardOverLap) return;
-    if (!self.param.wAddFastScrollAnina) return;
-    CGPoint newOffset = CGPointMake(targetContentOffset->x, targetContentOffset->y);
-    if(velocity.x < 1.5) {
-        [scrollView setContentOffset:newOffset animated:YES];
-    }
-}
-
 - (void)setUpSpecialFrame{
     if (!self.param.wSpecialStyle) return;
+    if (!self.data.count) return;
     if (self.param.wSpecialStyle == SpecialStyleLine) {
         [UIView animateWithDuration:0.5 animations:^{
             CGRect rect = self.line.frame;

@@ -101,28 +101,88 @@
     if ([self.collectionView isPagingEnabled]||self.param.wMarquee) {
         return proposedContentOffset;
     }
-    CGRect rect;
-    rect.origin.y = 0;
-    rect.origin.x = proposedContentOffset.x;
-    rect.size = self.collectionView.frame.size;
-    NSArray *array = [super layoutAttributesForElementsInRect:rect];
-  
-    
-    CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * self.param.wContentOffsetX;
-    CGFloat minDelta = MAXFLOAT;
-    for (UICollectionViewLayoutAttributes *attrs in array) {
-        if (ABS(minDelta) > ABS(attrs.center.x - centerX)) {
-            minDelta = attrs.center.x - centerX;
+
+       
+    CGFloat offSetAdjustment = MAXFLOAT;
+    CGFloat horizontalCenter = (CGFloat) (proposedContentOffset.x + self.collectionView.frame.size.width * self.param.wContentOffsetX);
+
+    CGRect targetRect = CGRectMake(proposedContentOffset.x,
+                                    0.0,
+                                    self.collectionView.bounds.size.width,
+                                    self.collectionView.bounds.size.height);
+       
+    NSArray *attributes = [self layoutAttributesForElementsInRect:targetRect];
+    NSPredicate *cellAttributesPredicate = [NSPredicate predicateWithBlock: ^BOOL(UICollectionViewLayoutAttributes * _Nonnull evaluatedObject,NSDictionary<NSString *,id> * _Nullable bindings){
+           return (evaluatedObject.representedElementCategory == UICollectionElementCategoryCell);
+       }];
+       
+    NSArray *cellAttributes = [attributes filteredArrayUsingPredicate: cellAttributesPredicate];
+       
+    UICollectionViewLayoutAttributes *currentAttributes;
+       
+    for (UICollectionViewLayoutAttributes *layoutAttributes in cellAttributes)
+    {
+        CGFloat itemHorizontalCenter = layoutAttributes.center.x;
+        if (ABS(itemHorizontalCenter - horizontalCenter) < ABS(offSetAdjustment))
+        {
+            currentAttributes   = layoutAttributes;
+            offSetAdjustment    = itemHorizontalCenter - horizontalCenter;
         }
     }
-
-    proposedContentOffset.x += minDelta;
-
-    if (!self.param.wCardOverLap) {
-        self.param.myCurrentPath = round((ABS(proposedContentOffset.x))/(self.param.wItemSize.width+self.param.wLineSpacing));
-    }
-
-    return proposedContentOffset;
+       
+    CGFloat nextOffset          = proposedContentOffset.x + offSetAdjustment;
+       
+    proposedContentOffset.x     = nextOffset;
+    CGFloat deltaX              = proposedContentOffset.x - self.collectionView.contentOffset.x;
+    CGFloat velX                = velocity.x;
+       
+    if (fabs(deltaX) <= FLT_EPSILON || fabs(velX) <= FLT_EPSILON || (velX > 0.0 && deltaX > 0.0) || (velX < 0.0 && deltaX < 0.0))
+    {
+        
+    }else if (velocity.x > 0.0){
+      NSArray *revertedArray = [[attributes reverseObjectEnumerator] allObjects];
+      BOOL found = YES;
+      float proposedX = 0.0;
+      for (UICollectionViewLayoutAttributes *layoutAttributes in revertedArray)
+           {
+               if(layoutAttributes.representedElementCategory == UICollectionElementCategoryCell)
+               {
+                   CGFloat itemHorizontalCenter = layoutAttributes.center.x;
+                   if (itemHorizontalCenter > proposedContentOffset.x) {
+                       found = YES;
+                       proposedX = nextOffset + (currentAttributes.frame.size.width / 2) + (layoutAttributes.frame.size.width / 2);
+                   } else {
+                       break;
+                   }
+               }
+           }
+           
+           if (found) {
+               proposedContentOffset.x = proposedX;
+               proposedContentOffset.x += self.param.wLineSpacing;
+           }
+       }
+       else if (velocity.x < 0.0)
+       {
+           for (UICollectionViewLayoutAttributes *layoutAttributes in cellAttributes)
+           {
+               CGFloat itemHorizontalCenter = layoutAttributes.center.x;
+               if (itemHorizontalCenter > proposedContentOffset.x)
+               {
+                   proposedContentOffset.x = nextOffset - ((currentAttributes.frame.size.width / 2) + (layoutAttributes.frame.size.width / 2));
+                   proposedContentOffset.x -= self.param.wLineSpacing;
+                   break;
+               }
+           }
+       }
+       proposedContentOffset.y = 0.0;
+       
+       
+       if (!self.param.wCardOverLap) {
+           self.param.myCurrentPath = round((ABS(proposedContentOffset.x))/(self.param.wItemSize.width+self.param.wLineSpacing));
+       }
+       
+       return proposedContentOffset;
     
 }
 
