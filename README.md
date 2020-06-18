@@ -169,7 +169,9 @@
     })
     .wFrameSet(CGRectMake(0, BannerHeight/4*3+10, BannerWitdh, BannerHeight/5))
     
-      
+##### 淡入淡出
+![fade.gif](https://upload-images.jianshu.io/upload_images/9163368-34cacbd143c0a0fe.gif?imageMogr2/auto-orient/strip)
+
 ##### 更新UI
 -(void)updateUI;
 改变.wDataSet(@[]),然后调用updateUI()实例方法即可
