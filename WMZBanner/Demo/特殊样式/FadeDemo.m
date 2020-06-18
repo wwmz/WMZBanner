@@ -1,41 +1,61 @@
+
+
+
+
+
+
 //
-//  SpecilDemo.m
+//  FadeDemo.m
 //  WMZBanner
 //
-//  Created by wmz on 2020/4/15.
+//  Created by wmz on 2020/6/17.
 //  Copyright © 2020 wmz. All rights reserved.
 //
 
-#import "SpecilDemo.h"
+#import "FadeDemo.h"
 #import "WMZBannerView.h"
-@interface SpecilDemo ()
+@interface FadeDemo ()
 
 @end
 
-@implementation SpecilDemo
+@implementation FadeDemo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self styleOne];
+    [self styleTwo];
 }
 
 
 - (void)styleOne{
     WMZBannerParam *param =  BannerParam()
     .wFrameSet(CGRectMake(10,100, BannerWitdh-20, BannerHeight*0.25))
-    .wItemSizeSet(CGSizeMake(BannerWitdh-20, BannerHeight*0.23))
+    .wItemSizeSet(CGSizeMake(BannerWitdh-20, BannerHeight*0.25))
     .wDataSet([self getData])
-    //自定义下划线
-    .wSpecialCustumLineSet(^(UIView *line) {
-        line.frame = CGRectMake(0, 0, 100, 3);
-        line.backgroundColor = [UIColor redColor];
-    })
-    .wHideBannerControlSet(YES)
-    .wSpecialStyleSet(SpecialStyleLine);
+    //淡入淡出
+    .wFadeOpenSet(YES)
+    .wVerticalSet(YES)
+    .wAutoScrollSet(YES)
+    .wRepeatSet(YES)
+    ;
     WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
     [self.view addSubview:viewOne];
-    
+}
+
+- (void)styleTwo{
+    WMZBannerParam *param =  BannerParam()
+    .wFrameSet(CGRectMake(10,BannerHeight*0.25+150, BannerWitdh-20, BannerHeight*0.25))
+    .wItemSizeSet(CGSizeMake(BannerWitdh-30, BannerHeight*0.25))
+    .wDataSet([self getData])
+    .wLineSpacingSet(5)
+    .wHideBannerControlSet(YES)
+    //淡入淡出
+    .wFadeOpenSet(YES)
+    //纵向
+    .wVerticalSet(YES);
+    WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
+    [self.view addSubview:viewOne];
 }
 
 - (NSArray*)getData{

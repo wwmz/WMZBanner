@@ -18,6 +18,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGRect,   
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*,             wData)
 //特殊样式 default 无
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, SpecialStyle,                 wSpecialStyle)
+//淡入淡出 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wFadeOpen)
 //开启缩放 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wScale)
 //开启卡片重叠模式 default NO

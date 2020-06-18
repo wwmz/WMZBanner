@@ -96,5 +96,7 @@
     
 
 }
-
+- (void)dealloc{
+    
+}
 @end

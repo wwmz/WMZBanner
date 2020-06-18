@@ -13,6 +13,7 @@
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGRect,                        wFrame)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSArray*,                      wData)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScaleFactor)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wFadeOpen)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wEffect)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wVertical)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wImageFill)

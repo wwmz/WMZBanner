@@ -42,8 +42,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "-resetCollection"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,10 +58,10 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
-            landmarkName = "WMZBannerView"
-            landmarkType = "3">
+            startingLineNumber = "304"
+            endingLineNumber = "304"
+            landmarkName = "-checkCellInCenterCollectionView:AtIndexPath:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,9 +74,9 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "-scrolToPath:animated:"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "-checkCellInCenterCollectionView:AtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,8 +90,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "-setUp"
             landmarkType = "7">
          </BreakpointContent>
@@ -109,6 +109,54 @@
             startingLineNumber = "31"
             endingLineNumber = "31"
             landmarkName = "-initWithFrame:Data:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "312517B0-7F39-42B0-9F9D-B40FB03C2AED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "593"
+            endingLineNumber = "593"
+            landmarkName = "-willMoveToSuperview:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E74FC511-3383-4E1B-9CA1-15598D3AF9F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZBanner/Demo/&#x53e0;&#x52a0;&#x6837;&#x5f0f;/DemoAdd.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-dealloc"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "435DBD35-79F2-499F-AC77-691698645503"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZBanner/Demo/&#x5361;&#x7247;&#x6837;&#x5f0f;/DemoCard.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-dealloc"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

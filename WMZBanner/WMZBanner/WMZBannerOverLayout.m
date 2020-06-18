@@ -30,9 +30,6 @@
     CGSizeMake(self.param.wItemSize.width , (self.param.wItemSize.height - (self.param.wCardOverLapCount - 1)*self.param.wLineSpacing)):
     CGSizeMake(self.param.wItemSize.width - (self.param.wCardOverLapCount - 1)*self.param.wLineSpacing, self.param.wItemSize.height);
     self.minimumInteritemSpacing = (self.param.wFrame.size.height-self.param.wItemSize.height)/2;
-//    self.minimumLineSpacing = self.param.wVertical?
-//    MAX(self.collectionContenSize.height - self.itemSize.height , 0):
-//    MAX(self.collectionContenSize.width - self.itemSize.width , 0);
     self.sectionInset = self.param.wSectionInset;
     self.scrollDirection = self.param.wVertical? UICollectionViewScrollDirectionVertical
                                                         :UICollectionViewScrollDirectionHorizontal;
@@ -52,7 +49,7 @@
 
        self.param.myCurrentPath = self.param.wVertical?
        MAX(floor(self.collectionContenOffset.y / (int)self.collectionContenSize.height ), 0):
-       MAX(floor(self.collectionContenOffset.x / (float)self.collectionContenSize.width ), 0);
+       MAX(floor(self.collectionContenOffset.x / (int)self.collectionContenSize.width ), 0);
        NSInteger minVisibleIndex = MAX(self.param.myCurrentPath, 0);
        NSInteger contentOffset =  self.param.wVertical?
        self.collectionContenOffset.y:self.collectionContenOffset.x;
@@ -80,17 +77,21 @@
            attributes.transform = CGAffineTransformMakeScale(scale, scale);
            if (visibleIndex == 1) {
                if (self.param.wVertical) {
-                   if (self.collectionContenOffset.y >= 0) {
-                       attributes.center = CGPointMake(attributes.center.x, attributes.center.y - offset);
-                   }else{
-                       attributes.center = CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress);
+                   if (minVisibleIndex != maxVisibleIndex) {
+                       if (self.collectionContenOffset.y >= 0) {
+                           attributes.center = CGPointMake(attributes.center.x, attributes.center.y - offset);
+                       }else{
+                           attributes.center = CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress);
+                       }
                    }
                }else{
-                   if (self.collectionContenOffset.x >= 0) {
-                     attributes.center =  CGPointMake(attributes.center.x - offset, attributes.center.y);
-                 }else{
-                     attributes.center = CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
-                 }
+                   if (minVisibleIndex != maxVisibleIndex) {
+                       if (self.collectionContenOffset.x >= 0) {
+                           attributes.center =  CGPointMake(attributes.center.x - offset, attributes.center.y);
+                       }else{
+                           attributes.center = CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
+                       }
+                   }
                }
            }else if (visibleIndex == self.param.wCardOverLapCount + 1){
                attributes.center = self.param.wVertical?
