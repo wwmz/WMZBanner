@@ -35,7 +35,6 @@
     .wDataSet([self getData])
     //淡入淡出
     .wFadeOpenSet(YES)
-    .wVerticalSet(YES)
     .wAutoScrollSet(YES)
     .wRepeatSet(YES)
     ;
