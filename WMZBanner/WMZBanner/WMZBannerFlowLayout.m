@@ -27,6 +27,7 @@
     self.minimumInteritemSpacing = (self.param.wFrame.size.height-self.param.wItemSize.height)/2;
     self.minimumLineSpacing = self.param.wLineSpacing;
     self.sectionInset = self.param.wSectionInset;
+    
     if ([self.collectionView isPagingEnabled]) {
          self.scrollDirection = self.param.wVertical? UICollectionViewScrollDirectionVertical
                                                      :UICollectionViewScrollDirectionHorizontal;
@@ -41,7 +42,11 @@
 
 //卡片缩放
 - (NSArray<UICollectionViewLayoutAttributes *> *)cardScaleTypeInRect:(CGRect)rect{
-    
+    if (!self.param.wCardOverLap) {
+        self.param.myCurrentPath =
+        round((ABS(self.collectionView.contentOffset.x))/(self.param.wItemSize.width+self.param.wLineSpacing));
+        
+    }
     NSArray *array = [self getCopyOfAttributes:[super layoutAttributesForElementsInRect:rect]];
     if (!self.param.wScale||self.param.wMarquee) {
         return array;
@@ -176,11 +181,6 @@
            }
        }
        proposedContentOffset.y = 0.0;
-       
-       
-       if (!self.param.wCardOverLap) {
-           self.param.myCurrentPath = round((ABS(proposedContentOffset.x))/(self.param.wItemSize.width+self.param.wLineSpacing));
-       }
        
        return proposedContentOffset;
     

@@ -83,7 +83,7 @@
    .wItemSizeSet(CGSizeMake(BannerWitdh*0.55, BannerHeight*0.2))
    //固定移动的距离
    .wContentOffsetXSet(0.5)
-   //自动滚动
+//   //自动滚动
    .wAutoScrollSet(YES)
     //循环
     .wRepeatSet(YES)

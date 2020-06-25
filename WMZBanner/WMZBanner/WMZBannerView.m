@@ -33,6 +33,10 @@
         if (parentView) {
             [parentView addSubview:self];
         }
+        self.param.wFrame = CGRectMake(self.param.wFrame.origin.x,
+                                       self.param.wFrame.origin.y,
+                                       (int)self.param.wFrame.size.width,
+                                       (int)self.param.wFrame.size.height);
         [self setFrame:self.param.wFrame];
         self.data = [NSArray arrayWithArray:self.param.wData];
         [self setUp];
@@ -47,6 +51,10 @@
 - (instancetype)initConfigureWithModel:(WMZBannerParam *)param{
     if (self = [super init]) {
         self.param = param;
+        self.param.wFrame = CGRectMake(self.param.wFrame.origin.x,
+                                       self.param.wFrame.origin.y,
+                                       (int)self.param.wFrame.size.width,
+                                       (int)self.param.wFrame.size.height);
         [self setFrame:self.param.wFrame];
         self.data = [NSArray arrayWithArray:self.param.wData];
         [self setUp];
@@ -146,6 +154,7 @@
     }else if(self.param.wItemSize.width>self.frame.size.width){
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.param.wItemSize.height);
     }
+    self.param.wItemSize = CGSizeMake((int)self.param.wItemSize.width, (int)self.param.wItemSize.height);
     
     if (self.param.wFadeOpen) {
         self.flowL = [[WMZBannerFadeLayout alloc] initConfigureWithModel:self.param];
@@ -167,7 +176,9 @@
     if (self.param.wMyCellClassName) {
         [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
     }
-    self.myCollectionV.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, (int)self.bounds.size.width, (int)self.bounds.size.height);
+    
+    self.myCollectionV.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
+    
     self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width && self.param.wLineSpacing == 0)||self.param.wVertical;
     if ([self.myCollectionV isPagingEnabled]) {
         self.myCollectionV.decelerationRate = UIScrollViewDecelerationRateNormal;
@@ -192,6 +203,7 @@
     effectView.frame = self.bgImgView.bounds;
     [self.bgImgView addSubview:effectView];
     [self resetCollection];
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -467,7 +479,6 @@
     if (index>self.data.count-1) {
         index = 0;
     }
-    
     //取上一张
     id dic = self.data[index];
     if (self.param.wEventScrollEnd) {
@@ -533,7 +544,7 @@
 
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.animations = @[scale, showViewAnn];
-    group.duration = 0.4;
+    group.duration = 0.6;
     [view.layer addAnimation:group forKey:nil];
 }
 - (void)hideAninationWithView:(UIView*)view{
@@ -549,13 +560,13 @@
 
      CAAnimationGroup *group = [CAAnimationGroup animation];
      group.animations = @[scale, showViewAnn];
-     group.duration = 0.4;
+     group.duration = 0.6;
      [view.layer addAnimation:group forKey:nil];
 }
 
 - (UICollectionView *)myCollectionV{
     if (!_myCollectionV) {
-        _myCollectionV = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:_flowL];
+        _myCollectionV = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:self.flowL];
         _myCollectionV.delegate = self;
         _myCollectionV.dataSource = self;
         _myCollectionV.showsVerticalScrollIndicator = NO;
