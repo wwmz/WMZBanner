@@ -72,7 +72,7 @@
     self.bannerControl.numberOfPages = self.data.count;
     [UIView animateWithDuration:0.0 animations:^{
         [self.myCollectionV reloadData];
-        if (self.param.wSelectIndex|| self.param.wRepeat) {
+        if (self.param.wSelectIndex>=0|| self.param.wRepeat) {
             NSIndexPath *path = [NSIndexPath indexPathForRow: self.param.wRepeat?((COUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0];
             [self scrolToPath:path animated:NO];
             self.bannerControl.currentPage = self.param.wSelectIndex;
