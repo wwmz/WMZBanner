@@ -278,7 +278,7 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 ==============
 使用过程中如果有什么bug欢迎给我提issue 我看到就会解决
 [我的简书](https://www.jianshu.com/u/17b9dd398782)
-
+ios问题交流群 937909825(有问题加群哈)
 
 更新记录
 ==============
