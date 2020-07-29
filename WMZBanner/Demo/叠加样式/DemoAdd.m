@@ -71,6 +71,10 @@
     .wAutoScrollSet(YES)
     //显示个数
     .wCardOverLapCountSet(3)
+    //开启透明度变化 default NO
+    .wCardOverAlphaOpenSet(YES)
+    //透明度最小系数 default 0.1 
+    .wCardOverMinAlphaSet(0.1)
     //开启纵向
     .wVerticalSet(YES);
     WMZBannerView *viewTwo = [[WMZBannerView alloc]initConfigureWithModel:param1];

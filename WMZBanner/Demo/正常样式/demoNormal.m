@@ -55,8 +55,6 @@
     .wDataSet([self getData])
     //开启循环滚动
     .wRepeatSet(YES)
-    //开启自动滚动
-    .wAutoScrollSet(YES)
     //开启纵向
     .wVerticalSet(YES);
     WMZBannerView *viewTwo = [[WMZBannerView alloc]initConfigureWithModel:param1];

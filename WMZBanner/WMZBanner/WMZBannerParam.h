@@ -18,12 +18,17 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGRect,   
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, NSArray*,             wData)
 //特殊样式 default 无
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, SpecialStyle,                 wSpecialStyle)
+
 //淡入淡出 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wFadeOpen)
 //开启缩放 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wScale)
 //开启卡片重叠模式 default NO
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wCardOverLap)
+//卡片重叠模式开启偏移透明度变化 default NO
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wCardOverAlphaOpen)
+//叠加模式透明度最小值 defalt 0.1
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wCardOverMinAlpha)
 //卡片重叠显示个数 default 4
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, NSInteger,            wCardOverLapCount)
 //背景毛玻璃效果 default NO
@@ -106,7 +111,6 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BannerCont
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, UIColor*,             wMarqueeTextColor)
 //跑马灯速度  default  5
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wMarqueeRate)
-
 /* =========================================Attributes==========================================*/
 
 /* =========================================Events==============================================*/
@@ -117,6 +121,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerClic
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCenterClickBlock,wEventCenterClick)
 //每次滚动结束都会调用 最好是关闭自动滚动的场景使用
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollEndBlock, wEventScrollEnd)
+//正在滚动
+WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollBlock,    wEventDidScroll)
 /* =========================================Events==============================================*/
 
 /* =========================================custom==============================================*/

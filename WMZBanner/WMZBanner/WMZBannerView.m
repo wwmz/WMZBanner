@@ -422,22 +422,32 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSInteger index = 0;
     if (self.param.wCardOverLap||self.param.wFadeOpen) {
         if ([self.myCollectionV isPagingEnabled]&&!self.param.wMarquee) {
-            NSInteger index = self.param.wRepeat?self.param.myCurrentPath%self.data.count:self.param.myCurrentPath;
-            self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
+            index = self.param.myCurrentPath;
         }
     }else{
         if ([self.myCollectionV isPagingEnabled]&&!self.param.wMarquee) {
-            NSInteger index =  self.param.wVertical?
+            index =  self.param.wVertical?
                                scrollView.contentOffset.y/scrollView.frame.size.height:
                                scrollView.contentOffset.x/scrollView.frame.size.width;
             self.param.myCurrentPath = index;
-            self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
         }else{
-            self.bannerControl.currentPage = self.param.wRepeat?self.param.myCurrentPath %self.data.count:self.param.myCurrentPath;
+            index = self.param.myCurrentPath;
         }
     }
+    self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
+//    if (self.param.wEventDidScroll) {
+//        CGPoint point = scrollView.contentOffset;
+//        NSLog(@"111  %f",point.x);
+//        if (self.param.wRepeat) {
+//            int a = (int)point.x;
+//           int b =  a%index;
+//                    NSLog(@"%d",b);
+//        }
+//        self.param.wEventDidScroll(<#CGPoint contentoffet#>)
+//    }
     [self setUpSpecialFrame];
 }
 

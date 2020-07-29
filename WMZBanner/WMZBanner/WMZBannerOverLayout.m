@@ -93,14 +93,23 @@
                        }
                    }
                }
+               if (self.param.wCardOverAlphaOpen) {
+                    attributes.alpha = MAX(1-offsetProgress, MAX(self.param.wCardOverMinAlpha, 0));
+               }
            }else if (visibleIndex == self.param.wCardOverLapCount + 1){
                attributes.center = self.param.wVertical?
                     CGPointMake(attributes.center.x, attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing):
                     CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing, attributes.center.y);
+                    if (self.param.wCardOverAlphaOpen) {
+                        attributes.alpha = MAX(offsetProgress, MAX(self.param.wCardOverMinAlpha, 0));
+                    }
            }else{
                attributes.center = self.param.wVertical?
                         CGPointMake(attributes.center.x , attributes.center.y + attributes.size.height * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress):
                         CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - self.param.wLineSpacing * offsetProgress, attributes.center.y);
+              if (self.param.wCardOverAlphaOpen) {
+                 attributes.alpha = MAX(offsetProgress, MAX(self.param.wCardOverMinAlpha*2, 0));
+              }
            }
            [mArr addObject:attributes];
         }

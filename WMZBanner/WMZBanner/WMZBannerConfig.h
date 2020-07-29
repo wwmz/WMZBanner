@@ -60,6 +60,10 @@ typedef void (^BannerCenterClickBlock)(id anyID,NSInteger index,BOOL isCenter,UI
  */
 typedef void (^BannerScrollEndBlock)(id anyID,NSInteger index,BOOL isCenter,UICollectionViewCell* cell);
 
+/*
+* 滚动
+*/
+typedef void (^BannerScrollBlock)(CGPoint contentoffet);
 
 /*
  * 自定义下划线

@@ -13,6 +13,8 @@
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGRect,                        wFrame)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSArray*,                      wData)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScaleFactor)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wCardOverMinAlpha)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wCardOverAlphaOpen)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wFadeOpen)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wEffect)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                          wVertical)
@@ -42,6 +44,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCellCallBlock,         
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerClickBlock,              wEventClick)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerScrollEndBlock,          wEventScrollEnd)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerCenterClickBlock,        wEventCenterClick)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerScrollBlock,             wEventDidScroll)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, UIColor*,                      wBannerControlSelectColor)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSString*,                     wBannerControlImage)
@@ -91,6 +94,7 @@ WMZBannerParam * BannerParam(void){
         _wBannerControlSelectMargin = 3;
         _wMarqueeRate = 5.0f;
         _wCardOverLapCount = 4;
+        _wCardOverMinAlpha = 0.1;
     }
     return self;
 }
