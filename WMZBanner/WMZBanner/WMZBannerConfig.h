@@ -76,6 +76,7 @@ typedef void (^BannerSpecialLine)(UIView *line);
 typedef enum :NSInteger{
     BannerCellPositionCenter      = 0,             //居中 默认
     BannerCellPositionBottom      = 1,             //置底
+    BannerCellPositionTop         = 2,             //顶部
 }BannerCellPosition;
 
 

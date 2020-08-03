@@ -50,8 +50,8 @@
     .wEffectHeightSet(0.8)
     //自动滚动
     .wAutoScrollSet(YES)
-    //整体左右间距  设置为size.width的一半 让最后一个可以居中
-    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, BannerWitdh*0.55*0.3))
+    //整体左右间距  设置为 (1-0.32)*wItemSize
+    .wSectionInsetSet(UIEdgeInsetsMake(0,BannerWitdh*0.55*0.68, 0, BannerWitdh*0.55*0.68))
     //间距
     .wLineSpacingSet(10)
     //开启背景毛玻璃

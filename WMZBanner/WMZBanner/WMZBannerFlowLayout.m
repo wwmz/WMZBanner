@@ -54,13 +54,17 @@
     CGRect  visibleRect = CGRectZero;
     visibleRect.origin = self.collectionView.contentOffset;
     visibleRect.size = self.collectionView.bounds.size;
+    NSMutableArray *marr = [NSMutableArray new];
     for (int i = 0; i<array.count; i++) {
         UICollectionViewLayoutAttributes *attributes = array[i];
         CGFloat distance = CGRectGetMidX(visibleRect) - attributes.center.x;
+        if (self.param.wContentOffsetX!=0.5) {
+            distance = CGRectGetMidX(visibleRect) - (attributes.center.x + (0.5-self.param.wContentOffsetX)*visibleRect.size.width);
+        }
         CGFloat normalizedDistance = fabs(distance / self.param.wActiveDistance);
         CGFloat zoom = 1 - self.param.wScaleFactor  * normalizedDistance;
         attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
-        attributes.frame = CGRectMake(attributes.frame.origin.x, attributes.frame.origin.y + zoom, attributes.size.width, attributes.size.height);
+        attributes.frame = CGRectMake(attributes.frame.origin.x, attributes.frame.origin.y , attributes.size.width, attributes.size.height);
         if (self.param.wAlpha<1) {
             CGFloat collectionCenter =  self.collectionView.frame.size.width / 2 ;
             CGFloat offset = self.collectionView.contentOffset.x ;
@@ -74,10 +78,20 @@
         if (self.param.wZindex) {
            attributes.zIndex = zoom*100;
         }
-        attributes.center = CGPointMake(attributes.center.x, (self.param.wPosition == BannerCellPositionBottom?attributes.center.y:self.collectionView.center.y) + zoom);
+        CGPoint center = CGPointMake(attributes.center.x, self.collectionView.center.y );
+        if (self.param.wPosition == BannerCellPositionBottom) {
+            center =  CGPointMake(attributes.center.x, attributes.center.y );
+            attributes.center = center;
+        }else if (self.param.wPosition == BannerCellPositionTop) {
+            center =  CGPointMake(attributes.center.x, attributes.center.y-  attributes.size.height*(1-zoom));
+            attributes.center = center;
+        }else if (self.param.wPosition == BannerCellPositionCenter) {
+            attributes.center = center;
+        }
+        [marr addObject:attributes];
 
     }
-    return array;
+    return marr;
 }
 
 
