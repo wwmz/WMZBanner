@@ -297,8 +297,11 @@
     for (int i = 0; i<[collectionView visibleCells].count; i++) {
         UICollectionViewCell *cell = [collectionView visibleCells][i];
         [arr addObject:[NSString stringWithFormat:@"%.0f",cell.frame.size.height]];
+//         CGFloat distance = CGRectGetMidX(visibleRect) - cellattributes.center.x;
         [indexArr addObject:cell];
     }
+    
+    
     float max = [[arr valueForKeyPath:@"@max.floatValue"] floatValue];
            
     NSInteger cellIndex = [arr indexOfObject:[NSString stringWithFormat:@"%.0f",max]];
@@ -438,16 +441,20 @@
         }
     }
     self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
-//    if (self.param.wEventDidScroll) {
-//        CGPoint point = scrollView.contentOffset;
-//        NSLog(@"111  %f",point.x);
-//        if (self.param.wRepeat) {
-//            int a = (int)point.x;
-//           int b =  a%index;
-//                    NSLog(@"%d",b);
-//        }
-//        self.param.wEventDidScroll(<#CGPoint contentoffet#>)
-//    }
+    if (self.param.wEventDidScroll) {
+        CGPoint point = scrollView.contentOffset;
+        long b  = 0;
+        if (self.param.wRepeat) {
+            int a = (int)point.x;
+            long width = ((long)self.param.wItemSize.width + (long)self.param.wLineSpacing);
+            if (a%width!=0) {
+                b = a%width+self.bannerControl.currentPage*width;
+                self.param.wEventDidScroll(labs(b));
+            }
+        }else{
+            self.param.wEventDidScroll(fabs(point.x));
+        }
+    }
     [self setUpSpecialFrame];
 }
 
@@ -485,7 +492,9 @@
     if (!self.data.count) return;
     if (self.param.wMarquee) return;
     NSInteger current = MAX(self.param.myCurrentPath, 0);
+    NSLog(@"滚动结束 %d",current);
     NSInteger index = self.param.wRepeat?current%self.data.count:current;
+        NSLog(@"滚动结束111 %d",index);
     if (index>self.data.count-1) {
         index = 0;
     }
@@ -504,6 +513,11 @@
         }
     }
     self.bannerControl.currentPage =  index;
+    
+    if (self.param.wEventDidScroll) {
+        long b  = index*((long)self.param.wItemSize.width + (long)self.param.wLineSpacing);
+        self.param.wEventDidScroll(labs(b));
+    }
     self.lastIndex = current;
 }
 //淡入淡出

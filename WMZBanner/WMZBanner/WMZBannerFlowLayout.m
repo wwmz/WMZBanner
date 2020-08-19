@@ -42,11 +42,7 @@
 
 //卡片缩放
 - (NSArray<UICollectionViewLayoutAttributes *> *)cardScaleTypeInRect:(CGRect)rect{
-    if (!self.param.wCardOverLap) {
-        self.param.myCurrentPath =
-        round((ABS(self.collectionView.contentOffset.x))/(self.param.wItemSize.width+self.param.wLineSpacing));
-        
-    }
+    [self setUpIndex];
     NSArray *array = [self getCopyOfAttributes:[super layoutAttributesForElementsInRect:rect]];
     if (!self.param.wScale||self.param.wMarquee) {
         return array;
@@ -89,12 +85,17 @@
             attributes.center = center;
         }
         [marr addObject:attributes];
-
     }
     return marr;
 }
 
-
+- (void)setUpIndex{
+    if (!self.param.wCardOverLap) {
+         self.param.myCurrentPath = self.param.wVertical?
+         round((ABS(self.collectionView.contentOffset.y))/(self.param.wItemSize.height+self.param.wLineSpacing)):
+             round ((ABS(self.collectionView.contentOffset.x))/(self.param.wItemSize.width+self.param.wLineSpacing));
+    }
+}
 
 - (NSArray *)getCopyOfAttributes:(NSArray *)attributes
 {

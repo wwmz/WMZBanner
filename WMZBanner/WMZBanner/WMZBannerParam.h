@@ -66,7 +66,7 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,  
 //item的size default 视图的宽高 item的width最小为父视图的一半 (为了保证同屏最多显示3个 减少不必要的bug)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGSize,               wItemSize)
 //item的之间的间距 default 0
-WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wLineSpacing)
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, int,                  wLineSpacing)
 //滑动的时候偏移的距离 以倍数计算 default 0.5 正中间
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wContentOffsetX)
 //左右相邻item的中心点 default BannerCellPositionCenter
@@ -121,7 +121,7 @@ WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerClic
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCenterClickBlock,wEventCenterClick)
 //每次滚动结束都会调用 最好是关闭自动滚动的场景使用
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollEndBlock, wEventScrollEnd)
-//正在滚动
+//正在滚动(尚未实现)
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollBlock,    wEventDidScroll)
 /* =========================================Events==============================================*/
 

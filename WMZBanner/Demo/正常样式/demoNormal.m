@@ -24,7 +24,11 @@
     /*
      *横向
      */
-    WMZBannerParam *param =  BannerParam()
+    WMZBannerParam *param =
+    BannerParam()
+//    .wEventDidScrollSet(^(long contentoffet) {
+//        NSLog(@"%ld",contentoffet);
+//    })
     .wFrameSet(CGRectMake(10, BannerHeight/6, BannerWitdh-20, BannerHeight/4))
     .wDataSet(@[])
     //开启循环滚动
@@ -35,12 +39,13 @@
     .wAutoScrollSet(YES)
     //自动滚动时间
     .wAutoScrollSecondSet(3)
+    
     ;
     WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
     [self.view addSubview:viewOne];
     
     //模拟刷新数据
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         param.wDataSet([self getData]);
         [viewOne updateUI];
     });

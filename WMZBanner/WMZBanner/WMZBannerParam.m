@@ -31,7 +31,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BOOL,                        
 WMZBannerPropSetFuncImplementation(WMZBannerParam, NSInteger,                     wCardOverLapCount)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wActiveDistance)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGSize,                        wItemSize)
-WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wLineSpacing)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, int,                           wLineSpacing)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wEffectHeight)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wContentOffsetX)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wScreenScale)
