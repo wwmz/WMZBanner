@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3074B2624ED793C001701F1 /* SpecilFirstScaleDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3074B2524ED793C001701F1 /* SpecilFirstScaleDemo.m */; };
 		F31163AF23A78E78008171B5 /* demoOne.m in Sources */ = {isa = PBXBuildFile; fileRef = F31163AE23A78E78008171B5 /* demoOne.m */; };
 		F31F3FFF232205FF00C7B660 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F31F3FFE232205FF00C7B660 /* AppDelegate.m */; };
 		F31F4002232205FF00C7B660 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F31F4001232205FF00C7B660 /* ViewController.m */; };
@@ -111,6 +112,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3074B2424ED793C001701F1 /* SpecilFirstScaleDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpecilFirstScaleDemo.h; sourceTree = "<group>"; };
+		F3074B2524ED793C001701F1 /* SpecilFirstScaleDemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpecilFirstScaleDemo.m; sourceTree = "<group>"; };
 		F31163AD23A78E78008171B5 /* demoOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = demoOne.h; sourceTree = "<group>"; };
 		F31163AE23A78E78008171B5 /* demoOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = demoOne.m; sourceTree = "<group>"; };
 		F31F3FFA232205FF00C7B660 /* WMZBanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMZBanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -474,6 +477,8 @@
 				F352C05B24473F27000EDA94 /* SpecilDemo.m */,
 				F3A1D11A249A1E5A0001A6D7 /* FadeDemo.h */,
 				F3A1D11B249A1E5A0001A6D7 /* FadeDemo.m */,
+				F3074B2424ED793C001701F1 /* SpecilFirstScaleDemo.h */,
+				F3074B2524ED793C001701F1 /* SpecilFirstScaleDemo.m */,
 			);
 			path = "特殊样式";
 			sourceTree = "<group>";
@@ -804,6 +809,7 @@
 				F3A1D11C249A1E5A0001A6D7 /* FadeDemo.m in Sources */,
 				F38AFE4023A7BB3E00C56BC2 /* TianMaoCell.m in Sources */,
 				F3AD70EE2324241E00728B93 /* UIImage+MultiFormat.m in Sources */,
+				F3074B2624ED793C001701F1 /* SpecilFirstScaleDemo.m in Sources */,
 				F3AD71112324241E00728B93 /* SDImageAssetManager.m in Sources */,
 				F3AD71162324241E00728B93 /* UIColor+HexString.m in Sources */,
 				F31163AF23A78E78008171B5 /* demoOne.m in Sources */,

@@ -85,6 +85,7 @@ typedef enum :NSInteger{
  */
 typedef enum :NSInteger{
     SpecialStyleLine      = 1,             //下划线
+    SpecialStyleFirstScale      = 2,       //首个变大效果
 }SpecialStyle;
 
 /*

@@ -25,8 +25,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "7">
          </BreakpointContent>
@@ -41,8 +41,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerFlowLayout.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "-targetContentOffsetForProposedContentOffset:withScrollingVelocity:"
             landmarkType = "7">
          </BreakpointContent>
@@ -50,79 +50,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "990A55F4-B5CE-4A92-8286-733EFAAE42EB"
-            shouldBeEnabled = "Yes"
+            uuid = "BC737B91-7D14-4B99-B869-C6334A8001D5"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WMZBanner/WMZBanner/WMZBannerFadeLayout.m"
+            filePath = "WMZBanner/Demo/&#x7535;&#x5546;&#x64ad;&#x62a5;/DemoDianshang.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-cardOverLapTypeInRect:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "990A55F4-B5CE-4A92-8286-733EFAAE42EB - 2b61903375df65ee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WMZBannerFadeLayout cardOverLapTypeInRect:]"
-                  moduleName = "WMZBanner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZBanner/WMZBanner/WMZBanner/WMZBannerFadeLayout.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "1037">
-               </Location>
-               <Location
-                  uuid = "990A55F4-B5CE-4A92-8286-733EFAAE42EB - 2b61903375df65ee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WMZBannerFadeLayout cardOverLapTypeInRect:]"
-                  moduleName = "WMZBanner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZBanner/WMZBanner/WMZBanner/WMZBannerFadeLayout.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "1070">
-               </Location>
-               <Location
-                  uuid = "990A55F4-B5CE-4A92-8286-733EFAAE42EB - 2b61903375df65ee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WMZBannerFadeLayout cardOverLapTypeInRect:]"
-                  moduleName = "WMZBanner"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZBanner/WMZBanner/WMZBanner/WMZBannerFadeLayout.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "1294">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6DE30F14-00F6-4BD6-81C9-D0E25F5B7F41"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
-            landmarkName = "-scrollViewDidEndScrollingAnimation:"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-dealloc"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

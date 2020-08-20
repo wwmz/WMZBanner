@@ -51,16 +51,39 @@
     visibleRect.origin = self.collectionView.contentOffset;
     visibleRect.size = self.collectionView.bounds.size;
     NSMutableArray *marr = [NSMutableArray new];
+    NSInteger minIndex = 0;
+    CGFloat minCenterX = [(UICollectionViewLayoutAttributes*)array.firstObject center].x;
+    for (int i = 0; i<array.count; i++) {
+        UICollectionViewLayoutAttributes *attributes = array[i];
+        CGRect cellFrameInSuperview = [self.collectionView convertRect:attributes.frame toView:self.collectionView.superview];
+        if (cellFrameInSuperview.origin.x>=0&&
+            cellFrameInSuperview.origin.x<=self.collectionView.frame.size.width) {
+            if (minCenterX>cellFrameInSuperview.origin.x) {
+                minCenterX = cellFrameInSuperview.origin.x;
+                minIndex = i;
+            }
+        }
+    }
     for (int i = 0; i<array.count; i++) {
         UICollectionViewLayoutAttributes *attributes = array[i];
         CGFloat distance = CGRectGetMidX(visibleRect) - attributes.center.x;
         if (self.param.wContentOffsetX!=0.5) {
-            distance = CGRectGetMidX(visibleRect) - (attributes.center.x + (0.5-self.param.wContentOffsetX)*visibleRect.size.width);
+             distance = CGRectGetMidX(visibleRect) - (attributes.center.x + (0.5-self.param.wContentOffsetX)*visibleRect.size.width);
+        }
+        if (self.param.wSpecialStyle == SpecialStyleFirstScale) {
+            distance = CGRectGetMinX(visibleRect) - attributes.center.x;
         }
         CGFloat normalizedDistance = fabs(distance / self.param.wActiveDistance);
         CGFloat zoom = 1 - self.param.wScaleFactor  * normalizedDistance;
-        attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
-        attributes.frame = CGRectMake(attributes.frame.origin.x, attributes.frame.origin.y , attributes.size.width, attributes.size.height);
+        if (self.param.wSpecialStyle == SpecialStyleFirstScale) {
+            if (i == minIndex) {
+                attributes.transform3D = CATransform3DMakeScale(1.0, zoom+0.6, 1.0);
+            }else{
+                attributes.transform3D = CATransform3DMakeScale(1.0, 1, 1.0);
+            }
+        }else{
+            attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);
+        }
         if (self.param.wAlpha<1) {
             CGFloat collectionCenter =  self.collectionView.frame.size.width / 2 ;
             CGFloat offset = self.collectionView.contentOffset.x ;

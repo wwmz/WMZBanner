@@ -63,6 +63,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerPageControl,           
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerSpecialLine,             wSpecialCustumLine)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlSelectMargin)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wMarqueeRate)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, id,                            wMyCellClassNames)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }

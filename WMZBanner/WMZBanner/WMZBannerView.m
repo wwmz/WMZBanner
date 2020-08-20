@@ -120,7 +120,7 @@
         self.param.wAutoScrollSecond = 0.05f;
         self.param.wRepeat = YES;
     }
-    
+    self.param.wFrame = CGRectIntegral(self.param.wFrame);
     if (self.param.wScreenScale<1&&self.param.wScreenScale>0) {
         CGRect rect = self.param.wFrame;
         rect.origin.x = rect.origin.x * self.param.wScreenScale;
@@ -144,7 +144,6 @@
         sets.left*=self.param.wScreenScale;
         self.param.wSectionInset = sets;
     }
-    
     if (self.param.wItemSize.height == 0 || self.param.wItemSize.width == 0 ) {
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     }
@@ -154,7 +153,9 @@
     }else if(self.param.wItemSize.width>self.frame.size.width){
         self.param.wItemSize = CGSizeMake(self.frame.size.width, self.param.wItemSize.height);
     }
-    self.param.wItemSize = CGSizeMake((int)self.param.wItemSize.width, (int)self.param.wItemSize.height);
+    int width = self.param.wItemSize.width;
+    int height = self.param.wItemSize.height;
+    self.param.wItemSize = CGSizeMake(width, height);
     
     if (self.param.wFadeOpen) {
         self.flowL = [[WMZBannerFadeLayout alloc] initConfigureWithModel:self.param];
@@ -175,6 +176,17 @@
     [self.myCollectionV registerClass:[CollectionTextCell class] forCellWithReuseIdentifier:NSStringFromClass([CollectionTextCell class])];
     if (self.param.wMyCellClassName) {
         [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
+    }
+    if (self.param.wMyCellClassNames) {
+        if ([self.param.wMyCellClassNames isKindOfClass:[NSString class]]) {
+           [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
+        }else if ([self.param.wMyCellClassNames isKindOfClass:[NSArray class]]){
+            [(NSArray*)self.param.wMyCellClassNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[NSString class]]) {
+                     [self.myCollectionV registerClass:NSClassFromString(obj) forCellWithReuseIdentifier:obj];
+                }
+            }];
+        }
     }
     
     self.myCollectionV.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
@@ -297,10 +309,8 @@
     for (int i = 0; i<[collectionView visibleCells].count; i++) {
         UICollectionViewCell *cell = [collectionView visibleCells][i];
         [arr addObject:[NSString stringWithFormat:@"%.0f",cell.frame.size.height]];
-//         CGFloat distance = CGRectGetMidX(visibleRect) - cellattributes.center.x;
         [indexArr addObject:cell];
     }
-    
     
     float max = [[arr valueForKeyPath:@"@max.floatValue"] floatValue];
            
@@ -492,9 +502,7 @@
     if (!self.data.count) return;
     if (self.param.wMarquee) return;
     NSInteger current = MAX(self.param.myCurrentPath, 0);
-    NSLog(@"滚动结束 %d",current);
     NSInteger index = self.param.wRepeat?current%self.data.count:current;
-        NSLog(@"滚动结束111 %d",index);
     if (index>self.data.count-1) {
         index = 0;
     }
