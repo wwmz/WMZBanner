@@ -196,7 +196,7 @@
         self.myCollectionV.decelerationRate = UIScrollViewDecelerationRateNormal;
     }
     
-    self.bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectMake((self.bounds.size.width - 80)/2 , self.bounds.size.height - 30,80, 30) WithModel:self.param];
+    self.bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectMake((self.bounds.size.width - 60)/2 , self.bounds.size.height - 30,60, 30) WithModel:self.param];
     if (self.param.wCustomControl) {
         self.param.wCustomControl(self.bannerControl);
     }
@@ -234,6 +234,7 @@
             [self setIconData:cell.icon withData:dic];
         }
         tmpCell = cell;
+        cell.contentView.layer.cornerRadius = self.param.wCustomImageRadio;
     }
     return tmpCell;
 }
@@ -650,7 +651,6 @@
         [self.contentView addSubview:self.icon];
         self.icon.frame = self.contentView.bounds;
         self.contentView.layer.masksToBounds = YES;
-        self.contentView.layer.cornerRadius = 5;
     }
     return self;
 }

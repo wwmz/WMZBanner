@@ -25,11 +25,15 @@
 
 - (void)styleDefault{
     WMZBannerParam *param =  BannerParam()
-    .wBannerControlColorSet([UIColor lightGrayColor])
+    .wBannerControlColorSet([UIColor redColor])
     .wBannerControlSelectColorSet([UIColor orangeColor])
+    //可设置此属性调整圆点间距
+//    .wBannerControlSelectMarginSet(10)
     .wFrameSet(CGRectMake(10, 100, BannerWitdh-20, BannerHeight/6))
     .wDataSet([self getData]);
     WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
+    viewOne.layer.cornerRadius = 5;
+    viewOne.layer.masksToBounds = YES;
     [self.view addSubview:viewOne];
 }
 
@@ -69,7 +73,7 @@
       .wBannerControlImageSizeSet(CGSizeMake(10, 10))
       .wBannerControlSelectImageSizeSet(CGSizeMake(30, 30))
       //自定义pageControl的位置
-      .wCustomControlSet(^(UIPageControl *pageControl) {
+      .wCustomControlSet(^(UIControl *pageControl) {
           //随意改变xy值
           CGRect rect = pageControl.frame;
           rect.origin.y =  10;

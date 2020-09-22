@@ -31,10 +31,12 @@
 //    })
     .wFrameSet(CGRectMake(10, BannerHeight/6, BannerWitdh-20, BannerHeight/4))
     .wDataSet(@[])
+    //自定义图片圆角
+    .wCustomImageRadioSet(5)
     //开启循环滚动
     .wRepeatSet(YES)
     //设置item的间距
-    .wLineSpacingSet(10)
+//    .wLineSpacingSet(10)
     //开启自动滚动
     .wAutoScrollSet(YES)
     //自动滚动时间
@@ -42,6 +44,9 @@
     
     ;
     WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
+    viewOne.layer.cornerRadius = 5;
+    viewOne.layer.masksToBounds = YES;
+    
     [self.view addSubview:viewOne];
     
     //模拟刷新数据

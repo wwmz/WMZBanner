@@ -33,20 +33,14 @@
     .wSpecialStyleSet(SpecialStyleFirstScale);
     WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
     [self.view addSubview:viewOne];
-    
 }
 
 - (NSArray*)getData{
     return @[
-      @{@"name":@"第0个",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597912538465&di=cf27b604a09cc86a31b136525fd6611b&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D2422345863%2C2654460938%26fm%3D214%26gp%3D0.jpg"},
-      @{@"name":@"第1个",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597912514660&di=a0182075bd0bc424d12ab7472a4cad15&imgtype=0&src=http%3A%2F%2Fimg3.a0bi.com%2Fupload%2Fttq%2F20140802%2F1406969914400.jpg"},
-      @{@"name":@"第2个",@"icon":@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=294505291,2139227285&fm=26&gp=0.jpg"},
-      @{@"name":@"第3个",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597912514660&di=2ea315151ad9030350ed0ad4aa971ce1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F27%2F20150127103509_KvXhU.thumb.700_0.jpeg"},
-      
-//      @{@"name":@"第0个",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597912538465&di=cf27b604a09cc86a31b136525fd6611b&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D2422345863%2C2654460938%26fm%3D214%26gp%3D0.jpg"},
-//      @{@"name":@"第1个",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597912514660&di=a0182075bd0bc424d12ab7472a4cad15&imgtype=0&src=http%3A%2F%2Fimg3.a0bi.com%2Fupload%2Fttq%2F20140802%2F1406969914400.jpg"},
-//      @{@"name":@"第2个",@"icon":@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=294505291,2139227285&fm=26&gp=0.jpg"},
-//      @{@"name":@"第3个",@"icon":@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597912514660&di=2ea315151ad9030350ed0ad4aa971ce1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F27%2F20150127103509_KvXhU.thumb.700_0.jpeg"}
+      @"http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=64fdb384ce5c1038242bc6c68721bf25/060828381f30e92435342faf44086e061c95f798.jpg",
+          @"http://dmimg.5054399.com/allimg/optuji/qbanop/38.jpg",
+          @"http://img4.imgtn.bdimg.com/it/u=3778233232,2537963140&fm=26&gp=0.jpg",
+      @"http://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/09fa513d269759ee1100528cb2fb43166d22df20.jpg"
 
       ];
 }

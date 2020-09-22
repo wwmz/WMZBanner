@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "WMZBanner"
-  s.version      = "1.1.4"
+  s.version      = "1.1.5"
   s.platform     = :ios, '8.0'
   s.license      = "Copyright (c) 2018年 WMZ. All rights reserved."
   s.summary      = "轻量级轮播图,支持自定义内容和自定义卡片样式,支持网络图片和本地图片混合使用"

@@ -34,7 +34,7 @@
     self.param =
      BannerParam()
     //自定义pageControl的位置
-    .wCustomControlSet(^(UIPageControl *pageControl) {
+    .wCustomControlSet(^(UIControl *pageControl) {
         
     })
     //自定义视图必传

@@ -53,6 +53,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,     
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BOOL,                 wZindex)
 //整体间距 默认UIEdgeInsetsMake(0,0, 0, 0)
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, UIEdgeInsets,         wSectionInset)
+//自定义图片圆角 default 5
+WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wCustomImageRadio)
 //整体视图缩放系数 default 1
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wScreenScale)
 //毛玻璃背景的高度 (视图的高度*倍数) default 1 范围0~1

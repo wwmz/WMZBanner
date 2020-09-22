@@ -48,7 +48,7 @@ typedef void (^BannerClickBlock)(id anyID,NSInteger index);
 /*
  * 自定义pageControl
  */
-typedef void (^BannerPageControl)(UIPageControl* pageControl);
+typedef void (^BannerPageControl)(UIControl* pageControl);
 
 /*
  * 点击 ,可获取居中cell

@@ -63,6 +63,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerPageControl,           
 WMZBannerPropSetFuncImplementation(WMZBannerParam, BannerSpecialLine,             wSpecialCustumLine)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wBannerControlSelectMargin)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wMarqueeRate)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wCustomImageRadio)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, id,                            wMyCellClassNames)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
@@ -96,6 +97,7 @@ WMZBannerParam * BannerParam(void){
         _wMarqueeRate = 5.0f;
         _wCardOverLapCount = 4;
         _wCardOverMinAlpha = 0.1;
+        _wCustomImageRadio = 5.0f;
     }
     return self;
 }

@@ -79,7 +79,7 @@
             if (i == minIndex) {
                 attributes.transform3D = CATransform3DMakeScale(1.0, zoom+0.6, 1.0);
             }else{
-                attributes.transform3D = CATransform3DMakeScale(1.0, 1, 1.0);
+                attributes.transform3D = CATransform3DMakeScale(1.0, 1.0, 1.0);
             }
         }else{
             attributes.transform3D = CATransform3DMakeScale(1.0, zoom, 1.0);

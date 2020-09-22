@@ -7,13 +7,20 @@
 //
 
 #import "WMZBannerControl.h"
+#define bannerPointSize CGSizeMake(8,8)
+@interface WMZBannerControl()
+{
+    NSInteger _numberOfPages;
+    NSInteger _currentPage;
+}
+@property(nonatomic,strong)NSMutableArray *imageArr;
+@end
 @implementation WMZBannerControl
 
 - (instancetype)initWithFrame:(CGRect)frame WithModel:(WMZBannerParam *)param{
     if (self = [super initWithFrame:frame]) {
         self.param = param;
         self.userInteractionEnabled = NO;
-        self.hidesForSinglePage = YES;
         self.currentPageIndicatorTintColor = param.wBannerControlSelectColor;
         self.pageIndicatorTintColor = param.wBannerControlColor;
         if (param.wBannerControlImage) {
@@ -34,60 +41,78 @@
 }
 
 - (void)setCurrentPage:(NSInteger)currentPage{
-    [super setCurrentPage:currentPage];
+    _currentPage = currentPage;
     [self updateDots];
+}
+
+- (void)setNumberOfPages:(NSInteger)numberOfPages{
+    _numberOfPages = numberOfPages;
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];\
+    UIView *tempView = nil;
+    for (int i = 0; i<numberOfPages; i++) {
+        UIView *bgView = [UIView new];
+        
+        bgView.frame = CGRectMake(tempView?CGRectGetMaxX(tempView.frame)+self.param.wBannerControlSelectMargin:self.param.wBannerControlSelectMargin, 0,self.frame.size.width/numberOfPages , self.frame.size.height);
+        [self addSubview:bgView];
+        UIImageView *imageView = [UIImageView new];
+        imageView.tag = 111;
+        [bgView addSubview:imageView];
+        
+        UIView  *pointView = [UIImageView new];
+        [bgView addSubview:pointView];
+        pointView.tag = 222;
+        pointView.frame = CGRectMake((bgView.frame.size.width - bannerPointSize.width)/2, (bgView.frame.size.height - bannerPointSize.height)/2, bannerPointSize.width, bannerPointSize.height);
+        pointView.layer.backgroundColor = self.param.wBannerControlColor.CGColor;
+        pointView.layer.cornerRadius = pointView.frame.size.height/2;
+        
+        tempView = bgView;
+    }
 }
 
 
 - (void)updateDots{
     for (int i = 0; i < [self.subviews count]; i++) {
-        UIImageView *dot = [self imageViewForSubview:[self.subviews objectAtIndex:i] currPage:i];
+        UIView *bgView = self.subviews[i];
+        UIImageView *dot = [bgView viewWithTag:111];
+        UIView *pointView = [bgView viewWithTag:222];
         if (i == self.currentPage){
-            dot.image = self.currentImage;
-            CGRect rect = dot.frame;
-            rect.size = self.currentImageSize;
-            dot.frame = rect;
-            dot.layer.masksToBounds = YES;
-            dot.layer.cornerRadius =  self.param.wBannerControlImageRadius?:self. self.currentImageSize.height/2;
+           pointView.layer.backgroundColor = self.param.wBannerControlSelectColor.CGColor;
+           pointView.hidden = self.currentImage?YES:NO;
+           dot.hidden = self.currentImage?NO:YES;
+           if (self.currentImage) {
+               dot.image = self.currentImage;
+               CGRect rect = dot.frame;
+               rect.size = self.currentImageSize;
+               dot.frame = rect;
+               dot.layer.masksToBounds = YES;
+               dot.layer.cornerRadius =  self.param.wBannerControlImageRadius?:self. self.currentImageSize.height/2;
+           }
         }else{
-            dot.image = self.inactiveImage;
-            CGRect rect = dot.frame;
-            rect.size = self.inactiveImageSize;
-            dot.frame = rect;
-            dot.layer.masksToBounds = YES;
-            dot.layer.cornerRadius = self.param.wBannerControlImageRadius?:self. self.inactiveImageSize.height/2;
-        }
-    }
-}
-
-
-- (UIImageView *)imageViewForSubview:(UIView *)view currPage:(int)currPage{
-    UIImageView *dot = nil;
-    if ([view isKindOfClass:[UIView class]]) {
-        for (UIView *subview in view.subviews) {
-            if ([subview isKindOfClass:[UIImageView class]]) {
-                dot = (UIImageView *)subview;
-                break;
+            pointView.layer.backgroundColor = self.param.wBannerControlColor.CGColor;
+            pointView.hidden = self.inactiveImage?YES:NO;
+            dot.hidden = self.currentImage?NO:YES;
+            if (self.inactiveImage) {
+                dot.image = self.inactiveImage;
+                CGRect rect = dot.frame;
+                rect.size = self.inactiveImageSize;
+                dot.frame = rect;
+                dot.layer.masksToBounds = YES;
+                dot.layer.cornerRadius = self.param.wBannerControlImageRadius?:self. self.inactiveImageSize.height/2;
             }
         }
-        if (dot == nil) {
-            dot = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, view.frame.size.width, view.frame.size.height)];
-            [view addSubview:dot];
-        }
-    }else {
-        dot = (UIImageView *)view;
     }
-    
-    return dot;
+    [self layoutSubviews];
 }
+
+
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     if (self.param.wBannerControlImage&&self.param.wBannerControlSelectImage){
-        UIImageView *tmp = nil;
+        UIView *tmp = nil;
         for (int i=0; i<[self.subviews count]; i++) {
-            UIImageView* dot = [self.subviews objectAtIndex:i];
+            UIView* dot = [self.subviews objectAtIndex:i];
             CGFloat x = (tmp?CGRectGetMaxX(tmp.frame):0)+self.param.wBannerControlSelectMargin;
             CGFloat y = 0;
             if (i == self.currentPage) {
@@ -105,13 +130,14 @@
                 self.frame = rect;
             }
         }
-        [self resetFrame];
     }
+    [self resetFrame];
 }
 
 - (void)resetFrame{
+    
     for (int i=0; i<[self.subviews count]; i++) {
-        UIImageView* dot = [self.subviews objectAtIndex:i];
+        UIView* dot = [self.subviews objectAtIndex:i];
         if (i == [self.subviews count]-1) {
             CGRect rect = self.frame;
             rect.size.width = CGRectGetMaxX(dot.frame);
@@ -132,6 +158,13 @@
       if (self.param.wCustomControl) {
           self.param.wCustomControl(self);
       }
+}
+
+- (NSMutableArray *)imageArr{
+    if (!_imageArr) {
+        _imageArr = [NSMutableArray new];
+    }
+    return _imageArr;
 }
 
 @end
