@@ -125,7 +125,7 @@ WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerClic
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerCenterClickBlock,wEventCenterClick)
 //每次滚动结束都会调用 最好是关闭自动滚动的场景使用
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollEndBlock, wEventScrollEnd)
-//正在滚动(尚未实现)
+//正在滚动
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerScrollBlock,    wEventDidScroll)
 /* =========================================Events==============================================*/
 

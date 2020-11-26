@@ -63,7 +63,7 @@ typedef void (^BannerScrollEndBlock)(id anyID,NSInteger index,BOOL isCenter,UICo
 /*
 * 滚动
 */
-typedef void (^BannerScrollBlock)(long contentoffet);
+typedef void (^BannerScrollBlock)(CGPoint point);
 
 /*
  * 自定义下划线

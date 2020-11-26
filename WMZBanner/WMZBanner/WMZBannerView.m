@@ -70,6 +70,7 @@
 
 - (void)resetCollection{
     self.bannerControl.numberOfPages = self.data.count;
+    self.bannerControl.hidden = self.param.wHideBannerControl;
     [UIView animateWithDuration:0.0 animations:^{
         [self.myCollectionV reloadData];
         if (self.param.wSelectIndex>=0|| self.param.wRepeat) {
@@ -200,9 +201,9 @@
     if (self.param.wCustomControl) {
         self.param.wCustomControl(self.bannerControl);
     }
-    if (!self.param.wHideBannerControl) {
-        [self addSubview:self.bannerControl];
-    }
+
+    [self addSubview:self.bannerControl];
+
     
     self.bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height*self.param.wEffectHeight)];
     self.bgImgView.contentMode = self.param.wImageFill?UIViewContentModeScaleAspectFill:UIViewContentModeScaleToFill;
@@ -453,18 +454,7 @@
     }
     self.bannerControl.currentPage = self.param.wRepeat?index %self.data.count:index;
     if (self.param.wEventDidScroll) {
-        CGPoint point = scrollView.contentOffset;
-        long b  = 0;
-        if (self.param.wRepeat) {
-            int a = (int)point.x;
-            long width = ((long)self.param.wItemSize.width + (long)self.param.wLineSpacing);
-            if (a%width!=0) {
-                b = a%width+self.bannerControl.currentPage*width;
-                self.param.wEventDidScroll(labs(b));
-            }
-        }else{
-            self.param.wEventDidScroll(fabs(point.x));
-        }
+        self.param.wEventDidScroll(scrollView.contentOffset);
     }
     [self setUpSpecialFrame];
 }
@@ -524,8 +514,7 @@
     self.bannerControl.currentPage =  index;
     
     if (self.param.wEventDidScroll) {
-        long b  = index*((long)self.param.wItemSize.width + (long)self.param.wLineSpacing);
-        self.param.wEventDidScroll(labs(b));
+        self.param.wEventDidScroll(self.myCollectionV.contentOffset);
     }
     self.lastIndex = current;
 }
