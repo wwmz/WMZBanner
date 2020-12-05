@@ -13,7 +13,6 @@
 #import "WMZBannerControl.h"
 #import "WMZBannerOverLayout.h"
 #import "WMZBannerFadeLayout.h"
-#define COUNT 500
 @interface WMZBannerView()<UICollectionViewDelegate,UICollectionViewDataSource>{
     BOOL beganDragging;
 }
@@ -71,21 +70,26 @@
 - (void)resetCollection{
     self.bannerControl.numberOfPages = self.data.count;
     self.bannerControl.hidden = self.param.wHideBannerControl;
+    if (self.data.count == 1) {
+        self.bannerControl.hidden = YES;
+    }
     [UIView animateWithDuration:0.0 animations:^{
         [self.myCollectionV reloadData];
         if (self.param.wSelectIndex>=0|| self.param.wRepeat) {
-            NSIndexPath *path = [NSIndexPath indexPathForRow: self.param.wRepeat?((COUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0];
-            [self scrolToPath:path animated:NO];
-            self.bannerControl.currentPage = self.param.wSelectIndex;
-            self.param.myCurrentPath = self.param.wRepeat?((COUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex;
-            if (self.param.wAutoScroll) {
-                [self createTimer];
-            }else{
-                [self cancelTimer];
-            }
+            NSIndexPath *path = [NSIndexPath indexPathForRow: self.param.wRepeat?((BANNERCOUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self scrolToPath:path animated:NO];
+                self.bannerControl.currentPage = self.param.wSelectIndex;
+                self.param.myCurrentPath = self.param.wRepeat?((BANNERCOUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex;
+                if (self.param.wAutoScroll) {
+                    [self createTimer];
+                }else{
+                    [self cancelTimer];
+                }
+            });
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self scrollEnd:[NSIndexPath indexPathForRow: self.param.wRepeat?((COUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0]];
+            [self scrollEnd:[NSIndexPath indexPathForRow: self.param.wRepeat?((BANNERCOUNT/2)*self.data.count+self.param.wSelectIndex):self.param.wSelectIndex inSection:0]];
         });
     } completion:^(BOOL finished) {}];
     
@@ -161,7 +165,6 @@
     if (self.param.wFadeOpen) {
         self.flowL = [[WMZBannerFadeLayout alloc] initConfigureWithModel:self.param];
     }else if (self.param.wCardOverLap) {
-        self.param.wRepeat = YES;
         if (self.param.wScaleFactor == 0.5) {
             self.param.wScaleFactor = 0.8f;
         }
@@ -254,7 +257,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return  self.param.wRepeat?self.data.count*COUNT:self.data.count;
+    return  self.param.wRepeat?self.data.count*BANNERCOUNT:self.data.count;
     
 }
 
@@ -337,7 +340,7 @@
 //滚动处理
 - (void)scrolToPath:(NSIndexPath*)path animated:(BOOL)animated{
     
-    if (self.param.wRepeat?(path.row> self.data.count*COUNT-1):(path.row> self.data.count-1)){
+    if (self.param.wRepeat?(path.row> self.data.count*BANNERCOUNT-1):(path.row> self.data.count-1)){
         [self cancelTimer];
         return;
     }
@@ -385,7 +388,7 @@
         return;
     }
     self.param.myCurrentPath+=1;
-    if (self.param.wRepeat&&  self.param.myCurrentPath == (self.data.count*COUNT)) {
+    if (self.param.wRepeat&&  self.param.myCurrentPath == (self.data.count*BANNERCOUNT)) {
        self.param.myCurrentPath = 0;
     }
     else if(!self.param.wRepeat&&  self.param.myCurrentPath == self.data.count){
@@ -492,8 +495,8 @@
 - (void)scrollEnd:(NSIndexPath*)indexPath{
     if (!self.data.count) return;
     if (self.param.wMarquee) return;
-    NSInteger current = MAX(self.param.myCurrentPath, 0);
-    NSInteger index = self.param.wRepeat?current%self.data.count:current;
+    NSInteger current = MAX( self.param.wCardOverLap?self.param.overFactPath:self.param.myCurrentPath, 0);
+    NSInteger index =  self.param.wRepeat?current%self.data.count:current;
     if (index>self.data.count-1) {
         index = 0;
     }

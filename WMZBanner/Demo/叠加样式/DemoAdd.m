@@ -30,15 +30,20 @@
      *横向
      */
     WMZBannerParam *param =  BannerParam()
-    .wFrameSet(CGRectMake(10,100, BannerWitdh-20, BannerHeight*0.35))
+    .wFrameSet(CGRectMake(10,100, BannerWitdh-40, BannerHeight*0.35))
     .wItemSizeSet(CGSizeMake(BannerWitdh-60, BannerHeight*0.25))
     .wDataSet([self getData])
+    .wEventScrollEndSet(^(id anyID, NSInteger index, BOOL isCenter, UICollectionViewCell *cell) {
+            NSLog(@"滚动到第%ld个",index);
+    })
     //设置item的间距
     .wLineSpacingSet(15)
     //开启卡片叠加模式
     .wCardOverLapSet(YES)
     //毛玻璃背景
     .wEffectSet(YES)
+    //循环
+    .wRepeatSet(YES)
     //开启自动滚动
     .wAutoScrollSet(YES)
     ;
@@ -58,22 +63,23 @@
     .wFrameSet(CGRectMake(10,  CGRectGetMaxY(viewOne.frame)+30 , BannerWitdh-20, BannerHeight*0.35))
     .wItemSizeSet(CGSizeMake(BannerWitdh/2, BannerHeight*0.3))
     .wDataSet([self getData])
-    .wHideBannerControlSet(YES)
+    .wHideBannerControlSet(NO)
     //设置item的间距
-    .wLineSpacingSet(20)
+    .wLineSpacingSet(40)
     //开启卡片叠加模式
     .wCardOverLapSet(YES)
     //缩放系数
     .wScaleFactorSet(0.6)
     //毛玻璃背景
     .wEffectSet(YES)
+    .wRepeatSet(YES)
     //开启自动滚动
     .wAutoScrollSet(YES)
     //显示个数
     .wCardOverLapCountSet(3)
     //开启透明度变化 default NO
     .wCardOverAlphaOpenSet(YES)
-    //透明度最小系数 default 0.1 
+    //透明度最小系数 default 0.1
     .wCardOverMinAlphaSet(0.1)
     //开启纵向
     .wVerticalSet(YES);

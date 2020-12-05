@@ -11,8 +11,13 @@
 #ifndef WMZBannerConfig_h
 #define WMZBannerConfig_h
 
+#if __has_include(<SDWebImage/UIImageView+WebCache.h>)
+#import <SDWebImage/UIImageView+WebCache.h>
+#else
 #import "UIImageView+WebCache.h"
-#import <UIKit/UIKit.h>
+#endif
+
+#define BANNERCOUNT 500
 
 #define BannerWitdh  [UIScreen mainScreen].bounds.size.width
 #define BannerHeight [UIScreen mainScreen].bounds.size.height
