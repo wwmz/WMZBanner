@@ -250,9 +250,8 @@ SDWebImage
 
 ### CocoaPods
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZBanner'`。
-3. 执行 `pod install` 或 `pod update`。
-4. 导入 #import "WMZBannerView.h"。
+2.`pod 'WMZBanner', '~> 1.1.6'`
+3. 导入 #import "WMZBannerView.h"。
 
 ### 注:要消除链式编程的警告 
 要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
@@ -296,3 +295,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20200618 更新至1.1.3 修复bug 新增特殊样式 下划线/淡入淡出
 - 20200625 更新至1.1.4 修复bug 
 - 20200920 更新至1.1.5 适配ios14
+- 20201207 更新至1.1.6 修复叠加bug
