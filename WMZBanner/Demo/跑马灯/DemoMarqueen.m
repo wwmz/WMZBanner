@@ -32,6 +32,8 @@
      .wMarqueeSet(YES)
      //开启循环滚动
      .wRepeatSet(YES)
+     //速率
+     .wMarqueeRateSet(5)
      //设置item的间距
      .wLineSpacingSet(10);
     

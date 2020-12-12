@@ -15,6 +15,7 @@
 #import "WMZBannerFadeLayout.h"
 @interface WMZBannerView()<UICollectionViewDelegate,UICollectionViewDataSource>{
     BOOL beganDragging;
+    CGFloat marginTime;
 }
 @property(strong,nonatomic)UICollectionView *myCollectionV;
 @property(strong,nonatomic)UICollectionViewFlowLayout *flowL ;
@@ -122,7 +123,7 @@
     if (self.param.wMarquee) {
         self.param.wAutoScroll = YES;
         self.param.wHideBannerControl = YES;
-        self.param.wAutoScrollSecond = 0.05f;
+        marginTime = 0.05f;
         self.param.wRepeat = YES;
     }
     self.param.wFrame = CGRectIntegral(self.param.wFrame);
@@ -183,11 +184,23 @@
     }
     if (self.param.wMyCellClassNames) {
         if ([self.param.wMyCellClassNames isKindOfClass:[NSString class]]) {
-           [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassName) forCellWithReuseIdentifier:self.param.wMyCellClassName];
+           [self.myCollectionV registerClass:NSClassFromString(self.param.wMyCellClassNames) forCellWithReuseIdentifier:self.param.wMyCellClassNames];
         }else if ([self.param.wMyCellClassNames isKindOfClass:[NSArray class]]){
             [(NSArray*)self.param.wMyCellClassNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[NSString class]]) {
                      [self.myCollectionV registerClass:NSClassFromString(obj) forCellWithReuseIdentifier:obj];
+                }
+            }];
+        }
+    }
+    
+    if (self.param.wXibCellClassNames) {
+        if ([self.param.wXibCellClassNames isKindOfClass:[NSString class]]) {
+            [self.myCollectionV registerNib:[UINib nibWithNibName:self.param.wXibCellClassNames bundle:nil] forCellWithReuseIdentifier:self.param.wXibCellClassNames];
+        }else if ([self.param.wXibCellClassNames isKindOfClass:[NSArray class]]){
+            [(NSArray*)self.param.wXibCellClassNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[NSString class]]) {
+                     [self.myCollectionV registerNib:[UINib nibWithNibName:obj bundle:nil] forCellWithReuseIdentifier:obj];
                 }
             }];
         }
@@ -373,15 +386,15 @@
 - (void)createTimer{
     if (!self.timer) {
         SEL sel = NSSelectorFromString(self.param.wMarquee?@"autoMarqueenScrollAction":@"autoScrollAction");
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.param.wAutoScrollSecond  target:self selector:sel userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.param.wMarquee?marginTime: self.param.wAutoScrollSecond  target:self selector:sel userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     }
 }
 
 //定时器方法 自动滚动
 - (void)autoScrollAction{
-    
     if (beganDragging) return;
+    if (!self.timer) return;
     if (!self.superview) return;
     if (!self.param.wAutoScroll) {
         [self cancelTimer];
@@ -401,6 +414,7 @@
 
 //定时器方法 跑马灯
 - (void)autoMarqueenScrollAction{
+    if (!self.timer) return;
     if (!self.superview) return;
     if (!self.param.wAutoScroll) {
         [self cancelTimer];
@@ -436,6 +450,9 @@
         if (self.param.wAutoScroll) {
             [self cancelTimer];
         }
+    }else{
+        [self cancelTimer];
+        [self performSelector:@selector(createTimer) withObject:nil afterDelay:self.param.wAutoScrollSecond];
     }
 }
 
@@ -475,10 +492,10 @@
         if (self.param.wAutoScroll) {
             [self createTimer];
         }
+        [self setUpSpecialFrame];
+        [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
+        [self fadeAction];
     }
-    [self setUpSpecialFrame];
-    [self scrollEnd:[NSIndexPath indexPathForRow:self.param.myCurrentPath inSection:0]];
-    [self fadeAction];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{

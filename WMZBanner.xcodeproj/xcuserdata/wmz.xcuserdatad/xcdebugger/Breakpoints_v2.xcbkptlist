@@ -25,8 +25,8 @@
             filePath = "WMZBanner/WMZBanner/WMZBannerView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "458"
-            endingLineNumber = "458"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "7">
          </BreakpointContent>
@@ -57,8 +57,8 @@
             filePath = "WMZBanner/Demo/&#x7535;&#x5546;&#x64ad;&#x62a5;/DemoDianshang.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "-dealloc"
             landmarkType = "7">
          </BreakpointContent>

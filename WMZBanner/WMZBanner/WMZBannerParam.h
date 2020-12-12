@@ -91,6 +91,8 @@ WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerSpec
 WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, NSString*,            wMyCellClassName)
 //自定义cell的类名 自定义视图必传 不然会crash 和上面的属性wMyCellClassName 二选一 此属性可以传数组
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, id,                   wMyCellClassNames)
+//自定义xib cell的类名 自定义视图必传 不然会crash
+WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, id,                   wXibCellClassNames)
 //系统的圆点颜色  default  ffffff
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, UIColor*,             wBannerControlColor)
 //系统的圆点选中颜色  default  orange

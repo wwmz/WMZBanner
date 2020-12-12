@@ -65,6 +65,7 @@ WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                     
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wMarqueeRate)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, CGFloat,                       wCustomImageRadio)
 WMZBannerPropSetFuncImplementation(WMZBannerParam, id,                            wMyCellClassNames)
+WMZBannerPropSetFuncImplementation(WMZBannerParam, id,                            wXibCellClassNames)
 WMZBannerParam * BannerParam(void){
     return  [WMZBannerParam new];
 }
