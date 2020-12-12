@@ -76,7 +76,7 @@
     .wFrameSet(CGRectMake(10, BannerHeight/4+140, BannerWitdh-20, 50))
     .wMyCellClassNamesSet(@"KuaiBaoCell")
     //xib
-//    .wXibCellClassNamesSet(@"KuaiBaoCell")
+//   .wXibCellClassNamesSet(@"KuaiBaoCell")
     .wMyCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, id model, UIImageView *bgImageView,NSArray*dataArr) {
                //自定义视图
         KuaiBaoCell *cell = (KuaiBaoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([KuaiBaoCell class]) forIndexPath:indexPath];
