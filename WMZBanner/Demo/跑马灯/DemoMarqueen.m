@@ -33,10 +33,7 @@
      //开启循环滚动
      .wRepeatSet(YES)
      //速率
-     .wMarqueeRateSet(5)
-     //设置item的间距
-     .wLineSpacingSet(10);
-    
+    .wMarqueeRateSet(5);
      WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
      [self.view addSubview:viewOne];
     
@@ -51,6 +48,8 @@
      .wMarqueeSet(YES)
      //开启循环滚动
      .wRepeatSet(YES)
+    //不可拖动
+     .wCanFingerSlidingSet(NO)
      //纵向
      .wVerticalSet(YES);
     

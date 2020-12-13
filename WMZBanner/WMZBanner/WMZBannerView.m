@@ -62,6 +62,7 @@
     return self;
 }
 
+
 - (void)updateUI{
     self.data = [NSArray arrayWithArray:self.param.wData];
     [self resetCollection];
@@ -206,22 +207,15 @@
         }
     }
     
-    self.myCollectionV.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
-    
     self.myCollectionV.pagingEnabled = (self.param.wItemSize.width == self.myCollectionV.frame.size.width && self.param.wLineSpacing == 0)||self.param.wVertical;
     if ([self.myCollectionV isPagingEnabled]) {
         self.myCollectionV.decelerationRate = UIScrollViewDecelerationRateNormal;
     }
     
     self.bannerControl = [[WMZBannerControl alloc]initWithFrame:CGRectMake((self.bounds.size.width - 60)/2 , self.bounds.size.height - 30,60, 30) WithModel:self.param];
-    if (self.param.wCustomControl) {
-        self.param.wCustomControl(self.bannerControl);
-    }
-
     [self addSubview:self.bannerControl];
 
-    
-    self.bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height*self.param.wEffectHeight)];
+    self.bgImgView = [UIImageView new];
     self.bgImgView.contentMode = self.param.wImageFill?UIViewContentModeScaleAspectFill:UIViewContentModeScaleToFill;
     [self addSubview:self.bgImgView];
     [self sendSubviewToBack:self.bgImgView];
@@ -229,8 +223,14 @@
     self.bgImgView.layer.masksToBounds = YES;
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    effectView.frame = self.bgImgView.bounds;
     [self.bgImgView addSubview:effectView];
+    
+    self.myCollectionV.frame = self.bounds;
+    if (self.param.wCustomControl) {
+        self.param.wCustomControl(self.bannerControl);
+    }
+    self.bgImgView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height*self.param.wEffectHeight);
+    effectView.frame = self.bgImgView.bounds;
     [self resetCollection];
     
 }
@@ -420,19 +420,27 @@
         [self cancelTimer];
         return;
     }
+    
+    NSValue *value = nil;
     if (self.param.wVertical) {
         CGFloat OffsetY = self.myCollectionV.contentOffset.y + self.param.wMarqueeRate;
         if (OffsetY >self.myCollectionV.contentSize.height) {
             OffsetY = self.myCollectionV.contentSize.height/2;
         }
-        [self.myCollectionV setContentOffset:CGPointMake(self.myCollectionV.contentOffset.x, OffsetY) animated:NO];
+        value = [NSValue valueWithCGPoint:CGPointMake(self.myCollectionV.contentOffset.x, OffsetY)];
     }else{
         CGFloat OffsetX = self.myCollectionV.contentOffset.x + self.param.wMarqueeRate;
         if (OffsetX >self.myCollectionV.contentSize.width) {
             OffsetX = self.myCollectionV.contentSize.width/2;
         }
-        [self.myCollectionV setContentOffset:CGPointMake(OffsetX, self.myCollectionV.contentOffset.y) animated:NO];
+        value = [NSValue valueWithCGPoint:CGPointMake(OffsetX, self.myCollectionV.contentOffset.y)];
     }
+    [self performSelector:@selector(changeOffset:) withObject:value afterDelay:0];
+}
+
+- (void)changeOffset:(NSValue*)offset{
+    CGPoint po = offset.CGPointValue;
+    [self.myCollectionV setContentOffset:po animated:NO];
 }
 
 //定时器销毁
