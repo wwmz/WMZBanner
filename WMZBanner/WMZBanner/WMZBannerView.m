@@ -280,6 +280,7 @@
         id dic = self.data[index];
         self.param.wEventClick(dic, index);
     }
+    
     if (self.param.wEventCenterClick) {
         NSInteger index = self.param.wRepeat?indexPath.row%self.data.count:indexPath.row;
         id dic = self.data[index];
@@ -401,7 +402,7 @@
         return;
     }
     self.param.myCurrentPath+=1;
-    if (self.param.wRepeat&&  self.param.myCurrentPath == (self.data.count*BANNERCOUNT)) {
+    if (self.param.wRepeat&&  self.param.myCurrentPath == (self.data.count*BANNERCOUNT - 1)) {
        self.param.myCurrentPath = 0;
     }
     else if(!self.param.wRepeat&&  self.param.myCurrentPath == self.data.count){
@@ -420,7 +421,6 @@
         [self cancelTimer];
         return;
     }
-    
     NSValue *value = nil;
     if (self.param.wVertical) {
         CGFloat OffsetY = self.myCollectionV.contentOffset.y + self.param.wMarqueeRate;
@@ -435,12 +435,10 @@
         }
         value = [NSValue valueWithCGPoint:CGPointMake(OffsetX, self.myCollectionV.contentOffset.y)];
     }
-    [self performSelector:@selector(changeOffset:) withObject:value afterDelay:0];
-}
 
-- (void)changeOffset:(NSValue*)offset{
-    CGPoint po = offset.CGPointValue;
-    [self.myCollectionV setContentOffset:po animated:NO];
+    [UIView animateWithDuration:marginTime animations:^{
+        [self.myCollectionV setContentOffset:value.CGPointValue];
+    }];
 }
 
 //定时器销毁
