@@ -115,7 +115,7 @@ WMZBannerPropStatementAndPropSetFuncStatement(copy,   WMZBannerParam, BannerPage
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, BannerControlPosition,wBannerControlPosition)
 //跑马灯文字颜色  default  red
 WMZBannerPropStatementAndPropSetFuncStatement(strong, WMZBannerParam, UIColor*,             wMarqueeTextColor)
-//跑马灯速度  default  5
+//跑马灯速度  default  0.5
 WMZBannerPropStatementAndPropSetFuncStatement(assign, WMZBannerParam, CGFloat,              wMarqueeRate)
 /* =========================================Attributes==========================================*/
 

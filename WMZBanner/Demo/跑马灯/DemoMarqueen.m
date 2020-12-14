@@ -33,7 +33,7 @@
      //开启循环滚动
      .wRepeatSet(YES)
      //速率
-    .wMarqueeRateSet(5);
+    .wMarqueeRateSet(0.6);
      WMZBannerView *viewOne = [[WMZBannerView alloc]initConfigureWithModel:param];
      [self.view addSubview:viewOne];
     

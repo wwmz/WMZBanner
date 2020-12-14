@@ -124,7 +124,7 @@
     if (self.param.wMarquee) {
         self.param.wAutoScroll = YES;
         self.param.wHideBannerControl = YES;
-        marginTime = 0.05f;
+        marginTime = 0.005;
         self.param.wRepeat = YES;
     }
     self.param.wFrame = CGRectIntegral(self.param.wFrame);
@@ -435,10 +435,7 @@
         }
         value = [NSValue valueWithCGPoint:CGPointMake(OffsetX, self.myCollectionV.contentOffset.y)];
     }
-
-    [UIView animateWithDuration:marginTime animations:^{
-        [self.myCollectionV setContentOffset:value.CGPointValue];
-    }];
+    [self.myCollectionV setContentOffset:value.CGPointValue];
 }
 
 //定时器销毁

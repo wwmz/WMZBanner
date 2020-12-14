@@ -95,7 +95,7 @@ WMZBannerParam * BannerParam(void){
         _wEffectHeight = 1;
         _wDataParamIconName = @"icon";
         _wBannerControlSelectMargin = 3;
-        _wMarqueeRate = 5.0f;
+        _wMarqueeRate = 0.5;
         _wCardOverLapCount = 4;
         _wCardOverMinAlpha = 0.1;
         _wCustomImageRadio = 5.0f;
