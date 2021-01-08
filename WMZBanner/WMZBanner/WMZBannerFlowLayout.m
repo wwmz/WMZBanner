@@ -99,7 +99,7 @@
         }
         CGPoint center = CGPointMake(attributes.center.x, self.collectionView.center.y );
         if (self.param.wPosition == BannerCellPositionBottom) {
-            center =  CGPointMake(attributes.center.x, attributes.center.y );
+            center =  CGPointMake(attributes.center.x, attributes.center.y + attributes.size.height*(1-zoom));
             attributes.center = center;
         }else if (self.param.wPosition == BannerCellPositionTop) {
             center =  CGPointMake(attributes.center.x, attributes.center.y-  attributes.size.height*(1-zoom));
