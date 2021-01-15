@@ -70,6 +70,7 @@
 
 
 - (void)resetCollection{
+    self.bannerControl.frame = CGRectMake((self.bounds.size.width - 60)/2 , self.bounds.size.height - 30,60, 30);
     self.bannerControl.numberOfPages = self.data.count;
     self.bannerControl.hidden = self.param.wHideBannerControl;
     if (self.data.count == 1) {

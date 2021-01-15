@@ -318,7 +318,6 @@
 		F31163A623A78E4F008171B5 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				F352C05924473F1A000EDA94 /* 特殊样式 */,
 				F31163A723A78E4F008171B5 /* 显示全部属性 */,
 				F3C31F2F23AB14AD003952D3 /* 自定义pageControl */,
 				F31163A823A78E4F008171B5 /* 正常样式 */,
@@ -642,6 +641,7 @@
 		F3C31F2F23AB14AD003952D3 /* 自定义pageControl */ = {
 			isa = PBXGroup;
 			children = (
+				F352C05924473F1A000EDA94 /* 特殊样式 */,
 				F3C31F3023AB14B7003952D3 /* DemoPageControl.h */,
 				F3C31F3123AB14B7003952D3 /* DemoPageControl.m */,
 			);

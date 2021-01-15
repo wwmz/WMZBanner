@@ -47,11 +47,11 @@
     //固定移动的距离
     .wContentOffsetXSet(0.5)
     //循环
-    .wRepeatSet(YES)
+    .wRepeatSet(NO)
     //中间cell层级最上面
     .wZindexSet(YES)
     //整体左右间距  设置为size.width的一半 让最后一个可以居中
-    .wSectionInsetSet(UIEdgeInsetsMake(0,10, 0, BannerWitdh*0.55*0.3))
+    .wSectionInsetSet(UIEdgeInsetsMake(0,50, 0, BannerWitdh*0.55*0.3))
     //间距
     .wLineSpacingSet(10)
     //开启背景毛玻璃

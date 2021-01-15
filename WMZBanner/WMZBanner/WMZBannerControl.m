@@ -52,7 +52,7 @@
     for (int i = 0; i<numberOfPages; i++) {
         UIView *bgView = [UIView new];
         
-        bgView.frame = CGRectMake(tempView?CGRectGetMaxX(tempView.frame)+self.param.wBannerControlSelectMargin:self.param.wBannerControlSelectMargin, 0,self.frame.size.width/numberOfPages , self.frame.size.height);
+        bgView.frame = CGRectMake(tempView?(CGRectGetMaxX(tempView.frame)+self.param.wBannerControlSelectMargin):self.param.wBannerControlSelectMargin, 0,self.frame.size.width/numberOfPages , self.frame.size.height);
         [self addSubview:bgView];
         UIImageView *imageView = [UIImageView new];
         imageView.tag = 111;
