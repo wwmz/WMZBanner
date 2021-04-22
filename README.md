@@ -250,11 +250,8 @@ SDWebImage
 
 ### CocoaPods
 1. 将 cocoapods 更新至最新版本.
-2.`pod 'WMZBanner', '~> 1.1.6'`
+2.`pod 'WMZBanner', '~> 1.2.0'`
 3. 导入 #import "WMZBannerView.h"。
-
-### 注:要消除链式编程的警告 
-要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
 
 ### 手动安装
 
@@ -277,7 +274,6 @@ SDWebImage
 ==============
 使用过程中如果有什么bug欢迎给我提issue 我看到就会解决
 [我的简书](https://www.jianshu.com/u/17b9dd398782)
-ios问题交流群 937909825(有问题加群哈)
 
 更新记录
 ==============
@@ -297,4 +293,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20200920 更新至1.1.5 适配ios14
 - 20201207 更新至1.1.6 修复叠加bug
 - 20201213 更新至1.1.9 优化跑马灯 自定义cell支持xib
-
+- 20210422 更新至1.2.0 消除警告
